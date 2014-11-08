@@ -6,6 +6,7 @@ package major;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -19,27 +20,62 @@ import java.util.Date;
 import java.util.Properties;
 import javax.mail.Address;
 import javax.mail.FetchProfile;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
  * @author hitesh
  */
 public class front extends javax.swing.JFrame {
-
+ // Message table's data model.
+    private MessagesTableModel tableModel;
+    
+    // Table listing messages.
+    private JTable table;
+    
+    // This the text area for displaying messages.
+    private JTextArea messageTextArea;
+    
+  /* This is the split panel that holds the messages
+     table and the message view panel. */
+    private JSplitPane splitPane;
+    
+    // These are the buttons for managing the selected message.
+    private JButton replyButton, forwardButton, deleteButton;
+    
+    // Currently selected message in table.
+    private Message selectedMessage;
+    
+    // Flag for whether or not a message is being deleted.
+    private boolean deleting;
+    
+    // This is the JavaMail session.
+    private Session session;
+    
     /**
      * Creates new form front
      */
@@ -83,12 +119,57 @@ public class front extends javax.swing.JFrame {
         fileMenu.add(fileExitMenuItem);
         menuBar.add(fileMenu);
         setJMenuBar(menuBar);
-    //    getContentPane().setLayout(new BorderLayout());
-        MessagePanel.setBorder(
+     // Setup messages table.
+        tableModel = new MessagesTableModel();
+        table = new JTable(tableModel);
+        table.getSelectionModel().addListSelectionListener(new
+                ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                tableSelectionChanged();
+            }
+        });
+        // Allow only one row at a time to be selected.
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        // Setup E-mails panel.
+        
+        emailsPanel.setBorder(
                 BorderFactory.createTitledBorder("Inbox("+totalemails+")"));
-        MessagePanel.setLayout(new BorderLayout());
-     //   getContentPane().add(MessagePanel);
-        connect();
+        messageTextArea = new JTextArea();
+        messageTextArea.setEditable(false);
+        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+                new JScrollPane(table), new JScrollPane(messageTextArea));
+        emailsPanel.setLayout(new BorderLayout());
+        emailsPanel.add(splitPane, BorderLayout.CENTER);
+        
+        // Setup buttons panel 2.
+        JPanel buttonPanel2 = new JPanel();
+        replyButton = new JButton("Reply");
+        replyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                actionReply();
+            }
+        });
+        replyButton.setEnabled(false);
+        buttonPanel2.add(replyButton);
+        forwardButton = new JButton("Forward");
+        forwardButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                actionForward();
+            }
+        });
+        forwardButton.setEnabled(false);
+        buttonPanel2.add(forwardButton);
+        deleteButton = new JButton("Delete");
+        deleteButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                actionDelete();
+            }
+        });
+        deleteButton.setEnabled(false);
+        buttonPanel2.add(deleteButton);
+       
+      emailsPanel.setVisible(false);
     }
          // Exit this program.
     private void actionExit() {
@@ -230,7 +311,7 @@ public class front extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        MessagePanel = new javax.swing.JPanel();
+        emailsPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -242,17 +323,22 @@ public class front extends javax.swing.JFrame {
         });
 
         jButton2.setText("Inbox");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Sent");
 
-        javax.swing.GroupLayout MessagePanelLayout = new javax.swing.GroupLayout(MessagePanel);
-        MessagePanel.setLayout(MessagePanelLayout);
-        MessagePanelLayout.setHorizontalGroup(
-            MessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout emailsPanelLayout = new javax.swing.GroupLayout(emailsPanel);
+        emailsPanel.setLayout(emailsPanelLayout);
+        emailsPanelLayout.setHorizontalGroup(
+            emailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        MessagePanelLayout.setVerticalGroup(
-            MessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        emailsPanelLayout.setVerticalGroup(
+            emailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 239, Short.MAX_VALUE)
         );
 
@@ -269,7 +355,7 @@ public class front extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MessagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(emailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -283,7 +369,7 @@ public class front extends javax.swing.JFrame {
                         .addComponent(jButton2)
                         .addGap(31, 31, 31)
                         .addComponent(jButton3))
-                    .addComponent(MessagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -294,6 +380,16 @@ public class front extends javax.swing.JFrame {
         // TODO add your handling code here:
         actionNew();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        //connect2();
+        emailsPanel.setVisible(true);
+        //  getContentPane().setLayout(new BorderLayout());
+      //  getContentPane().add(buttonPanel, BorderLayout.NORTH);
+      //  getContentPane().add(emailsPanel, BorderLayout.CENTER);
+    //      getContentPane().add(buttonPanel2, BorderLayout.SOUTH);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -325,12 +421,252 @@ public class front extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new front().setVisible(true);
+                 front f=new front();f.show();f.connect2();
+                
             }
         });
     }
+     // Get a message's content.
+    public static String getMessageContent(Message message)
+    throws Exception {
+        Object content = message.getContent();
+        if (content instanceof Multipart) {
+            StringBuffer messageContent = new StringBuffer();
+            Multipart multipart = (Multipart) content;
+            for (int i = 0; i < multipart.getCount(); i++) {
+                Part part = (Part) multipart.getBodyPart(i);
+                if (part.isMimeType("text/plain")) {
+                    messageContent.append(part.getContent().toString());
+                }
+            }
+            return messageContent.toString();
+        } else {
+            return content.toString();
+        }
+    }
+     // Called when table row selection changes.
+    private void tableSelectionChanged() {
+    /* If not in the middle of deleting a message, set
+       the selected message and display it. */
+        if (!deleting) {
+            selectedMessage =
+                    tableModel.getMessage(table.getSelectedRow());
+            showSelectedMessage();
+            updateButtons();
+        }
+    }
+    
+       // Reply to a message.
+    private void actionReply() {
+        sendMessage(MessageDialog.REPLY, selectedMessage);
+    }
+    
+    // Forward a message.
+    private void actionForward() {
+        sendMessage(MessageDialog.FORWARD, selectedMessage);
+    }
+    
+    // Delete the selected message.
+    private void actionDelete() {
+        deleting = true;
+        
+        try {
+            // Delete message from server.
+            selectedMessage.setFlag(Flags.Flag.DELETED, true);
+            Folder folder = selectedMessage.getFolder();
+            folder.close(true);
+            folder.open(Folder.READ_WRITE);
+        } catch (Exception e) {
+            showError("Unable to delete message.", false);
+        }
+        
+        // Delete message from table.
+        tableModel.deleteMessage(table.getSelectedRow());
+        
+        // Update GUI.
+        messageTextArea.setText("");
+        deleting = false;
+        selectedMessage = null;
+        updateButtons();
+    }
+   
+      // Show the selected message in the content panel.
+    private void showSelectedMessage() {
+        // Show hour glass cursor while message is loaded.
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            messageTextArea.setText(
+                    getMessageContent(selectedMessage));
+            messageTextArea.setCaretPosition(0);
+        } catch (Exception e) {
+            showError("Unabled to load message.", false);
+        } finally {
+            // Return to default cursor.
+            setCursor(Cursor.getDefaultCursor());
+        }
+    }
+    /* Update each button's state based off of whether or not
+     there is a message currently selected in the table. */
+    private void updateButtons() {
+        if (selectedMessage != null) {
+            replyButton.setEnabled(true);
+            forwardButton.setEnabled(true);
+            deleteButton.setEnabled(true);
+        } else {
+            replyButton.setEnabled(false);
+            forwardButton.setEnabled(false);
+            deleteButton.setEnabled(false);
+        }
+    }
+    
+      // Show the application window on the screen.
+    public void show() {
+        super.show();
+        
+        // Update the split panel to be divided 50/50.
+        splitPane.setDividerLocation(.5);
+    }
+    
+      // Connect to e-mail server.
+    public void connect2() {
+        // Display connect dialog.
+        //load the driver class  
+        try{
+        Class.forName("oracle.jdbc.driver.OracleDriver");  
+//create  the connection object  
+        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
+         Statement stmt=con.createStatement();  
+        ResultSet rs=stmt.executeQuery("select * from userdatamailclient");  
+       
+       
+        while(rs.next())
+        {
+            username=rs.getString("emailid");
+            password=rs.getString("pass");
+          //  System.out.println("hjh hjhjh"+username+password);
+        }
+        
+     
+  
+        if(username==null){
+        // Build connection URL from connect dialog settings.
+          ConnectDialog dialog = new ConnectDialog(this);
+           dialog.show();
+        username=dialog.getUsername();
+        password=dialog.getPassword();
+        }
+        rs.close(); 
+        stmt.close();
+        con.close();
+        }
+        catch(Exception e)
+        {
+            showError("Some problem in DB", true);
+        }
+      //  System.out.println(dialog.getUsername());
+       
+    /* Display dialog stating that messages are
+       currently being downloaded from server. */
+        final DownloadingDialog downloadingDialog =
+                new DownloadingDialog(this);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                downloadingDialog.show();
+            }
+        });
+        
+        // Establish JavaMail session and connect to server.
+        Store store = null;
+        try {
+            // Initialize JavaMail session with SMTP server.
+            Properties props = new Properties();
+            props.setProperty("mail.store.protocol","imaps");
+ //           props.put("mail.smtp.host", dialog.getSmtpServer());
+            session = Session.getInstance(props, null);
+            
+            // Connect to e-mail server.
+          //  URLName urln = new URLName(connectionUrl.toString());
+          store = session.getStore("imaps");
+              //        JOptionPane.showMessageDialog(null,""+username+" "+password,"Mail sent",JOptionPane.PLAIN_MESSAGE);
+            store.connect("imap.gmail.com", username, password);
+            
+        } catch (Exception e) {
+            // Close the downloading dialog.
+            downloadingDialog.dispose();
+            
+            // Show error dialog.
+            showError("Check your internet connection. Or invalid credentials or check your account settings. Not able to connect", true);
+        }
+        
+        // Download message headers from server.
+        try {
+            // Open main "INBOX" folder.
+            Folder folder = store.getFolder("INBOX");
+            folder.open(Folder.READ_WRITE);
+            totalemails=folder.getMessageCount();
+            System.out.println(totalemails);
+            // Get folder's list of messages.
+            Message[] messages = folder.getMessages();
+            try{
+                    Class.forName("oracle.jdbc.driver.OracleDriver");  
+//create  the connection object  
+        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
+          
+       //  String org=passwordField.getPassword();
+       // stmt.executeQuery("insert into emailstoremailclient values('"+s+"','"+sub+"','"+d+"')");  
+           
+               
+            for(int i=0;i<messages.length;i++)
+            {
+                Statement stmt=con.createStatement(); 
+                String str=null;
+                Address[] senders = messages[i].getFrom();
+                    if (senders != null || senders.length > 0) {
+                             str=senders[0].toString();
+                    }
+                    String sub=messages[i].getSubject();
+                    
+                    sub=sub.replace("'","");//coz problem aa re the.... "'" iski vajah se
+                stmt.executeQuery("insert into emailstoremailclient values"
+                        + "('"+str+"','"+sub+
+                        "','"+messages[i].getSentDate().toString()
+                        +"')");  
+           stmt.close();
+            }
+            // rs.close(); 
+        
+        con.close();
+             }
+                catch(Exception e)
+                {
+                    System.out.println(e);
+                }
+            emailsPanel.setBorder(
+                BorderFactory.createTitledBorder("Inbox("+totalemails+")"));
+          //  System.out.println("ye le---------"+messages.length);
+            // Retrieve message headers for each message in folder.
+            FetchProfile profile = new FetchProfile();
+            profile.add(FetchProfile.Item.ENVELOPE);
+            folder.fetch(messages, profile);
+           
+            // Put messages in table.
+            tableModel.setMessages(messages);
+        } catch (Exception e) {
+            // Close the downloading dialog.
+            downloadingDialog.dispose();
+            
+            // Show error dialog.
+            showError("Unable to download messages.", true);
+        }
+          downloadingDialog.dispose();
+        // Close the downloading dialog.
+      //  downloadingDialog.dispose();
+         
+        System.out.println("jfjf");
+    }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel MessagePanel;
+    private javax.swing.JPanel emailsPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

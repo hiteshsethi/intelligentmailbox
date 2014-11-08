@@ -33,7 +33,7 @@
                   <Component id="jButton3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="MessagePanel" max="32767" attributes="0"/>
+              <Component id="emailsPanel" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -50,7 +50,7 @@
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="MessagePanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="emailsPanel" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -70,13 +70,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Inbox"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sent"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JPanel" name="MessagePanel">
+    <Container class="javax.swing.JPanel" name="emailsPanel">
 
       <Layout>
         <DimensionLayout dim="0">

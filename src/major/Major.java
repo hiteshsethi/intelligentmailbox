@@ -8,16 +8,36 @@ package major;
  *
  * @author hitesh
  */
-public class Major {
+public class Major extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        EmailClient client = new EmailClient();
-        client.show();
-        
+    //    EmailClient client = new EmailClient();
+    //    client.show();
+           try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        front f=new front();
+        f.show();
+        f.connect2();
         // Display connect dialog.
-       client.connect();
+      // client.connect();
     }
 }
