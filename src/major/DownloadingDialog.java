@@ -21,7 +21,7 @@ public class DownloadingDialog extends JDialog {
         super(parent, true);
         
         // Set dialog title.
-        setTitle("E-mail Client");
+        setTitle("Intelligent Email Box");
         
         // Instruct window not to close when the "X" is clicked.
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

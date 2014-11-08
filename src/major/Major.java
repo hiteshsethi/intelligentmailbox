@@ -14,6 +14,10 @@ public class Major {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        EmailClient client = new EmailClient();
+        client.show();
+        
+        // Display connect dialog.
+       client.connect();
     }
 }

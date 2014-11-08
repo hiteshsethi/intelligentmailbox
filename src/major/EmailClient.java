@@ -8,6 +8,10 @@ package major;
  *
  * @author hitesh
  */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
@@ -21,7 +25,8 @@ import javax.swing.event.*;
 public class EmailClient extends JFrame {
     String username;
     String password;
-    
+    int totalemails=0;
+    JPanel emailsPanel = new JPanel();
     // Message table's data model.
     private MessagesTableModel tableModel;
     
@@ -50,7 +55,7 @@ public class EmailClient extends JFrame {
     // Constructor for E-mail Client.
     public EmailClient() {
         // Set application title.
-        setTitle("E-mail Client");
+        setTitle("Intelligent Email Box");
         
         // Set window size.
         setSize(640, 480);
@@ -66,6 +71,9 @@ public class EmailClient extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
+        JMenuItem addAccountItem = new JMenuItem("Add another Account");
+        JMenuItem editAccountItem = new JMenuItem("Edit Account");
+        JMenuItem remAccountItem = new JMenuItem("Remove Account");
         JMenuItem fileExitMenuItem = new JMenuItem("Exit",
                 KeyEvent.VK_X);
         fileExitMenuItem.addActionListener(new ActionListener() {
@@ -73,13 +81,21 @@ public class EmailClient extends JFrame {
                 actionExit();
             }
         });
+        addAccountItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                 actionAdd();
+            }
+        });
+        fileMenu.add(addAccountItem);
+        fileMenu.add(editAccountItem);
+        fileMenu.add(remAccountItem);
         fileMenu.add(fileExitMenuItem);
         menuBar.add(fileMenu);
         setJMenuBar(menuBar);
         
         // Setup buttons panel.
         JPanel buttonPanel = new JPanel();
-        JButton newButton = new JButton("New Message");
+        JButton newButton = new JButton("Compose Email");
         newButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 actionNew();
@@ -100,9 +116,9 @@ public class EmailClient extends JFrame {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         // Setup E-mails panel.
-        JPanel emailsPanel = new JPanel();
+        
         emailsPanel.setBorder(
-                BorderFactory.createTitledBorder("E-mails"));
+                BorderFactory.createTitledBorder("Inbox("+totalemails+")"));
         messageTextArea = new JTextArea();
         messageTextArea.setEditable(false);
         splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
@@ -146,12 +162,20 @@ public class EmailClient extends JFrame {
     
     // Exit this program.
     private void actionExit() {
+        // yaha warning message dena ha----------------------------------------------------------------->>>>>
         System.exit(0);
     }
     
     // Create a new message.
     private void actionNew() {
         sendMessage(MessageDialog.NEW, null);
+    }
+    private void actionAdd()
+    {
+         ConnectDialog dialog = new ConnectDialog(this);
+           dialog.show();
+       String u=dialog.getUsername();
+       String p=dialog.getPassword();
     }
     
     // Called when table row selection changes.
@@ -203,7 +227,7 @@ public class EmailClient extends JFrame {
     // Send the specified message.
     private void sendMessage(int type, Message message) {
         // Display message dialog to get message values.
-        MessageDialog dialog;
+        MessageDialog dialog; //this one is displayed when we send a message to anybody
         try {
             dialog = new MessageDialog(this, type, message);
             if (!dialog.display()) {
@@ -250,7 +274,7 @@ public class EmailClient extends JFrame {
  
             transport.close();
  
-            JOptionPane.showMessageDialog(null, "Mail sent successfully ...","Mail sent",JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Mail sent successfully...","Mail sent",JOptionPane.PLAIN_MESSAGE);
         //    Transport.send(newMessage);
         } catch (Exception e) {
             showError("Unable to send message.", false);
@@ -298,19 +322,41 @@ public class EmailClient extends JFrame {
     // Connect to e-mail server.
     public void connect() {
         // Display connect dialog.
-        ConnectDialog dialog = new ConnectDialog(this);
-        dialog.show();
+        //load the driver class  
+        try{
+        Class.forName("oracle.jdbc.driver.OracleDriver");  
+//create  the connection object  
+        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
+         Statement stmt=con.createStatement();  
+        ResultSet rs=stmt.executeQuery("select * from userdatamailclient");  
+       
+       
+        while(rs.next())
+        {
+            username=rs.getString("emailid");
+            password=rs.getString("pass");
+          //  System.out.println("hjh hjhjh"+username+password);
+        }
         
+     
+  
+        if(username==null){
         // Build connection URL from connect dialog settings.
-        StringBuffer connectionUrl = new StringBuffer();
-        connectionUrl.append("pop3" + "://");
+          ConnectDialog dialog = new ConnectDialog(this);
+           dialog.show();
         username=dialog.getUsername();
         password=dialog.getPassword();
+        }
+        rs.close(); 
+        stmt.close();
+        con.close();
+        }
+        catch(Exception e)
+        {
+            showError("Some problem in DB", true);
+        }
       //  System.out.println(dialog.getUsername());
-        connectionUrl.append(dialog.getUsername() + ":");
-        connectionUrl.append(dialog.getPassword() + "@");
-        connectionUrl.append(dialog.getServer() + "/");
-        
+       
     /* Display dialog stating that messages are
        currently being downloaded from server. */
         final DownloadingDialog downloadingDialog =
@@ -331,16 +377,17 @@ public class EmailClient extends JFrame {
             session = Session.getInstance(props, null);
             
             // Connect to e-mail server.
-            URLName urln = new URLName(connectionUrl.toString());
+          //  URLName urln = new URLName(connectionUrl.toString());
           store = session.getStore("imaps");
-            store.connect("imap.gmail.com", dialog.getUsername(), dialog.getPassword());
+              //        JOptionPane.showMessageDialog(null,""+username+" "+password,"Mail sent",JOptionPane.PLAIN_MESSAGE);
+            store.connect("imap.gmail.com", username, password);
             
         } catch (Exception e) {
             // Close the downloading dialog.
             downloadingDialog.dispose();
             
             // Show error dialog.
-            showError("time lagega to connect.", true);
+            showError("Check your internet connection. Or invalid credentials or check your account settings. Not able to connect", true);
         }
         
         // Download message headers from server.
@@ -348,15 +395,51 @@ public class EmailClient extends JFrame {
             // Open main "INBOX" folder.
             Folder folder = store.getFolder("INBOX");
             folder.open(Folder.READ_WRITE);
-            
+            totalemails=folder.getMessageCount();
+            System.out.println(totalemails);
             // Get folder's list of messages.
             Message[] messages = folder.getMessages();
-            
+            try{
+                    Class.forName("oracle.jdbc.driver.OracleDriver");  
+//create  the connection object  
+        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
+          
+       //  String org=passwordField.getPassword();
+       // stmt.executeQuery("insert into emailstoremailclient values('"+s+"','"+sub+"','"+d+"')");  
+           
+               
+            for(int i=0;i<messages.length;i++)
+            {
+                Statement stmt=con.createStatement(); 
+                String str=null;
+                Address[] senders = messages[i].getFrom();
+                    if (senders != null || senders.length > 0) {
+                             str=senders[0].toString();
+                    }
+                    String sub=messages[i].getSubject();
+                    sub=sub.replace("'","");//coz problem aa re the.... "'" iski vajah se
+                stmt.executeQuery("insert into emailstoremailclient values"
+                        + "('"+str+"','"+sub+
+                        "','"+messages[i].getSentDate().toString()
+                        +"')");  
+           stmt.close();
+            }
+            // rs.close(); 
+        
+        con.close();
+             }
+                catch(Exception e)
+                {
+                    System.out.println(e);
+                }
+            emailsPanel.setBorder(
+                BorderFactory.createTitledBorder("Inbox("+totalemails+")"));
+          //  System.out.println("ye le---------"+messages.length);
             // Retrieve message headers for each message in folder.
             FetchProfile profile = new FetchProfile();
             profile.add(FetchProfile.Item.ENVELOPE);
             folder.fetch(messages, profile);
-            
+           
             // Put messages in table.
             tableModel.setMessages(messages);
         } catch (Exception e) {
@@ -399,11 +482,5 @@ public class EmailClient extends JFrame {
     }
     
     // Run the E-mail Client.
-    public static void main(String[] args) {
-        EmailClient client = new EmailClient();
-        client.show();
-        
-        // Display connect dialog.
-        client.connect();
-    }
+    
 }
