@@ -170,10 +170,13 @@ public class EmailClient extends JFrame {
     private void actionNew() {
         sendMessage(MessageDialog.NEW, null);
     }
+    
+    
     private void actionAdd()
     {
          ConnectDialog dialog = new ConnectDialog(this);
            dialog.show();
+           // yaha pe connect again call hona chiaye
        String u=dialog.getUsername();
        String p=dialog.getPassword();
     }
@@ -417,6 +420,7 @@ public class EmailClient extends JFrame {
                              str=senders[0].toString();
                     }
                     String sub=messages[i].getSubject();
+                    
                     sub=sub.replace("'","");//coz problem aa re the.... "'" iski vajah se
                 stmt.executeQuery("insert into emailstoremailclient values"
                         + "('"+str+"','"+sub+
