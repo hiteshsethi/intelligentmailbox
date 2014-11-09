@@ -4,6 +4,10 @@
  */
 package major;
 
+import java.util.Properties;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+
 /**
  *
  * @author hitesh
@@ -37,6 +41,21 @@ public class Major extends javax.swing.JFrame {
         front f=new front();
         f.show();
         f.connect2();
+        Properties props = System.getProperties();
+props.setProperty("mail.store.protocol", "imaps");
+try {
+    Session session = Session.getDefaultInstance(props, null);
+    javax.mail.Store store = session.getStore("imaps");
+    store.connect("imap.gmail.com", "shanu.latest@gmail.com", "zxcvbnmzxc");
+    javax.mail.Folder[] folders = store.getDefaultFolder().list("*");
+    for (javax.mail.Folder folder : folders) {
+        if ((folder.getType() & javax.mail.Folder.HOLDS_MESSAGES) != 0) {
+            System.out.println(folder.getFullName() + ": " + folder.getMessageCount());
+        }
+    }
+} catch (MessagingException e) {
+    e.printStackTrace();
+}
         // Display connect dialog.
       // client.connect();
     }
