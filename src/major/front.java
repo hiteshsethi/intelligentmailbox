@@ -330,6 +330,7 @@ public class front extends javax.swing.JFrame {
         setTitle("Intelligent Mail Box");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setForeground(java.awt.Color.white);
 
         jButton1.setBackground(new java.awt.Color(209, 72, 54));
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -689,12 +690,22 @@ public class front extends javax.swing.JFrame {
             Folder folder = store.getFolder("INBOX");
             //Folder folder = store.getFolder("[Gmail]/Sent Mail");
             folder.open(Folder.READ_WRITE);
+           
             totalemails=folder.getMessageCount();
             System.out.println(totalemails);
             // Get folder's list of messages.
             
             Message[] messages = folder.getMessages();
-           
+         
+            emailsPanel.setBorder(
+                BorderFactory.createTitledBorder("Inbox("+totalemails+")"));
+          //  System.out.println("ye le---------"+messages.length);
+            // Retrieve message headers for each message in folder.
+            FetchProfile profile = new FetchProfile();
+            profile.add(FetchProfile.Item.ENVELOPE);
+            profile.add(FetchProfile.Item.FLAGS);
+            folder.fetch(messages, profile);
+             
          try{
                     Class.forName("oracle.jdbc.driver.OracleDriver");  
 //create  the connection object  
@@ -708,11 +719,11 @@ public class front extends javax.swing.JFrame {
             {
                 Statement stmt=con.createStatement(); 
                 String str=null;
-                Address[] senders = messages[i].getFrom();
+                Address[] senders =folder.getMessage(i+1).getFrom();
                     if (senders != null || senders.length > 0) {
                              str=senders[0].toString();
                     }
-                    String sub=messages[i].getSubject();
+                    String sub=folder.getMessage(i+1).getSubject();
                     if(sub==null)
                         sub="No subject";
                     sub=sub.replace("'","");//coz problem aa re the.... "'" iski vajah se
@@ -727,7 +738,7 @@ public class front extends javax.swing.JFrame {
                     //sub=sub.replace("","");
                 stmt.executeQuery("insert into emailstoremailclient values"
                         + "('"+str+"','"+sub+
-                        "','"+messages[i].getSentDate().toString()
+                        "','"+folder.getMessage(i+1).getSentDate().toString()
                         +"')");  
            stmt.close();
             }
@@ -739,14 +750,6 @@ public class front extends javax.swing.JFrame {
                 {
                     System.out.println(e);
                 }
-            emailsPanel.setBorder(
-                BorderFactory.createTitledBorder("Inbox("+totalemails+")"));
-          //  System.out.println("ye le---------"+messages.length);
-            // Retrieve message headers for each message in folder.
-            FetchProfile profile = new FetchProfile();
-            profile.add(FetchProfile.Item.ENVELOPE);
-            folder.fetch(messages, profile);
-           
             // Put messages in table.
             tableModel.setMessages(messages);
         } catch (Exception e) {
