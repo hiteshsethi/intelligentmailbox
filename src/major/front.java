@@ -12,12 +12,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Address;
 import javax.mail.FetchProfile;
 import javax.mail.Flags;
@@ -43,8 +47,10 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableColumn;
 import org.msgpack.MessagePack;
 
 /**
@@ -53,13 +59,16 @@ import org.msgpack.MessagePack;
  */
 public class front extends javax.swing.JFrame {
  // Message table's data model.
+    File file = new File("crawledindiaa.txt");
+    int LastUid=0;
     private MessagesTableModel tableModel;
  //   private MessagesTableModel tableModel2;
     JPanel buttonPanel2;
-    
+    int jf;
     // Table listing messages.
     private JTable table;
     
+  //  table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     // This the text area for displaying messages.
     private JTextArea messageTextArea;
     
@@ -89,6 +98,13 @@ public class front extends javax.swing.JFrame {
        //JPanel emailsPanel = new JPanel();
     public front() {
         initComponents();
+              if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(front.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                            }
         setTitle("Intelligent Email Box");
          // Handle window closing events.
         addWindowListener(new WindowAdapter() {
@@ -96,6 +112,8 @@ public class front extends javax.swing.JFrame {
                 actionExit();
             }
         });
+      //  table.setcol
+     //table.getColumn(columnNames[0]).setPreferredWidth(100);
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH); //for full size
          // Setup file menu.
         JMenuBar menuBar = new JMenuBar();
@@ -612,7 +630,8 @@ public class front extends javax.swing.JFrame {
         // Update the split panel to be divided 50/50.
         splitPane.setDividerLocation(.5);
     }
-    
+    Message[] messages;
+    Folder folder;
       // Connect to e-mail server.
     public void connect2() {
         // Display connect dialog.
@@ -687,25 +706,43 @@ public class front extends javax.swing.JFrame {
         // Download message headers from server.
         try {
             // Open main "INBOX" folder.
-            Folder folder = store.getFolder("INBOX");
+            folder = store.getFolder("INBOX");
             //Folder folder = store.getFolder("[Gmail]/Sent Mail");
             folder.open(Folder.READ_WRITE);
-           
+           jf=folder.getUnreadMessageCount();
             totalemails=folder.getMessageCount();
             System.out.println(totalemails);
             // Get folder's list of messages.
             
-            Message[] messages = folder.getMessages();
+            messages = folder.getMessages();
          
             emailsPanel.setBorder(
-                BorderFactory.createTitledBorder("Inbox("+totalemails+")"));
+                BorderFactory.createTitledBorder("Inbox("+totalemails+") [Unread "+jf+"]"));
           //  System.out.println("ye le---------"+messages.length);
             // Retrieve message headers for each message in folder.
             FetchProfile profile = new FetchProfile();
             profile.add(FetchProfile.Item.ENVELOPE);
             profile.add(FetchProfile.Item.FLAGS);
             folder.fetch(messages, profile);
-             
+             backgroundProcess.execute();
+            // Put messages in table.
+            tableModel.setMessages(messages);
+        } catch (Exception e) {
+            // Close the downloading dialog.
+            downloadingDialog.dispose();
+            
+            // Show error dialog.
+            showError("Unable to download messages.", true);
+        }
+          downloadingDialog.dispose();
+        // Close the downloading dialog.
+      //  downloadingDialog.dispose();
+         
+      //  System.out.println("jfjf");
+    }
+    void execute1()
+    {
+        
          try{
                     Class.forName("oracle.jdbc.driver.OracleDriver");  
 //create  the connection object  
@@ -750,22 +787,23 @@ public class front extends javax.swing.JFrame {
                 {
                     System.out.println(e);
                 }
-            // Put messages in table.
-            tableModel.setMessages(messages);
-        } catch (Exception e) {
-            // Close the downloading dialog.
-            downloadingDialog.dispose();
-            
-            // Show error dialog.
-            showError("Unable to download messages.", true);
-        }
-          downloadingDialog.dispose();
-        // Close the downloading dialog.
-      //  downloadingDialog.dispose();
-         
-      //  System.out.println("jfjf");
     }
-   
+   private SwingWorker<Boolean, Void> backgroundProcess = new SwingWorker<Boolean, Void>() {
+
+        @Override
+        protected Boolean doInBackground() throws Exception {
+            // paste the MySQL code stuff here
+            execute1();
+            return true;
+        }
+
+        @Override
+        protected void done() {
+            // Process ended, mark some ended flag here
+            System.out.println("dkh thread ended");
+            // or show result dialog, messageBox, etc      
+        }
+    };
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel emailsPanel;
     private javax.swing.JButton jButton1;
