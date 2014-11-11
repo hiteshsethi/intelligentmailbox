@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Kshitij'12</title>
+</head>
+
+<body>
+<img src="http://www.ktj.in/images/ktjnkgp.png" height="85px" width="169px"/> <img align="right" src="http://www.ktj.in/images/title.jpg" />
+<h2 align="center"><u>ACCOMMODATION DETAILS</u></h2>
+<p>
+Kshitij is the annual Techno-management fest of IIT Kharagpur. This year it will be organized from 27th-30th January. The accommodation form for the participants is 
+now available on the website at  http://www.ktj.in/#acco.<br><br>
+The details for filling the accommodation form is as follows:
+</p><b>
+<li>Participants will have to make and bring along with them a draft of Rs. 1000/-(INR 200 is as a caution money for all the accommodation materials provided 
+which, will be refunded after the fest) in favour of "Kshitij", payable at SBI, IIT Kharagpur (0202).
+<li>If you are coming in a team (say 5 membered team), a single draft can be drawn for the whole amount (5 x 1000 = Rs. 5000). However, all team members are required 
+to fill the form separately. If they have a common DD then the same DD number is to be entered in all the forms.
+<li>Registrations for Accommodation will end on January 21st.
+<li>Accommodation will be provided in a first come, first serve basis. Participants are required to update their accommodation forms with the PNR number of their 
+travelling ticket. 
+<li>The following items must be brought by the participants during the registration at IIT Kharagpur:<br>
+1)College Identity Card<br>
+2)Accommodation Form Printout<br> 
+3)Demand Draft<br> 
+<li>All the finalists must register for Accommodation. They will be granted Accommodation as soon as they register. </b><br><br>
+<br>For any doubt or queries contact:<br>
+Aditya Bhushan Verma<br>
+Email: aditya.verma@ktj.in<br>
+Ph: +91 9775639567<br>
+
+
+
+<br><br/>Follow Kshitij 2012 on twitter to get the latest updates at <a href="https://twitter.com/#!/ktj_2012">https://twitter.com/ktj_2012</a>
+<br/>Follow us on facebook   <a href="https://www.facebook.com/kshitij.2012"><img align="middle" src=http://www.ktj.in/images/fb.jpg height="30" width="26" /></a><br/>
+
+
+</body>
+</html><center><b><a href="http://www.ktj.in/mailer/unsubscribe.php?id=hitesh.28jan@gmail.com&cnf=4f5d4d4cab261f47cb7501c511812f8a">Unsubscribe Newsletter</a></b></center>

@@ -1,0 +1,63 @@
+<div style="border:1px solid gray;width:615px;">
+  <div style="height:75px; background-color:#FFFFFF;margin:0px; padding:0px;">
+ <div style="float:left; padding-left: 10px;"><a href="http://www.myntra.com/?utm_source=MRP_mailer&utm_medium=mailer&utm_campaign=myntra_logo" target="_blank"><img src="http://myntramailer.s3.amazonaws.com/online/myntra-logo.jpg" alt="Myntra" title="Myntra" width="215" height="75" style="line-height:0px;border:0px;color:#000;font-family:arial,helvetica,serif;font-size:12px;"></a></div>
+ <div style="float: right; margin-top:6px;">
+ 
+ <span style="float: right;  font-size: 11px; font-family: arial; margin: 15px 0px 10px 0px; padding: 0px 5px;"><strong style="display: block; font-size: 12px; color: #4d4d4d; line-height: 16px;">10% CASHBACK<br>FREE SHIPPING<br>CASH ON DELIVERY
+</strong></span>
+ <span style="float: right; margin-top:5px;">
+ <a href="http://www.myntra.com/mymyntra.php?view=myreferrals" alt="refer and win" title="refer and win" width="215" height="75"  target="_blank"><img src="http://myntramailer.s3.amazonaws.com/online/referandwin.jpg" style="line-height:0px;border:0px;color:#000;font-family:arial,helvetica,serif;font-size:12px;"/></a></span>
+ </div>
+  </div>
+  <div style="height: 35px;background-color: #ffffff; margin: 0pt 0pt 0px; font-weight: bold; border: 0px solid gray;">
+    <ul style="margin:0px;float:left;color:white;font-family:Arial,Helvetica,sans-serif;font-size:12px;list-style:none outside none;padding:0px;line-height:15px;">
+      <li style="border-right:1px solid gray; float:left;margin:0px;"><a href="http://www.myntra.com/tshirts?utm_source=MRP_mailer&utm_medium=mailer&utm_campaign=tshirts" target="_blank" style="color: black; text-decoration: none; display: block; padding: 8px 15px;">Tshirts</a></li>
+      <li style="border-right:1px solid gray; float:left;margin:0px;"><a href="http://www.myntra.com/sports-footwear?utm_source=MRP_mailer&utm_medium=mailer&utm_campaign=sports_footwear" target="_blank" style="color: black; text-decoration: none; display: block; padding: 8px 10px;">Sports Footwear</a></li>
+      <li style="border-right:1px solid gray; float:left;margin:0px;"><a href="http://www.myntra.com/casual-footwear?utm_source=MRP_mailer&utm_medium=mailer&utm_campaign=casual_footwear" target="_blank" style="color: black; text-decoration: none; display: block; padding: 8px 15px;">Casual Footwear</a></li>
+	  <li style="border-right:1px solid gray; float:left;margin:0px;"><a href="http://www.myntra.com/cricket-jerseys?utm_source=MRP_mailer&utm_medium=mailer&utm_campaign=cricket_jersey" target="_blank" style="color: black; text-decoration: none; display: block; padding: 8px 15px;">Sports Jerseys</a></li>
+	  <li style="border-right:1px solid gray; float:left;margin:0px;"><a href="http://www.myntra.com/accessories?utm_source=MRP_mailer&utm_medium=mailer&utm_campaign=accessories" target="_blank" style="color: black; text-decoration: none; display: block; padding: 8px 20px;">Accessories</a></li>
+      <li style="float: left;margin:0px;"><a href="http://www.myntra.com/brands?utm_source=MRP_mailer&utm_medium=mailer&utm_campaign=brands" target="_blank" style="color: black; text-decoration: none; display: block; padding: 10px 15px;">Brands</a></li>
+    </ul>
+  </div>
+</div>
+<div style="border:1px solid gray;width:615px;">
+  <div style="margin-top:0px; padding:0px;">
+ <a href="http://www.myntra.com/mrp_landing.php?utm_source=MRP_mailer&utm_medium=welcome_fb&utm_campaign=mrp_know_more" target="_blank" style="outline:none">
+ <img src="http://myntramailer.s3.amazonaws.com/online/mynt-club-welcome-banner.jpg" width="615" height="452" alt="You are now a privileged member of the Mynt Club. You have received a credit of Rs 750 for your first purchase! Click here to learn more." title="You are now a privileged member of the Mynt Club. You have received a credit of Rs 750 for your first purchase! Click here to learn more." style="text-decoration:none;border:none;font-family:Arial,Helvetica,sans-serif;color:#666;font-size:12px;"/>
+ </a>
+  </div>
+  <table background="http://myntramailer.s3.amazonaws.com/july2011/ymyntra-background.jpg" height="180" width="615">
+ <tbody><tr><td><div style="margin-top:0px;height:200px;width:600px;line-height:0px;font-family:Arial,Helvetica,sans-serif;color:#000;font-size:15px;list-style-type:circle; list-style-align:center;" align="center" background="http://myntramailer.s3.amazonaws.com/july2011/ymyntra-background.jpg">
+ <div style="padding-top:40px;line-height:27px"> 
+ <img src="http://myntramailer.s3.amazonaws.com/july2011/bullet-style.jpg" width="10" height="11" alt="" title="" /><strong> Largest in-season catalog</strong> of sports and casual wear<br>
+ <img src="http://myntramailer.s3.amazonaws.com/july2011/bullet-style.jpg" width="10" height="11" alt="" title="" /><strong> More than 50 brands of</strong> footwear, apparel &amp; accessories<br>
+ <img src="http://myntramailer.s3.amazonaws.com/july2011/bullet-style.jpg" width="10" height="11" alt="" title="" /><strong> Free shipping</strong> throughout the country<br>
+  <img src="http://myntramailer.s3.amazonaws.com/july2011/bullet-style.jpg" width="10" height="11" alt="" title="" /> Customer friendly<strong> Returns policy</strong><br>
+ <img src="http://myntramailer.s3.amazonaws.com/july2011/bullet-style.jpg" width="10" height="11" alt="" title="" /> Pay<strong> Cash on Delivery</strong><br>
+ <img src="http://myntramailer.s3.amazonaws.com/july2011/bullet-style.jpg" width="10" height="11" alt="" title="" /> 24x7<strong> Customer support</strong><br>
+ </div>
+ </div>
+ </td></tr></tbody></table>
+   <div style="margin-top:5px; padding:0px;">
+ <a href="http://www.myntra.com/mymyntra.php?view=myreferrals&utm_source=MRP_mailer&utm_medium=welcome_fb&utm_campaign=refer_and_earn" target="_blank" style="outline:none">
+ <img src="http://myntramailer.s3.amazonaws.com/online/mynt-club-welcome-banner2.jpg" width="615" height="155" alt="Refer and earn more. Get Rs 250 for every friend who registers, and Rs 1000 on the first time each of them buys on Myntra! Click here to learn more" title="Refer and earn more. Get Rs 250 for every friend who registers, and Rs 1000 on the first time each of them buys on Myntra! Click here to learn more" style="text-decoration:none;border:none;font-family:Arial,Helvetica,sans-serif;color:#666;font-size:12px;"/>
+ </a>
+  </div>
+    <div style="margin-top:0px; padding:0px;">
+ <img src="http://myntramailer.s3.amazonaws.com/online/mynt-club-welcome-banner3.jpg" width="615" height="75" alt="mynt club | Rewards and loyalty program" title="mynt club | Rewards and loyalty program" style="text-decoration:none;border:none;font-family:Arial,Helvetica,sans-serif;color:#666;font-size:12px;"/>
+<img src="http://www.email-tracking-with-google-analytics.com/track/t4739.gif" border=0>
+ </div>
+<div style="border:1px solid gray;width:615px;">    
+<div style="margin-top:0px;background-color:#9b9b9b;border:0px solid red; height:30px; "> 
+    <div style="width:615px; _margin-left:10px; padding:4px 8px 25px 8px; font-family:arial,helvetica,serif; font-size:12px; position:absolute;">
+      <span style="float:left;width:370px; margin-top: 5px;color:#FFFFFF;">support@myntra.com | Call +91-80-43541999 | Connect with us</span> <span style="float:left; width:100px"><a href="http://www.facebook.com/pages/Myntracom/6466648220?v=wall" target="_blank" ><img src="http://myntramailer.s3.amazonaws.com/online/facebook-icon.jpg" border="none"/></a>
+ <a href="http://twitter.com/myntradotcom" target="_blank"> <img src="http://myntramailer.s3.amazonaws.com/online/twitter-icon.jpg" border="none"/></a>
+   </span>
+      <span style="float:right;width:100px; margin-top: 5px; margin-right: 10px;color:#FFFFFF;">www.myntra.com</span>
+      
+    </div>
+  </div>
+  <div style="clean:both;font-size:0px;line-height:0px;">&nbsp;</div>
+  <p style="font-family:arial,helvetica,serif; font-size:11px; color:#1f1f1f;">Offer valid on Myntra.com only. Myntra logo is a registered trademark of www.myntra.com, India. Check out our Privacy Policy and User Agreement. Unsubscribe from this newsletter. Forgot your password? Need help or have any question? Contact us at Customer Support. <br>
+    &copy; 2011. All Right Reserved. www.myntra.com</p>
+</div>

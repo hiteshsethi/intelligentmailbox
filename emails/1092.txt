@@ -1,0 +1,77 @@
+<table width="100%" height="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="4" style="background-color: #01baff; font-size: 1px">&nbsp;</td>
+    </tr>
+    <tr valign="top">
+        <td style="background: #efefef">
+        	<div id="wrapper" style="width: 600px; margin: 0 auto; text-align: left; max-width: 600px">
+        		<a href="http://cl.s4.exct.net/?qs=4e2081398546f468ee1958e12495cd3110545410c36b335506ade76d6fec57d927ae476780315c68"><img src="http://s3.amazonaws.com/com.klout.perks.assets/00ddbe26-577d-4fd2-a7f6-06da952f680e.png" alt="Klout News Logo" width="196" height="25" style="margin: 18px 0px 0px 0px; border: none" /></a>
+                <h1 style="font: 10px Arial, sans-serif; font-weight: bold; color:#645357">Everyone has influence.<BR>Is this email not displaying correctly? <a href="http://cl.s4.exct.net/?qs=4e2081398546f468f8e97d0068a46de2e93657d07d91d9023acf643e21a5ece7c6fdb5c0a6225ddf">View it in your browser.</a></h1>
+
+
+        		<table cellpadding="50" cellspacing="0" width="500" style="margin: 0; border: 1px solid #d7d7d7; background: #ffffff; color: #645357; font-family: Arial, sans-serif; font-size: 14px">
+
+    
+        			<tr>
+                        <td><h1 style="font: 24px Arial, sans-serif; font-weight: bold; color:#645357; margin-bottom: 30px">Hi Hitesh,</h1>
+    <h1 style="font: 24px Arial, sans-serif; font-weight: bold; color:#645357">Have you joined the Red Bull squad yet?</h1>
+
+    <a href="http://cl.s4.exct.net/?qs=4e2081398546f4684ed386293027cc6dd1d4a67f532165beab5639e32199c331f0ce7b9c1d1500e9">
+      <img alt="New Red Bull Brand Squad" src="http://s3.amazonaws.com/com.klout.perks.assets/9e2b63de-94b8-4f83-87d6-65f01ca36167.jpg" width="526" height="408"/>
+    </a>
+
+    <div style="width: 530px;">
+      <p style="font-size: 14px">This week we unveiled <a href="http://cl.s4.exct.net/?qs=4e2081398546f4684ed386293027cc6dd1d4a67f532165beab5639e32199c331f0ce7b9c1d1500e9">new brand squads with our launch partner Red Bull</a>. With brand squads, influencers can see their rank within the squad, directly influence the brand, view the best content from other influencers, and earn exclusive Perks.<br /><br /></p>
+    </div>
+
+    <div style="width: 260px; float: left; margin-right: 10px; background-color:#ffffff;">
+      <a href="http://cl.s4.exct.net/?qs=4e2081398546f468c3a773c1e3ee44bbb930f25266b6837694c35ca2ce9a8119c742404fbde9bdf7">
+        <img alt="Exclusive Red Bull Perks" src="http://s3.amazonaws.com/com.klout.perks.assets/9dc6f55a-ee49-4a2a-a2d8-88743bf95996.jpg" class="alignnone" width="263" height="130"/>
+      </a>
+      <p style="font-size: 14px;">Coming soon, the Top 1000 Red Bull influencers will earn <a href="http://cl.s4.exct.net/?qs=4e2081398546f468c3a773c1e3ee44bbb930f25266b6837694c35ca2ce9a8119c742404fbde9bdf7">a 4-pack of Red Bull Total Zero</a>. Which exclusive Perks will the Top 100 and Top 10 influencers receive?  <a href="http://cl.s4.exct.net/?qs=4e2081398546f4684ed386293027cc6dd1d4a67f532165beab5639e32199c331f0ce7b9c1d1500e9">Wouldn't you like to know...</a><br /><br /></p>
+    </div>
+
+    
+   <div style="width: 260px; float: left; background-color:#ffffff;">
+      <a href="http://cl.s4.exct.net/?qs=4e2081398546f4686ae580eb6167fef6edbe48359ea0ccf6b5a4e86a532646fc1fe15c2897ae5d41">
+        <img alt="Political Klout of G20" src="http://s3.amazonaws.com/com.klout.perks.assets/3ee3f08a-b1dd-4988-853a-faffed3ac87a.jpg" class="alignnone" width="263" height="130"/>
+      </a>
+      <p style="font-size: 14px;">G20 influencers is a study conducted by Burson-Marsteller, a leading global public relations agency, that identified the 10 most politically influential people for each country of the G20. <a href="http://cl.s4.exct.net/?qs=4e2081398546f4686ae580eb6167fef6edbe48359ea0ccf6b5a4e86a532646fc1fe15c2897ae5d41">Find out who is shaping the debate online.</a><br /><br /></p>
+    </div>
+    <div style="width: 260px; float: left; margin-right:10px; clear: both; background-color:#ffffff;">
+      <a href="http://cl.s4.exct.net/?qs=4e2081398546f468b66d3c2a8e2c4761be91bf1205b221fab588bd13b964fcb2898fe1a6f4220d15">
+        <img alt="Klout Star: Benedict Corpuz" src="http://s3.amazonaws.com/com.klout.perks.assets/ba6a23b2-287d-465e-97fb-3d0c87c0669d.jpg" class="alignnone" width="263" height="130"/>
+      </a>
+      <p style="font-size: 14px;">Klout Star <a href="http://cl.s4.exct.net/?qs=4e2081398546f468b66d3c2a8e2c4761be91bf1205b221fab588bd13b964fcb2898fe1a6f4220d15">Benedict Corpuz</a> is a one-man social media guinea pig. He tests every social website and app he thinks can help him stay connected with his family and friends while he bounces around the country as a flight attendant. See what apps and sites he says are crucial.
+      </p>
+    </div>
+ <div style="width: 260px; float: left; background-color:#ffffff;">
+      <a href="http://cl.s4.exct.net/?qs=4e2081398546f468c01859ae6acd96a37cbb9cc53b9666268aa65e916205d6f6ff211502f7a1f7c4">
+        <img alt="Klout in WSJ" src="http://s3.amazonaws.com/com.klout.perks.assets/a3a97e01-ffbc-41d9-b720-293a2c4742e3.jpg" class="alignnone" width="263" height="130"/>
+      </a>
+      <p style="font-size: 14px;"><a href="http://cl.s4.exct.net/?qs=4e2081398546f468c01859ae6acd96a37cbb9cc53b9666268aa65e916205d6f6ff211502f7a1f7c4">The Wall Street Journal</a> featured Klout and its role in empowering the citizen influencer. Read on to find out what that means for the future of business-customer relationships. </p>
+    </div>
+
+  </div>
+</table>
+        		<table cellpadding="0" cellspacing="0" style="font: 11px Arial, sans-serif; color: #c5c5c5; margin-top: 4px; text-align: center">
+        		  <tr>
+        		      <td>
+        		          Copyright &copy; 2012 Klout. All rights reserved. <table cellpadding="2" cellspacing="0" width="600" ID="Table5" Border=0 style="text-align: center"><tr>
+<td><font face="verdana" size="1" color="#444444">This email was sent by: <b>Klout</b><br>77 Stillman San Francisco, CA, 94107, US<br><br></font></td></tr></table>
+        		      </td>
+        		  </tr>
+<tr>
+                            <td colspan="2" valign="middle" align="center">
+                                <div style="font-size: 12px">
+                                     &nbsp;<a href="http://cl.s4.exct.net/?qs=4e2081398546f468c09a33a78322d954cb73e29c4ff96e31b0299b4daebb1612963b662b57b1a85c">One-Click Unsubscribe</a> | <a href="http://cl.s4.exct.net/?qs=4e2081398546f468669c762b0fcca682b5b4eab92de073579580500076a09d9ed42b2aade9fd3c49" >Email Preferences</a> &nbsp;
+                                </div>
+                            </td>
+                        </tr>
+        		</table>        		
+        	</div>
+        </td>        
+    </tr>
+</table>
+<a style="display: none" href="http://cl.s4.exct.net/?qs=4e2081398546f46861876a962480436a2f1ca597b32b871e7e826cbe44fa0589fba2be348ffd37da"></a>
+<img src="http://cl.s4.exct.net/open.aspx?ffcb10-fe951574766d0c7c75-fe3412757d64047f751773-fea415707065057d76-ff2410797c61-fe5713777462037d7d10-ff5d137977" width="1" height="1">

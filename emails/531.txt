@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Kshitij'12</title>
+</head>
+
+<body>
+<img src="http://www.ktj.in/images/ktjnkgp.png" height="85px" width="169px"/> <img align="right" src="http://www.ktj.in/images/title.jpg" />
+<h2 align="center"><u> OVERNITE </u></h2>
+<p>
+Overnite, the ACM certified coding competition is back again! Gear up for its online prelims. The trial round will take place on 14th January at 6:00 pm and the actual prelims will take place on 15th January 6:00 pm. But there are a few things to be kept in mind before the coding fever takes you over. Before participating in overnite please take care of the following.</p>
+
+Â·        <li>The participating team should consist of exactly 3 members</li>
+
+Â·        <li>Every team has to fill up all the required details on the link given below before 5:00 pm on 15th January. The registration will open at 5:00 pm on 15th January.</li>
+
+Â·        <li>Details of the team coach who is a faculty member of the teamâs institute, the team name and the team password have to be specifically filled in. The team coach does not need to be present at the finals.</li>
+
+</p><br>
+<p>http://overnite.ktj.in</p><br>
+
+
+<p><b>For further details, visit :</b> http://ktj.in/#Overnite
+<br>
+
+</p><br>
+
+<u><h3><b>Prizes</b></h3></u>
+<b>First prize</b> worth Rs 15000<br>
+<b>Second prize</b> worth Rs 9000<br>
+<b>Third prize</b> worth Rs 6000<br>
+<b>Consolation Prizes</b> worth Rs 15000<br><br>
+<p>For any further details contact: 
+<br>
+Anshul Patel<br>
+anshul.patel@ktj.in  <br>
++91 9735484780<br>
+<br>
+
+
+
+<br><br/>Follow Kshitij 2012 on twitter to get the latest updates at <a href="https://twitter.com/#!/ktj_2012">https://twitter.com/ktj_2012</a>
+<br/>Follow us on facebook   <a href="https://www.facebook.com/kshitij.2012"><img align="middle" src=http://www.ktj.in/images/fb.jpg height="30" width="26" /></a><br/>
+
+
+</body>
+</html><center><b><a href="http://www.ktj.in/mailer/unsubscribe.php?id=hitesh.28jan@gmail.com&cnf=4f5d4d4cab261f47cb7501c511812f8a">Unsubscribe Newsletter</a></b></center>

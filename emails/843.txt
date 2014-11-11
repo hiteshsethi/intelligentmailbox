@@ -1,0 +1,15 @@
+Hi Hitesh,
+
+You recently changed your Facebook password on 13 March 2012 at 10:14.
+As a security precaution, this notification has been sent to all email addresses associated with your account.
+
+If you have not changed your password, your account may have been the victim of a phishing scam.
+Please follow the link to regain control over your account:
+https://www.facebook.com/checkpoint/checkpointme?u=100001923358820&n=2ABtHXnH
+
+Your password was changed from the following location:
+Delhi, DL, IN (IP=117.211.93.74)
+
+Thanks,
+The Facebook Team
+

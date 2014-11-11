@@ -12,7 +12,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -59,8 +63,9 @@ import org.msgpack.MessagePack;
  */
 public class front extends javax.swing.JFrame {
  // Message table's data model.
-    File file = new File("crawledindiaa.txt");
+    File file;
     int LastUid=0;
+    int flag=0;
     private MessagesTableModel tableModel;
  //   private MessagesTableModel tableModel2;
     JPanel buttonPanel2;
@@ -98,13 +103,9 @@ public class front extends javax.swing.JFrame {
        //JPanel emailsPanel = new JPanel();
     public front() {
         initComponents();
-              if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException ex) {
-                Logger.getLogger(front.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                            }
+        
+        
+              
         setTitle("Intelligent Email Box");
          // Handle window closing events.
         addWindowListener(new WindowAdapter() {
@@ -470,8 +471,10 @@ public class front extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //connect2();
+        
         emailsPanel.setVisible(true);
-              buttonPanel2.setVisible(true); 
+              buttonPanel2.setVisible(true);
+               updateInbox.execute();
         //  getContentPane().setLayout(new BorderLayout());
       //  getContentPane().add(buttonPanel, BorderLayout.NORTH);
       //  getContentPane().add(emailsPanel, BorderLayout.CENTER);
@@ -583,7 +586,7 @@ public class front extends javax.swing.JFrame {
         } catch (Exception e) {
             showError("Unable to delete message.", false);
         }
-        
+       
         // Delete message from table.
         tableModel.deleteMessage(table.getSelectedRow());
         
@@ -632,6 +635,7 @@ public class front extends javax.swing.JFrame {
     }
     Message[] messages;
     Folder folder;
+    String str;
       // Connect to e-mail server.
     public void connect2() {
         // Display connect dialog.
@@ -676,7 +680,7 @@ public class front extends javax.swing.JFrame {
                 new DownloadingDialog(this);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                downloadingDialog.show();
+         //       downloadingDialog.show();
             }
         });
         
@@ -702,6 +706,27 @@ public class front extends javax.swing.JFrame {
             // Show error dialog.
             showError("Check your internet connection. Or invalid credentials or check your account settings. Not able to connect", true);
         }
+        int p=0;
+        String st;
+         st=username.replace(".", "");
+          st=st.replace(".","");
+           st=st.replace("@","");
+            st=st.replace("_","");
+           try{
+            BufferedReader reader = new BufferedReader(new FileReader("uid"+st+".txt"));
+String line = null;
+while ((line = reader.readLine()) != null) {
+    int i=Integer.parseInt(line);
+    System.out.println("this is "+i);
+    p=i;
+}
+            reader.close();
+           }
+           catch(Exception e)
+           {
+               
+           }
+       //        reader.close();
         
         // Download message headers from server.
         try {
@@ -713,9 +738,20 @@ public class front extends javax.swing.JFrame {
             totalemails=folder.getMessageCount();
             System.out.println(totalemails);
             // Get folder's list of messages.
-            
-            messages = folder.getMessages();
-         
+          if(p==0){
+              p=1;}
+          if(p==totalemails)
+          {
+              p++;
+          }
+          if(flag==0)
+          {
+              //messages = folder.getMessages(p,totalemails);
+              p=1;
+              flag=1;
+          }
+            messages = folder.getMessages(p,totalemails);
+         System.out.println(" jjhh "+p+" jhj  "+messages.length);
             emailsPanel.setBorder(
                 BorderFactory.createTitledBorder("Inbox("+totalemails+") [Unread "+jf+"]"));
           //  System.out.println("ye le---------"+messages.length);
@@ -723,9 +759,17 @@ public class front extends javax.swing.JFrame {
             FetchProfile profile = new FetchProfile();
             profile.add(FetchProfile.Item.ENVELOPE);
             profile.add(FetchProfile.Item.FLAGS);
+         //   UIDFolder f;
+        //    profile.add(UIDFolder.FetchProfileItem.UID);
             folder.fetch(messages, profile);
+           
+            
+             //recent=folder.getUID();
+        //     getMessageUID(session,folder,message[0]);
              backgroundProcess.execute();
+            
             // Put messages in table.
+             
             tableModel.setMessages(messages);
         } catch (Exception e) {
             // Close the downloading dialog.
@@ -739,9 +783,31 @@ public class front extends javax.swing.JFrame {
       //  downloadingDialog.dispose();
          
       //  System.out.println("jfjf");
+          str=username.replace(".", "");
+          str=str.replace(".","");
+           str=str.replace("@","");
+            str=str.replace("_","");
+            // str=str.replace("","");
+          file = new File("uid"+str+".txt");
+              
+              if (!file.exists()) {
+            try {
+                file.createNewFile();
+                   FileWriter fw = null;
+        
+         fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            String s="0";
+            bw.write(s);
+            bw.close();
+            fw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(front.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                            }
     }
     void execute1()
-    {
+    {int count=0;
         
          try{
                     Class.forName("oracle.jdbc.driver.OracleDriver");  
@@ -752,8 +818,17 @@ public class front extends javax.swing.JFrame {
        // stmt.executeQuery("insert into emailstoremailclient values('"+s+"','"+sub+"','"+d+"')");  
            
                
-            for(int i=0;i<messages.length;i++)
-            {
+            BufferedReader reader = new BufferedReader(new FileReader("uid"+str+".txt"));
+String line = null;
+while ((line = reader.readLine()) != null) {
+    int i=Integer.parseInt(line);
+   // System.out.println("this is "+i);
+    count+=i;
+}
+            reader.close();
+            int start=count;
+            for(int i=start;i<messages.length+start;i++)
+            {count++;
                 Statement stmt=con.createStatement(); 
                 String str=null;
                 Address[] senders =folder.getMessage(i+1).getFrom();
@@ -777,17 +852,59 @@ public class front extends javax.swing.JFrame {
                         + "('"+str+"','"+sub+
                         "','"+folder.getMessage(i+1).getSentDate().toString()
                         +"')");  
+         /*       String cont= getMessageContent(folder.getMessage(i+1));
+                File file = new File("emails\\"+i+".txt");
+                 FileWriter fw = new FileWriter(file.getAbsoluteFile());
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    bw.write(cont);
+                    bw.close();*/
            stmt.close();
             }
             // rs.close(); 
         
         con.close();
+         int recent=count;
+        FileWriter fw = null;
+        
+         fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            String s=recent+"";
+            bw.write(s);
+            bw.close();
+            fw.close();
              }
                 catch(Exception e)
                 {
                     System.out.println(e);
                 }
+      
     }
+    
+   private SwingWorker<Boolean, Void> updateInbox = new SwingWorker<Boolean, Void>() {
+
+        @Override
+        protected Boolean doInBackground() throws Exception {
+            // paste the MySQL code stuff here
+        while(true){    try {
+
+  Thread.sleep(60000L);    // one second
+            }
+catch (Exception e) {
+     return true;
+    
+}
+        connect2();}
+   //      return true;
+           
+        }
+
+        @Override
+        protected void done() {
+            // Process ended, mark some ended flag here
+            System.out.println("dkh thread ended");
+            // or show result dialog, messageBox, etc      
+        }
+    };
    private SwingWorker<Boolean, Void> backgroundProcess = new SwingWorker<Boolean, Void>() {
 
         @Override

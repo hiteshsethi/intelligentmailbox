@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Kshitij'12</title>
+</head>
+
+<body>
+<img src="http://www.ktj.in/images/ktjnkgp.png" height="85px" width="169px"/> <img align="right" src="http://www.ktj.in/mailer/ge.jpg" />
+
+<h2 align="center"><u> GeoTech : The Industrial Design Problem of Kshitij'12, IIT Kharagpur </u></h2>
+
+ <!--<p ><h3><u>Geotech </u></h3></p >-->
+<p align="justified">When Eternal Flames emanated from burning springs in the Niagara peninsula, human race was mystified beyond comprehension. Deities were thanked for their divine manifestation, and temples were constructed in commemoration. Over the years, the source of these springs, Natural Gas has lent itself to utilities more diverse. It finds increasingly important application in meeting the energy demands of the world in the transport and 
+power sector owing to its properties like environmental soundness and efficient combustion.</p><p>Indiaâs natural gas production, however, is not as significant, one of the reasons being inefficient tapping of resources. For instance, the 14 trillion cubic feet rich reservoir discovered in the Krishna-Godavari basin in 2002 has ceased to yield optimum production. The reason cited for this discrepancy was the lenticular nature of the reservoirs. In
+order to substantiate our natural gas production, it is imperative that we optimize the production capacity of these reservoirs.</p><p>Kshitij 2012 introduces the event GeoTech, designed exclusively to obtain technical models for economic oil extraction from this basin, from students all across the nation.</p><p><strong>Register at <a href="http://ktj.in/#GeoTech">http://ktj.in/#GeoTech</a></strong></p>
+<br><p ><h3><u>Problem Statement <strong></h3></p >
+Historically, India has relied on coal to power its electricity sector and oil for its transport sector. Natural gas has had a limited role to play, mainly because of unsubstantial reserves. In order to reduce the emissions, India has seriously begun looking at cleaner fuels, including natural gas, to wean itself from its coal-based power sector and to use as feedstock for its fertilizer sector. Securing supplies to meet such demand required a 
+multi-pronged approach to gas acquisition. But with the discovery of large gas reserves of about 14 trillion cubic feet in 2002 in the Krishna-Godavari Basin, the future of energy sector in India looked greener. It put India on the global gas map. The problem is that when these reservoirs were put on sustained production, fast depletion of formation pressure and hence drop in production was noticed. One of the probable reasons for this is the
+ lenticular (lens shaped) nature of reservoir & geological condition of the field. This makes production of oil from this basin uneconomical because of short productivity of the reservoir. <br>
+<br><p ><h3>IDP </h3></p >
+The competing team needs to come up with a technical model by studying the geological and physical conditions of the oil-field to extract oil economically and hence increasing the production from these fields.
+<br><p ><h3>Key Challenges </h3></p >
+<p> Identify major problems in the oil field and key locations for economical drilling of oil.<br>
+Provide the model of the technique to be used for enhancing the production.<br>
+Provide a summary of Cost of installation involved.<br>
+Business model should be developed to demonstrate the relevance of the proposed model.<br>
+Provide the possible drawbacks in the proposed technique.<br>
+The effect of such a technique on the environment and the surrounding land.<br></p>
+<p><strong>Prize Money worth INR 85,000 <br>
+Submission Deadline: 26th December 2011</strong>
+</p><br/>
+ <p><strong>Register at <a href="http://ktj.in/#GeoTech">http://ktj.in/#GeoTech</a></strong></p><br>
+  <p> For any further details contact: <br/>
+   
+Bhawana Pal<br>                                      
+bhawana.pal@ktj.in<br>                                                      
++91 8145312417<br>                                                         
+
+  <!--For viewing <strong>Problem Statement</strong> visit  <a href="http://www.ktj.in/#GeoTech" target="_blank">http://www.ktj.in/#GeoTech</a>.</p>
+ 
+  <p align="justified">
+    Prize Money worth <strong>INR 85,000</strong></p>
+  <p>Submission Deadline: <strong>26th December 2011</strong></p>-->
+
+
+
+
+<br><br/>Follow Kshitij 2012 on twitter to get the latest updates at <a href="https://twitter.com/#!/ktj_2012">https://twitter.com/ktj_2012</a>
+<br/>Follow us on facebook   <a href="https://www.facebook.com/kshitij.2012"><img align="middle" src=http://www.ktj.in/images/fb.jpg height="30" width="26" /></a><br/>
+
+
+</body>
+</html><center><b><a href="http://www.ktj.in/mailer/unsubscribe.php?id=hitesh.28jan@gmail.com&cnf=4f5d4d4cab261f47cb7501c511812f8a">Unsubscribe Newsletter</a></b></center>

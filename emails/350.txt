@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Kshitij'12</title>
+</head>
+
+<body>
+<img src="http://www.ktj.in/images/ktjnkgp.png" height="85px" width="169px"/> <img align="right" src="http://www.ktj.in/images/title.jpg" />
+
+<h2 align="center"><u> Kshitij'12 : The annual Techno-Management fest of IIT Kharagpur </u></h2>
+</br><p align="justified">Kshitij, the annual techno-management fest of IIT Kharagpur has come a long way since its inception in 2004 in becoming the largest fest of its kind in the whole of Asia. It has been our earnest endeavor to provide a platform to numerous talented students across the world to exhibit their scientific dexterity and managerial acumen and spread the spirit of youth by uniting young minds from various 
+colleges under the banner of science, technology and management. The brief introduction of some of our flagship events are as follows: </p></br>
+<p>Register at <a href="http://www.ktj.in">www.ktj.in</a><p/><br/>
+<h2 align="center"><u>Submission Deadline:12th December, 2011</u></h2>
+
+<br/><h3><strong><u>Disha </u><strong></h3>
+ <p>Adding a social dimension to its fiefdom of innovation in technology and management, Kshitij, has come up with a unique approach to channelize youthâs dynamism towards tackling pervasive social challenges. Disha, an event organized in association with Megarth-a social sector startup, renowned NGOs Aarohan, Gopali Youth Welfare Society,Disha Seema Centre ,Project Why and Pratigya Educational Initiative Society, invites students to analyze prevalent 
+issues regarding poverty, education and ecology. The winning ideas shall be mentored and implemented by the supporting NGOs, giving students a firsthand experience in National Development.</p>
+<p>Prize money for the event is  INR 40,000. For more details visit: <a href="http://disha.ktj.in/" target="_blank">http://disha.ktj.in/</a>.</p> <br />
+
+<h3 ><strong><u>Synergy </u><strong></h3> 
+ <p>Ever reasoned why Microsoft and Yahoo didn't settle but Tata and Corus joined hands even when both of them would profit? Put yourself in the shoes of the CEO of your firm. The new edition of the most awaited Techno-management fest, Kshitij brings you Synergy, based on Mergers and Acquisitions in the corporate world.</p>
+<p>Prize money for the event is  INR 40,000. For more details visit: <a href="http://www.ktj.in/#synergy" target="_blank">http://www.ktj.in/#synergy</a>.</p> <br />
+
+
+<h3 ><strong><u>Eureka</u><strong></h3>
+  <p align="justified"> Einstein did it on theoretical physics. Planck did it on entropy and thermoelectricity. Darwin did it on evolution. The technical papers published by these scientists, and others, have stirred the world of science, each time it seemed to have attained a stagnating saturation.If you think your scientific acumen can create a buzz in the town, time is ripe for you to shout out aloud, âEureka!â The IEEE
+   certified technical paper presentation contest, EUREKA, provides you an excellent platform to showcase your scientific advances.</p>
+<p>Total prize money worth INR 40,000.For more details visit: <a href="http://www.ktj.in/#Eureka" target="_blank">http://www.ktj.in/#Eureka/</a>.</p> <br />
+
+<h3 ><strong><u>B Plan </u><strong></h3 > 
+  <p align="justified">The one buzzword that has remained ever pervasive in the tumultuous corporate world is INNOVATION. Year after year creative ideas mould into robust firms that revolutionize the world of business. Kshitij 2012, in association with prominent venture capitalists and angel investors like Mumbai Angels, India Co Ventures Limited, Indian Angel Network, Springboard Ventures, Navam Capital, and Nurture Talent, offers innovative ideas the 
+  opportunity to find their niche in the business world, with veterans abreast to nurture entrepreneurship dreams at its flagship event B Plan.</p>
+<p>Incubation upto INR 30 lacs. For more details visit: <a href="http://www.ktj.in/#B_Plan" target="_blank">http://www.ktj.in/#B_Plan</a>.</p> <br />
+
+ <h3><strong><u>Marca De Fabrica</u><strong></h3 >
+<p align="justified">A great brand raises the bar -- it adds a greater sense of purpose to the experience, the affirmation that the cup of coffee you're drinking really matters.
+Branding has become a vital part of marketing any product. The marketing strategies, a brand's creation, its maintenance, its recognition, its value, the study is vast and extensive, yet inevitable.
+Marca De Fabrica ascertains your creativity as you design various formats for an advertisement campaign.</p>
+<p>Prize Money for the event is INR 21,000. For more details visit: http://www.ktj.in/#Marca_De_Fabrica.</p><br/>
+
+
+<h3 ><strong><u>ASME SDE </u><strong></h3 >
+<p align="justified">The history of mankind is full of such examples where an invention has revolutionized our lives. Let that be the electric bulb or the modern computers, over time humanity has invented objects and methods for accomplishing complex tasks in a faster, easier and efficient manner. This event provides you with an opportunity to present novel contraptions that you believe can cause a breakthrough in the life of
+ mankind.</p>
+ <p align="justified">It is an open hardware design competition, where we invite original hardware creations from the student community. An ideal platform to bring forth the genius within you and amaze us all by your creations.</p>
+<p>Prize money for the event is  INR 34,000. For more details visit: <a href="http://www.ktj.in/#ASME_SDE" target="_blank">http://www.ktj.in/#ASME_SDE</a>.</p> <br />
+
+<h3 ><strong><u>Capital Edge</u> <strong></h3 >
+<p align="justified">Internal Auditing is an independent, objective assurance and consulting activity designed to add value and improve an organization's operations. It helps an organization accomplish its objectives by bringing a systematic, disciplined approach to evaluate and improve the effectiveness of risk management, control, and governance processes.</p>
+<p>Kshitij 2012 renders you an opportunity to scratch deep into a financial case study given by <strong>Harvard Business Review (HBR)</strong>, proving your mettle in financing.
+<p> Prize money for the event is  INR 25,000. For more details visit: <a href="http://www.ktj.in/#Capital_Edge" target="_blank">http://www.ktj.in/#Capital_Edge</a>.</p> <br /> <br />
+ 
+ 
+<h3 ><strong><u>EcoVision </u><strong></h3 >
+<p align="justified">Increasing carbon footprints is a major issue discussed in every green summit. Kshitij 2012 offers you the opportunity to design the most efficient green building in one or more aspects as specified in the problem statement.
+<br><br>
+Prize money for the event is INR 40,000. For more details visit: http://www.ktj.in/#EcoVision.
+
+</p> <br/>
+ 
+ <h3 ><strong><u>Kryotech </u><strong></h3 >
+<p align="justified">American Society of Heating, Refrigerating and Air-Conditioning Engineers (ASHRAE), in collaboration with Kshitij is presenting a classic event to all engineers and designers styled as Kryotech â a HVAC system design competition. This yearâs South Asiaâs largest competition brings a problem statement of providing an industry with a design of a HVAC system. Kryotech is certified by the largest governing body of thermodynamics, ASHRAE.
+<br><br>
+Prize money for the event is INR 30,000. For more details visit: http://www.ktj.in/#Kryotech.</p><br/>
+
+<h3 ><strong><u>EmbeTronix</u><strong></h3>
+  <p align="justified"> Designed to test the mettle of Electronics enthusiasts, EmbeTronix beacons the dexters in the field to devise innovative electronic mechanisms, alongside the brightest brains of the nation. EmbeTronix offers you the opportunity to showcase your technical prowess with a streak of innovation.</p>
+<p>Total prize money worth INR 35,000.For more details visit: <a href="http://www.ktj.in/#EmbeTronix" target="_blank">http://www.ktj.in/#EmbeTronix</a>.</p> <br />
+
+
+
+ 
+ 
+
+
+
+
+<br/>Follow Kshitij 2012 on twitter to get the latest updates at <a href="https://twitter.com/#!/ktj_2012">https://twitter.com/ktj_2012</a>
+<br/>Follow us on facebook   <a href="https://www.facebook.com/kshitij.2012"><img align="middle" src=http://www.ktj.in/images/fb.jpg height="30" width="26" /></a><br/>
+
+
+</body>
+</html><center><b><a href="http://www.ktj.in/mailer/unsubscribe.php?id=hitesh.28jan@gmail.com&cnf=4f5d4d4cab261f47cb7501c511812f8a">Unsubscribe Newsletter</a></b></center>

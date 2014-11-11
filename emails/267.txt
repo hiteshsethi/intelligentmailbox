@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+<style type="text/css">
+body { display: block !important; }
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; 
+charset=utf-8"><title>Quepasa Alerts</title></head>
+<body>
+	<table bgcolor="#f7f7f7" cellspacing="35" width="100%">
+	<tbody>
+	<tr>
+		<td>
+			<table style="font-family: Arial,Helvetica,sans-serif; font-size: 12px;" 
+align="center" border="0" cellpadding="0" cellspacing="0" width="620">
+  			<tbody>
+  			<tr>
+    			<td>
+					<table bgcolor="#000000" border="0" cellpadding="0" cellspacing="0" 
+height="28" width="622">
+					<tbody>
+					<tr>
+					    <td width="114"><a 
+href="http://www.quepasa.com/metric/email/click/f0e1f7a10b1d9fdf0c5c9b8f9a4361d0/166193477921359024/1430.html?url=http://www.quepasa.com/en_US/?mail=hitesh.28jan@gmail.com" 
+title="Quepasa.com"><img 
+src="http://cdn.quepasa.com/i/m/09/006/logoqp_black2.gif" alt="Quepasa.com" 
+border="0" height="28" width="114"></a></td>
+					    <td align="right" width="486">
+					    	<a 
+href="http://www.quepasa.com/metric/email/click/f0e1f7a10b1d9fdf0c5c9b8f9a4361d0/166193477921359024/1431.html?url=http%3A%2F%2Fwww.quepasa.com%2Fen_US%2Fuser%2FcancelQPAlerts.php%3Fsign%3Df58895a516b2abec65253585c24ce215%26alert%3D43%26mail%3Dhitesh.28jan%40gmail.com%26id%3D-1" 
+style="font-size: 10px; color: rgb(229, 229, 229); font-style:italic; 
+font-weight:bold;"><u>Click here</u></a><font style="font-size: 10px;" 
+color="#e5e5e5"> to unsubscribe.</font>
+					    </td>
+					    <td width="22">&nbsp;</td>
+					</tr>
+					</tbody>
+					</table>
+<p>I’d like to be your friend on Quepasa.com.</p>
+<p>Would you like to <a style="color:#BB1F22" 
+href="http://www.quepasa.com/metric/email/click/f0e1f7a10b1d9fdf0c5c9b8f9a4361d0/166193477921359024/1436.html?url=http://www.quepasa.com/qp/251460573.html&mail=hitesh.28jan@gmail.com">add</a> 
+me as a friend?</p>
+<br />
+<p>
+<span style="padding: 5px 20px;background-color:#BB1F22;margin-left:10px"><a 
+style="color:#FFF;text-decoration:none" 
+href="http://www.quepasa.com/metric/email/click/f0e1f7a10b1d9fdf0c5c9b8f9a4361d0/166193477921359024/1439.html?url=http://www.quepasa.com/qp/251460573.html&mail=hitesh.28jan@gmail.com">Yes</a></span>
+
+<span style="padding: 5px 20px;background-color:#BB1F22;margin-left:30px"><a 
+style="color:#FFF;text-decoration:none" 
+href="http://www.quepasa.com/metric/email/click/f0e1f7a10b1d9fdf0c5c9b8f9a4361d0/166193477921359024/1440.html?nofriend=true&url=http://www.quepasa.com/en_US/&mail=hitesh.28jan@gmail.com">No</a></span>
+<br /><br />
+</p>
+
+<p>Thanks!</p>
+
+<p>
+ksh  sethi
+</p></td>
+                        </tr>
+                        </tbody>
+                        </table>
+                        <table width="100%" border="0" cellspacing="0" 
+cellpadding="0" height="80"><tr><td align="center"> 
+<font color="#8a8a8a" face="Arial, Helvetica, sans-serif" 
+style="font-size:10px"> 
+<a 
+href="http://www.quepasa.com/metric/email/click/f0e1f7a10b1d9fdf0c5c9b8f9a4361d0/166193477921359024/1899.html?url=http%3A%2F%2Fwww.quepasa.com%2Fen_US%2Fuser%2FcancelQPAlerts.php%3Fsign%3Df58895a516b2abec65253585c24ce215%26alert%3D43%26mail%3Dhitesh.28jan%40gmail.com%26id%3D-1" 
+style="color:#8a8a8a; text-decoration:underline">Unsubscribe</a> I
+<a 
+href="http://www.quepasa.com/metric/email/click/f0e1f7a10b1d9fdf0c5c9b8f9a4361d0/166193477921359024/1434.html?url=http%3A%2F%2Fwww.quepasa.com%2Ftos_en_US.html?mail=hitesh.28jan@gmail.com" 
+style="color:#8a8a8a; text-decoration:underline">Terms of Use</a> I
+<a 
+href="http://www.quepasa.com/metric/email/click/f0e1f7a10b1d9fdf0c5c9b8f9a4361d0/166193477921359024/1435.html?url=http%3A%2F%2Fwww.quepasa.com%2Fcommon%2Fprivacypolicy_en_US.html?mail=hitesh.28jan@gmail.com" 
+style="color:#8a8a8a; text-decoration:underline">Privacy Policy</a> I
+<a href="mailto:support@quepasacorp.com" style="color:#8a8a8a; 
+text-decoration:underline">Support</a><br /> 
+Quepasa Corporation 324 Datura Street, Suite 114, West Palm Beach, FL, 
+33401<br /> 
+You are receiving this message because your friend is a registered member of 
+Quepasa.
+<br /> 
+Add <a href="mailto:info@quepasa.com" style="color:#8a8a8a; 
+text-decoration:underline">info@quepasa.com</a> to your contact list so you 
+always receive your Quepasa email.</font> 
+</td> 
+</tr></table>
+                </td>
+        </tr>
+        </tbody>
+        </table>
+</body>
+</html><img 
+src="http://www.quepasa.com/metric/email/view/f0e1f7a10b1d9fdf0c5c9b8f9a4361d0/166193477921359024/blank.gif" 
+alt="" />

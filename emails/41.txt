@@ -1,0 +1,20 @@
+Hi Hitesh,
+
+You recently asked to reset your Facebook password. To complete your request, please follow this link:
+
+https://www.facebook.com/recover.php?n=DsYPWkXVP&id=100001923358820&s=10
+
+Alternately, you may go to https://www.facebook.com/recover.php and enter the following password reset code:
+
+DsYPWkXVP
+
+Please note: for your protection, this email has been sent to all the email addresses associated with your Facebook account.
+
+*Didn't Request This Change?*
+If you did not request a new password, let us know at:
+
+https://www.facebook.com/login/recover/disavow_reset_email.php?n=DsYPWkXVP&id=100001923358820
+
+Thanks,
+The Facebook Team
+

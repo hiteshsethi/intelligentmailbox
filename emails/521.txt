@@ -1,0 +1,61 @@
+Greetings from Team Robotix!
+
+We're happy to see you registered for the event *VERTIGO* and hope to see
+you, all guns blazing, at Kharagpur on the 27th of January, when the
+showdown begins! To help you along the way, we will be in touch with you
+through email and phone. This mail brings to your attention the latest
+updates from your chosen event, along with a general overview of the Do's
+and Don'ts of the plan you make to come to Kharagpur.
+
+*Arena Updates :*
+
+1. The weight of the bot should preferably be below 5 kg.
+2. The diameter of the balls would approximately be 150mm and its weight
+20gm.
+3. Actual arena pictures would be put up by the 20th of January.
+
+*Event Video :*
+A simulation video of the event for basic understanding.
+http://www.youtube.com/watch?v=YRlz1Rfn-Qw
+
+*General Clarifications : *
+*
+*
+1. No abstract submission is required in the event. You are required to
+only bring your bot to Kharagpur.
+2. Accomodation forms have been put at www.ktj,in/#acco . Please fill in
+the necessary details within 21st January to ensure accomodation is
+provided to you.
+3. Please convey to other interested students that registration is still
+open on ktj.in and will be till the fest begins.
+4. Keep checking the tutorial for new updates. (
+http://www.robotix.in/tutorials/vertigo )
+*
+*
+*Some Helpful Information : *
+*
+*
+
+   - Try to make your bot in modules so that it is not damaged in
+   transportation.
+   - Carry small tools with you (eg. Hand saws, Soldering Irons, etc.) in
+   case you need to make last minute repairs.
+   - Your bot must fit within a 30 cm X 30 cm X 30 cm box at its initial
+   starting position. After the start, your bot may extend to bigger
+   dimensions. If you are using multiple bots,   ensure that they all together
+   fit within the dimension box. They must be placed in the arena in the same
+   configuration.
+   - Try to pack light since you will be spending most of your time in the
+   arena itself.
+   - The *Robot Repair Consultancy Centre (R2C2)* will have people to help
+   you in case you have technical queries. Be sure to approach us in case of
+   any troubles.
+   - If there is a *Robotix Student Executive at your college *or nearby,
+   you can always interact with him/her for more details on the event.
+
+
+Find a tutorial here : http://www.robotix.in/tutorials/vertigo  to help you
+along as you make your own Vertigo bot. Feel free to approach the heads on
+email/phone/forum at any time.
+
+Happy Bot Making!

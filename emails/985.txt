@@ -1,0 +1,102 @@
+Summer Internship Program with Project (SIPP – 2012)
+
+Dear Students,
+Greetings from Thinnkware!
+It’s an announcement about Thinnkware Summer Internship Program with
+Project (SIPP – 2012) & Scholarship tests. Register before30^th April
+2012 Early bird discount of 10% in course fees.
+
+Scholarship worth Rs. 1,00,000
+Discount amount No. of seats Date of test Marks to be scored out of 200
+Rs. 5000 5 students
+1^st June 2012 & 30^th June 2012
+2:00 PM- 4:00 PM 180+
+Rs. 2500 10 students 160+
+Rs. 1500 16 students 150+
+Rs. 1000 26 students 140+
+  * Scholarship will be awarded for ITBE/ITAE/ITRD batches.
+  * One student can appear only one time.
+  * No other discounts will be applicable for the students selected in
+    test.
+
+To apply for scholarship test:
+  * Send email at [1]training@thinnkware.com (Mention Name, College,
+    branch, year, SIPP course, attach test fees transaction details)
+  * Test fees-  100/- to be paid in account before test.
+  Links:
+    1. mailto:training@thinnkware.com
+
+
+Courses Offered:
+
+1.       Internship & Training in Basic Embedded System Design: ITBE
+The course is best suited for the beginner who is interested to learn
+about Embedded System. This covers all aspects of 8051 microcontroller
+from the basics of 8051 microcontrollers to its interfacings with
+various peripheral devices everything will be amalgamated hands on. The
+programming will be taught on industry standards using Embedded C.
+Duration: 40 hours (2 weeks).
+2.       Internship & Training in Advanced Embedded System Design: ITAE
+Stepping a bit ahead to keep up with the pace of the world, we advance
+to industry most used PIC Microcontroller from Microchip Inc. It covers
+the study of PIC microcontroller & its interfacings with various
+peripherals and much more to develop the competency as a whole.
+Programming the microcontroller & developing a project will be the key
+outputs of training.
+Duration: 72 hours (6 weeks).
+3.       Internship & Training in Robotics Design: ITRD
+Its a rigorous course in robotics which covers many aspects of robotics
+as Wired / Wireless / Mobile / Remote / Vision / Micromouse based on
+AVR Robotics Platform. You will be designing many different robotics
+applications during the training.
+Duration: 72 hours (6 weeks).
+4.       Internship & Training in MATLAB Software & Toolboxes: ITMT
+MATLABis very important software used in all domains of engineering?
+Today working would almost be non-existent had this not been known to
+people. Here we offer the basic knowledge of MATLAB and how work with
+its toolboxes.
+Duration: 32 hours (4 weekends).
+Key features of SIPP 2012:
+·       Industry visit to companies working in the core field of
+Embedded System/Robotics.
+·       Training Certificate will be provided on Industry pattern.
+·       Take away Robotics & Embedded Self learning kits to each
+participant worth 3000+
+·       Projects development mandatory.
+·       10 best key performers will be offered job after training.
+·       Training delivered by Design Engineers (R&D team) of
+ThinnkWare.
+·       Batch size is limited to 30 students only.
+·         Separate accommodation available for boys & girls.
+·         Discounts, Course details, Registration available online.
+
+Want to have a call from Thinnkware for SIPP-2011:
+
+·         Text SMS & send to +91-9211786061, +91-9211786065
+
+For complete course content, batch schedule & fees details visit
+[2]www.thinnkware.com
+  Links:
+    2. http://letmeknow.us1.list-manage.com/track/click?u=0cb6f316b3a8f536bf81ca98a&id=1be5114325&e=4b10af8ca1
+
+
+Regards
+Coordinator SIPP-2012
+Thinnkware, A venture of KC Robotics & Embedded Pvt. Ltd.
+E: [3]training@thinnkware.com
+A: Thinnkware, C-20/1 JSSATE-STEP Sector-62 Noida (U.P.)-201301
+P: +91-120-6494440
+M: +91-9211786061, 65
+F: +91-120-2401451
+  Links:
+    3. mailto:training@thinnkware.com
+ [4]View email in your browser |
+[5]Unsubscribe | [6]Update your profile | [7]Forward to a friend
+  Links:
+    4. http://us1.campaign-archive2.com/?u=0cb6f316b3a8f536bf81ca98a&id=c2d362f6f3&e=4b10af8ca1
+    5. http://letmeknow.us1.list-manage1.com/unsubscribe?u=0cb6f316b3a8f536bf81ca98a&id=0c64b98707&e=4b10af8ca1&c=c2d362f6f3
+    6. http://letmeknow.us1.list-manage.com/profile?u=0cb6f316b3a8f536bf81ca98a&id=0c64b98707&e=4b10af8ca1
+    7. http://us1.forward-to-friend1.com/forward?u=0cb6f316b3a8f536bf81ca98a&id=c2d362f6f3&e=4b10af8ca1
+
+Copyright (C) 2012 Let Me Know All rights reserved.
+You are receiving this e-mail because you opted to receive our daily update newsletter.

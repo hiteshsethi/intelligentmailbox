@@ -1,0 +1,76 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:title" content="Klout | Welcome" />
+    <title>Klout | Welcome</title>
+</head>
+<body link="#e84b00" vlink="#e84b00" alink="#e84b00" style="margin: 0; padding: 0; background: #efefef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 18px; color: #5f5358; border-top: 4px solid #01baff; text-align: center; -webkit-text-size-adjust: none">
+	<div id="wrapper" style="width: 640px; margin: 0 auto; text-align: left; max-width: 640px">
+		<img src="http://gallery.mailchimp.com/363d25f7749d0de2356900344/images/logo.1.png" alt="Klout" width="112" height="23" style="margin: 21px 0 11px 0px;" />
+		<table cellpadding="40" cellspacing="0" width="640" style="margin: 0; border: 1px solid #e9e9e9">
+			<tr>
+				<td style="width: 350px; background: #ffffff;" valign="top">
+					<table cellpadding="0" cellspacing="0" width="569" border="0" style="margin: 0;">
+                        <tr>
+                            <td><h1 style="font-size: 24px;">Welcome to Klout, Hitesh!</h1></td>
+                        </tr>
+						<tr>
+							<td style="padding-bottom: 20px" style="overflow-x: hidden; color: #5f5358;">
+
+                            <p>Klout is the standard of influence. Klout measures your influence online: you have the potential to influence others every time you share content and engage. We believe everyone has Klout &mdash; it's time to discover yours.</p>
+
+                            <p>Start building your Klout today!</p>
+
+                            <p style="font-weight: bold; font-size: 20px;">1) <a style="text-decoration: none" href="http://cl.s4.exct.net/?qs=9ecf1569fa94712f933818386a101eb322d0e5d2305974a81c9114ba8137909a">View Your Profile</a></p>
+                            <p>Check out your <a style="text-decoration: none" href="http://cl.s4.exct.net/?qs=9ecf1569fa94712f933818386a101eb322d0e5d2305974a81c9114ba8137909a">Klout Score</a>, see <a style="text-decoration: none" href="http://cl.s4.exct.net/?qs=9ecf1569fa94712f933818386a101eb322d0e5d2305974a81c9114ba8137909a">who you influence</a>, and discover what <a style="text-decoration: none" href="http://cl.s4.exct.net/?qs=9ecf1569fa94712f933818386a101eb322d0e5d2305974a81c9114ba8137909a">topics you're most influential about</a>.</p>
+
+                            <p style="font-weight: bold; font-size: 20px">2) <a style="text-decoration: none" href="http://cl.s4.exct.net/?qs=9ecf1569fa94712fbfdada0aaed19f64c0a3295d23f587aa32623ee13fe6c3f3">Connect Your Networks</a></p>
+                            <p>Klout measures your influence across Twitter, Facebook, LinkedIn, and Foursquare - with more networks coming soon! <a style="text-decoration: none" href="http://cl.s4.exct.net/?qs=9ecf1569fa94712fbfdada0aaed19f64c0a3295d23f587aa32623ee13fe6c3f3">Link your accounts</a> to get a more accurate picture of your influence.</p>
+
+                            <p style="font-weight: bold; font-size: 20px">3) <a style="text-decoration: none" href="http://cl.s4.exct.net/?qs=9ecf1569fa94712fab726749d38202afb01b4fc865671756b457fb2be5d27d25">Get Perks!</a></p>
+                            <p>Continue improving your Klout by engaging your network. As your score increases, so do your chances of <a style="text-decoration: none" href="http://cl.s4.exct.net/?qs=9ecf1569fa94712fab726749d38202afb01b4fc865671756b457fb2be5d27d25">getting cool Perks</a> from awesome brands!</p>
+                            <p>Be sure to follow our <a style="text-decoration: none" href="http://cl.s4.exct.net/?qs=9ecf1569fa94712f09e743ac162f88229ba7fed2d821ab09b831ba0d83048917">Twitter account</a> and <a style="text-decoration: none" href="http://cl.s4.exct.net/?qs=9ecf1569fa94712f32764795814267247c13d8faddd4265bc041395fa36cd428">like us on Facebook</a> for tips on improving your Klout and other cool happenings.</p>
+                            <p>&mdash; The Klout Team</p>
+						</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" cellspacing="0" width="640" id="templateFooter">
+        	<tr>
+            	<td valign="top" class="footerContent">
+                    <!-- // Begin Module: Standard Footer \\ -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td valign="top" width="100%" align="center">
+                                <br />
+                                <div style="font-size: 12px">
+                                    <em>Copyright &copy; 2011 Klout, All rights reserved.</em>
+                                    <br /><br />   
+                                    <br /><br />        
+           <em>This message was sent from a notification-only address that cannot accept incoming email; do not reply.</em>
+<br/><br/>                
+                                    This email was sent by:<br><b>Klout</b><br>77 Stillman<br>San Francisco, CA, 94107, US
+                                </div>
+                                <br />
+                            </td>
+                        </tr>
+                       <tr>
+                            <td colspan="2" valign="middle" align="center">
+                                <div style="font-size: 12px">
+                                     &nbsp;<a href="http://cl.s4.exct.net/?qs=9ecf1569fa94712fcf51ec856eea69513e53348148bfb4d90b8f12a503eb9552">One-Click Unsubscribe</a> | <a href="http://cl.s4.exct.net/?qs=9ecf1569fa94712f1d5b164f31eed3fd9ee6f4561a82f60b99a496c4e6a458b0" >Email Preferences</a> | <a href="http://cl.s4.exct.net/?qs=9ecf1569fa94712f80a8d215f5db976240095ae19c4a4db39ebbcc5b43fa89a2">View as Webpage</a> &nbsp;
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- // End Module: Standard Footer \\ -->
+                
+                </td>
+            </tr>
+        </table>	
+	</div>
+<a style="display: none" href="http://cl.s4.exct.net/?qs=9ecf1569fa94712f04ea967b5b716b73dfdc282f5858e981592f75650ed35a2f"></a>
+<img src="http://cl.s4.exct.net/open.aspx?ffcb10-fe9315727c63077c70-fe3512757d64047f751772-fea415707065057d76-ff8e1c79-fe5713777462037d7d10-ffcf14" width="1" height="1">
+</body>
+</html>

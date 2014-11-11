@@ -1,0 +1,71 @@
+Greetings from Team Robotix!
+
+We're happy to see you registered for the event Inferno and hope to see
+you, all guns blazing, at Kharagpur on the 27th of January, when the
+showdown begins! To help you along the way, we will be in touch with you
+through email and phone. This mail brings to your attention the latest
+updates from your chosen event, along with a general overview of the Do's
+and Don'ts of the plan you make to come to Kharagpur.
+
+*Arena Updates :*
+
+1. The weight of the cylinders (both black and white) will be approximately
+300 gms.
+2. The dimensions of the candles is as follows : Height = 6 cm ; Maximum
+diameter = 7 cm (approx);
+3. The dimension of the reservoir on the ground has been made 25 cm X 35 cm
+X 10 cm to provide larger volume of water. Bear in mind that the depth
+remains the same.
+4. The ground on which the bot has to run will be hard stone floor on
+which, during the course of the run, water might be spilled by the bot
+which will be allowed to remain. The floor might be slightly slippery.
+5. Please note that actual arena pictures have been uploaded on our website
+at : www.robotix.in/events/inferno
+6. Ensure that you use wires of at least 4 m between the bot and the
+control box.
+
+
+*General Clarifications : *
+*
+*
+1. No abstract submission is required in the event. You are required to
+only bring your bot to Kharagpur.
+2. Accomodation forms have been put at www.ktj,in/#acco . Please fill in
+the necessary details within 21st January to ensure accomodation is
+provided to you.
+3. Please convey to other interested students that registration is still
+open on ktj.in and will be till the fest begins.
+*
+*
+*Some Helpful Information : *
+*
+*
+
+   - Try to make your bot in modules so that it is not damaged in
+   transportation.
+   - Carry small tools with you (eg. Hand saws, Soldering Irons, etc.) in
+   case you need to make last minute repairs.
+   - Your bot must fit within a 30 cm X 30 cm X 30 cm box at its initial
+   starting position. After the start, your bot may extend to bigger
+   dimensions. If you are using multiple bots,   ensure that they all together
+   fit within the dimension box. They must be placed in the arena in the same
+   configuration.
+   - Try to pack light since you will be spending most of your time in the
+   arena itself.
+   - The *Robot Repair Consultancy Centre (R2C2)* will have people to help
+   you in case you have technical queries. Be sure to approach us in case of
+   any troubles.
+   - If there is a *Robotix Student Executive at your college *or nearby,
+   you can always interact with him/her for more details on the event.
+
+
+Find a new section on Hydraulic mechanisms in the Inferno tutorial to help
+you along as you make your own Inferno bot. Feel free to approach the heads
+on email/phone/forum at any time.
+
+Happy Bot Making!
+
+
+Nilanjana Bhattacharya
+Head
+Team Robotix
