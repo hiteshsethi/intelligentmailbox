@@ -40,6 +40,7 @@ public class Major extends javax.swing.JFrame {
 
         front f=new front();
         f.show();
+        f.setUserPass();
         f.connect2();
         
         Properties props = System.getProperties();

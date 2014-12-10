@@ -8,9 +8,14 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
@@ -25,8 +30,11 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.mail.Address;
 import javax.mail.FetchProfile;
 import javax.mail.Flags;
@@ -47,6 +55,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
@@ -66,6 +75,7 @@ import org.msgpack.MessagePack;
 public class front extends javax.swing.JFrame {
  // Message table's data model.
     File file;
+    int GlobalFlagforconnect2=0;
     int LastUid=0;
     int flag=0;
     private MessagesTableModel tableModel;
@@ -74,7 +84,8 @@ public class front extends javax.swing.JFrame {
     int jf;
     // Table listing messages.
     private JTable table;
-    
+    JPopupMenu popupMenu = new JPopupMenu();
+
   //  table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     // This the text area for displaying messages.
     private JTextArea messageTextArea;
@@ -257,10 +268,9 @@ public class front extends javax.swing.JFrame {
        
     
         // Download message headers from server.
-        
+      
 }
- 
-    
+
      // Show error dialog and exit afterwards if necessary.
     private void showError(String message, boolean exit) {
         JOptionPane.showMessageDialog(this, message, "Error",
@@ -269,13 +279,13 @@ public class front extends javax.swing.JFrame {
             System.exit(0);
     }
     int tabCounter=0;
-     public void add() {
-         
+     public void add(String str) {
+         str=str.toUpperCase();
     final JPanel content = new JPanel();
     JPanel tab = new JPanel();
     tab.setOpaque(false);
-
-    JLabel tabLabel = new JLabel("Tab " + (++tabCounter));
+++tabCounter;
+    JLabel tabLabel = new JLabel(str);
 tabLabel.setPreferredSize(new Dimension(130, 20));
     //JButton tabCloseButton = new JButton(closeXIcon);
 //    tabCloseButton.setPreferredSize(closeButtonSize);
@@ -297,7 +307,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
  public void addPrimary() {
     JPanel tab = new JPanel();
     tab.setOpaque(false);
-    JLabel tabLabel = new JLabel("PRIMARY");
+    JLabel tabLabel = new JLabel("  PRIMARY",new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\file8.png"),2);
     tabLabel.setPreferredSize(new Dimension(130, 20));
     tabCounter++;
     //JButton tabCloseButton = new JButton(closeXIcon);
@@ -397,6 +407,11 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         jLabel1 = new javax.swing.JLabel();
         addTabButton = new javax.swing.JButton();
         tabbedPane = new javax.swing.JTabbedPane();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Intelligent Mail Box");
@@ -461,12 +476,27 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\icon175x175.jpeg")); // NOI18N
 
-        addTabButton.setText("Add tab");
+        addTabButton.setText("Add Category");
         addTabButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addTabButtonActionPerformed(evt);
             }
         });
+
+        jButton6.setText("Manage Tabs");
+
+        jButton7.setText("Add Label");
+
+        jButton8.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\reload.png")); // NOI18N
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("drop");
+
+        jButton10.setText("More");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -483,21 +513,34 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(addTabButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addTabButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 18, Short.MAX_VALUE))
-                    .addComponent(tabbedPane))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tabbedPane)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 143, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -505,7 +548,18 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField1)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(12, 12, 12)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -517,6 +571,8 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                         .addGap(18, 18, 18)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(addTabButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -565,12 +621,80 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
 
     private void addTabButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTabButtonActionPerformed
         // TODO add your handling code here:
-        add();
+        String s="";
+        while(s.compareTo("")==0)
+        {
+            try{
+            s = (String)JOptionPane.showInputDialog( "Enter Classifier Name :","");
+            if(s!=null){
+            Pattern p= Pattern.compile("[^a-zA-Z ]");
+            Matcher m = p.matcher(s);
+            if(s.compareTo("")==0  || m.find() || s.length()>30)
+            {
+                JOptionPane.showMessageDialog( tabbedPane,"Please enter correct word...", "Error", JOptionPane.ERROR_MESSAGE);
+                s="";
+            }
+            }
+            else
+            {
+                break;
+            }
+            }
+            catch(Exception e)
+            {
+                System.out.println("Error Ocurred in Regex of classifier input  --> "+e);
+            }
+        }
+        if(s!=null){
+        add(s);}
     }//GEN-LAST:event_addTabButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        
+    SwingWorker<Boolean, Void> refreshProcess = new SwingWorker<Boolean, Void>() {
+
+        @Override
+        protected Boolean doInBackground() throws Exception {
+            // paste the MySQL code stuff here
+           // execute1();
+            try{
+                System.out.println("yaha aa gya mn");
+                connect2();
+                
+            }
+            catch(Exception e)
+            {
+                System.out.println("thread mn panga ha----------------------------------");
+              //  return false;
+                
+            }
+            return true;
+        }
+
+        @Override
+        protected void done() {
+            // Process ended, mark some ended flag here
+            GlobalFlagforconnect2=1;
+            System.out.println("Refresh Done-----------");
+            try {
+           boolean g = get();
+         } catch (InterruptedException ex) {
+           ex.printStackTrace();
+         } catch (ExecutionException ex) {
+           ex.printStackTrace();
+         }
+            // or show result dialog, messageBox, etc      
+        }
+    };
+        refreshProcess.execute();
+        
+       // connect2();
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -711,10 +835,10 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
     Folder folder;
     String str;
       // Connect to e-mail server.
-    public void connect2() {
-        // Display connect dialog.
-        //load the driver class  
+    public void setUserPass()
+    {
         try{
+            GlobalFlagforconnect2=0;
         Class.forName("oracle.jdbc.driver.OracleDriver");  
 //create  the connection object  
         Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
@@ -746,6 +870,29 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         {
             showError("Some problem in DB", true);
         }
+        addRightClickMenuOnTable();
+    }
+    public void addRightClickMenuOnTable()
+    {
+        //added right click menu on table rows
+          JMenuItem menuItemFurther = new JMenuItem("Move to tab");
+        JMenuItem menuItemRead = new JMenuItem("Mark as Read");
+        JMenuItem menuItemArchive = new JMenuItem("Archive");
+        JMenuItem menuItemDelete = new JMenuItem("Delete");
+        popupMenu.add(menuItemFurther);
+        popupMenu.addSeparator();
+        popupMenu.add(menuItemRead);
+        popupMenu.addSeparator();
+        popupMenu.add(menuItemArchive);
+        popupMenu.addSeparator();
+        popupMenu.add(menuItemDelete);
+        table.setComponentPopupMenu(popupMenu);
+        table.addMouseListener(new TableMouseListener(table));
+    }
+    public void connect2() {
+        // Display connect dialog.
+        //load the driver class  
+        
       //  System.out.println(dialog.getUsername());
        
     /* Display dialog stating that messages are
@@ -840,6 +987,23 @@ while ((line = reader.readLine()) != null) {
             
              //recent=folder.getUID();
         //     getMessageUID(session,folder,message[0]);
+             SwingWorker<Boolean, Void> backgroundProcess = new SwingWorker<Boolean, Void>() {
+
+        @Override
+        protected Boolean doInBackground() throws Exception {
+            // paste the MySQL code stuff here
+            execute1();
+            return true;
+        }
+
+        @Override
+        protected void done() {
+            // Process ended, mark some ended flag here
+            GlobalFlagforconnect2=1;
+            System.out.println("db Entry Done-----------");
+            // or show result dialog, messageBox, etc      
+        }
+    };
              backgroundProcess.execute();
            // execute1();
             // Put messages in table.
@@ -983,29 +1147,20 @@ catch (Exception e) {
             // or show result dialog, messageBox, etc      
         }
     };
-   private SwingWorker<Boolean, Void> backgroundProcess = new SwingWorker<Boolean, Void>() {
-
-        @Override
-        protected Boolean doInBackground() throws Exception {
-            // paste the MySQL code stuff here
-            execute1();
-            return true;
-        }
-
-        @Override
-        protected void done() {
-            // Process ended, mark some ended flag here
-            System.out.println("db Entry Done-----------");
-            // or show result dialog, messageBox, etc      
-        }
-    };
+    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTabButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTabbedPane tabbedPane;
