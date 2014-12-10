@@ -25,8 +25,10 @@ public class MessagesTableModel extends AbstractTableModel {
     
     // Sets the table's list of messages.
     public void setMessages(Message[] messages) {
+        // yaha pe database se value lete hue nai arraylist bnani ha
         for (int i = messages.length - 1; i >= 0; i--) {
             messageList.add(messages[i]);
+            System.out.println(" this message num is "+messages[i].getMessageNumber());
         }
         
         // Fire table data change notification to table.

@@ -208,7 +208,7 @@ public class front extends javax.swing.JFrame {
     {
          ConnectDialog dialog = new ConnectDialog(this);
            dialog.show();
-           // yaha pe connect again call hona chiaye
+           // yaha pe connect dubara call hone chaiye exact ho to connect2() hona chiye....along with sarre users ke mail show hone chiaaye
        String u=dialog.getUsername();
        String p=dialog.getPassword();
        connect();
@@ -474,7 +474,8 @@ public class front extends javax.swing.JFrame {
         
         emailsPanel.setVisible(true);
               buttonPanel2.setVisible(true);
-               updateInbox.execute();
+           //   connect2();
+          //     updateInbox.execute();
         //  getContentPane().setLayout(new BorderLayout());
       //  getContentPane().add(buttonPanel, BorderLayout.NORTH);
       //  getContentPane().add(emailsPanel, BorderLayout.CENTER);
@@ -676,13 +677,13 @@ public class front extends javax.swing.JFrame {
        
     /* Display dialog stating that messages are
        currently being downloaded from server. */
-        final DownloadingDialog downloadingDialog =
+        /*final DownloadingDialog downloadingDialog =
                 new DownloadingDialog(this);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
          //       downloadingDialog.show();
             }
-        });
+        });*/
         
         // Establish JavaMail session and connect to server.
         Store store = null;
@@ -701,7 +702,7 @@ public class front extends javax.swing.JFrame {
             
         } catch (Exception e) {
             // Close the downloading dialog.
-            downloadingDialog.dispose();
+     //       downloadingDialog.dispose();
             
             // Show error dialog.
             showError("Check your internet connection. Or invalid credentials or check your account settings. Not able to connect", true);
@@ -767,18 +768,18 @@ while ((line = reader.readLine()) != null) {
              //recent=folder.getUID();
         //     getMessageUID(session,folder,message[0]);
              backgroundProcess.execute();
-            
+           // execute1();
             // Put messages in table.
              
             tableModel.setMessages(messages);
         } catch (Exception e) {
             // Close the downloading dialog.
-            downloadingDialog.dispose();
+       //     downloadingDialog.dispose();
             
             // Show error dialog.
             showError("Unable to download messages.", true);
         }
-          downloadingDialog.dispose();
+         // downloadingDialog.dispose();
         // Close the downloading dialog.
       //  downloadingDialog.dispose();
          
@@ -806,6 +807,7 @@ while ((line = reader.readLine()) != null) {
             }
                             }
     }
+    // simply puts all mails into  the database
     void execute1()
     {int count=0;
         
@@ -827,7 +829,9 @@ while ((line = reader.readLine()) != null) {
 }
             reader.close();
             int start=count;
-            for(int i=start;i<messages.length+start;i++)
+            System.out.println(start+" yaha haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            //yaha start to start+mess.len tha
+            for(int i=0;i<messages.length+0;i++)
             {count++;
                 Statement stmt=con.createStatement(); 
                 String str=null;
@@ -848,10 +852,11 @@ while ((line = reader.readLine()) != null) {
                     sub=sub.replace("&","");
                     sub=sub.replace("*","");
                     //sub=sub.replace("","");
+                    int dbuid=folder.getMessage(i+1).getMessageNumber();
                 stmt.executeQuery("insert into emailstoremailclient values"
-                        + "('"+str+"','"+sub+
+                        + "("+dbuid+",'"+str+"','"+sub+
                         "','"+folder.getMessage(i+1).getSentDate().toString()
-                        +"')");  
+                        +"','inbox')");  
          /*       String cont= getMessageContent(folder.getMessage(i+1));
                 File file = new File("emails\\"+i+".txt");
                  FileWriter fw = new FileWriter(file.getAbsoluteFile());
@@ -917,7 +922,7 @@ catch (Exception e) {
         @Override
         protected void done() {
             // Process ended, mark some ended flag here
-            System.out.println("dkh thread ended");
+            System.out.println("db Entry Done-----------");
             // or show result dialog, messageBox, etc      
         }
     };
