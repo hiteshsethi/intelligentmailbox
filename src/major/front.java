@@ -7,6 +7,7 @@ package major;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -40,6 +41,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -154,7 +156,7 @@ public class front extends javax.swing.JFrame {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         // Setup E-mails panel.
-        
+        addPrimary();
         emailsPanel.setBorder(
                 BorderFactory.createTitledBorder("Inbox("+totalemails+")"));
         messageTextArea = new JTextArea();
@@ -190,13 +192,14 @@ public class front extends javax.swing.JFrame {
         });
         deleteButton.setEnabled(false);
         buttonPanel2.add(deleteButton);
-        emailsPanel.setSize(1200, 540);
+        tabbedPane.setSize(1160, 520);
+        emailsPanel.setSize(1160, 520);
     //    emailsPanel.setExtendedState(javax.swing.JPanel.MAXIMIZED_BOTH);
      //   pack();
       // emailsPanel.add(buttonPanel2)
         getContentPane().setLayout(new BorderLayout());
           getContentPane().add(buttonPanel2, BorderLayout.SOUTH);
-      buttonPanel2.setVisible(false);  
+      buttonPanel2.setVisible(true);  
       emailsPanel.setVisible(false);
     }
          // Exit this program.
@@ -265,7 +268,56 @@ public class front extends javax.swing.JFrame {
         if (exit)
             System.exit(0);
     }
-    
+    int tabCounter=0;
+     public void add() {
+         
+    final JPanel content = new JPanel();
+    JPanel tab = new JPanel();
+    tab.setOpaque(false);
+
+    JLabel tabLabel = new JLabel("Tab " + (++tabCounter));
+tabLabel.setPreferredSize(new Dimension(130, 20));
+    //JButton tabCloseButton = new JButton(closeXIcon);
+//    tabCloseButton.setPreferredSize(closeButtonSize);
+  /* tabCloseButton.addActionListener(new ActionListener() {
+
+      public void actionPerformed(ActionEvent e) {
+        int closeTabNumber = tabbedPane.indexOfComponent(content);
+        tabbedPane.removeTabAt(closeTabNumber);
+      }
+    });*/
+
+    tab.add(tabLabel, BorderLayout.WEST);
+ //   tab.add(tabCloseButton, BorderLayout.EAST);
+
+    tabbedPane.addTab(null, content);
+    tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, tab);
+  }
+     final JPanel emailsPanel = new JPanel();
+ public void addPrimary() {
+    JPanel tab = new JPanel();
+    tab.setOpaque(false);
+    JLabel tabLabel = new JLabel("PRIMARY");
+    tabLabel.setPreferredSize(new Dimension(130, 20));
+    tabCounter++;
+    //JButton tabCloseButton = new JButton(closeXIcon);
+//    tabCloseButton.setPreferredSize(closeButtonSize);
+  /* tabCloseButton.addActionListener(new ActionListener() {
+
+      public void actionPerformed(ActionEvent e) {
+        int closeTabNumber = tabbedPane.indexOfComponent(content);
+        tabbedPane.removeTabAt(closeTabNumber);
+      }
+    });*/
+
+    tab.add(tabLabel, BorderLayout.WEST);
+ //   tab.add(tabCloseButton, BorderLayout.EAST);
+
+    tabbedPane.addTab(null, emailsPanel);
+    tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, tab);
+  }
+
+     
     // Create a new message.
     private void actionNew() {
         sendMessage(MessageDialog.NEW, null);
@@ -339,11 +391,12 @@ public class front extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        emailsPanel = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        addTabButton = new javax.swing.JButton();
+        tabbedPane = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Intelligent Mail Box");
@@ -383,23 +436,18 @@ public class front extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout emailsPanelLayout = new javax.swing.GroupLayout(emailsPanel);
-        emailsPanel.setLayout(emailsPanelLayout);
-        emailsPanelLayout.setHorizontalGroup(
-            emailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        emailsPanelLayout.setVerticalGroup(
-            emailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 256, Short.MAX_VALUE)
-        );
-
         jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\1415554520_Black_Star.png")); // NOI18N
         jButton4.setText("Important");
         jButton4.setIconTextGap(10);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
+            }
+        });
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
             }
         });
 
@@ -413,42 +461,54 @@ public class front extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\icon175x175.jpeg")); // NOI18N
 
+        addTabButton.setText("Add tab");
+        addTabButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTabButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(addTabButton)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 38, Short.MAX_VALUE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(emailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 18, Short.MAX_VALUE))
+                    .addComponent(tabbedPane))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
-                        .addGap(18, 18, 18)
-                        .addComponent(emailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -456,8 +516,12 @@ public class front extends javax.swing.JFrame {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addTabButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -498,6 +562,15 @@ public class front extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void addTabButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTabButtonActionPerformed
+        // TODO add your handling code here:
+        add();
+    }//GEN-LAST:event_addTabButtonActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -927,7 +1000,7 @@ catch (Exception e) {
         }
     };
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel emailsPanel;
+    private javax.swing.JButton addTabButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -935,5 +1008,6 @@ catch (Exception e) {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 }
