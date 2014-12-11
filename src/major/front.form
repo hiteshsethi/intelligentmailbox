@@ -110,7 +110,6 @@
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jButton1" min="-2" pref="35" max="-2" attributes="0"/>
@@ -126,7 +125,7 @@
                       <Component id="addTabButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                       <Component id="tabbedPane" min="-2" pref="294" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -216,7 +215,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\hitesh\Documents\NetBeansProjects\major\icon175x175.jpeg"/>
+          <Image iconType="2" name="C:\Users\hitesh\Documents\NetBeansProjects\major\src\major\icon.png"/>
         </Property>
       </Properties>
     </Component>

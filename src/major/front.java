@@ -10,6 +10,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
@@ -24,11 +25,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -48,6 +53,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -75,25 +81,29 @@ import org.msgpack.MessagePack;
 public class front extends javax.swing.JFrame {
  // Message table's data model.
     File file;
+    final JPanel emailsPanel = new JPanel();
+     private JPanel[] otherPanel = new JPanel[50];
     int GlobalFlagforconnect2=0;
     int LastUid=0;
     int flag=0;
     private MessagesTableModel tableModel;
+    private MessagesTableModel[] othertableModel = new MessagesTableModel[50];
  //   private MessagesTableModel tableModel2;
     JPanel buttonPanel2;
     int jf;
     // Table listing messages.
     private JTable table;
-    JPopupMenu popupMenu = new JPopupMenu();
+    private JTable[] othertable = new JTable[50];
+    JPopupMenu popupMenu ;
 
   //  table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     // This the text area for displaying messages.
     private JTextArea messageTextArea;
-    
+    private JTextArea[] othermessageTextArea = new JTextArea[50];
   /* This is the split panel that holds the messages
      table and the message view panel. */
     private JSplitPane splitPane;
-    
+    private JSplitPane[] othersplitPane = new JSplitPane[50];
     // These are the buttons for managing the selected message.
     private JButton replyButton, forwardButton, deleteButton;
     
@@ -105,7 +115,7 @@ public class front extends javax.swing.JFrame {
     
     // This is the JavaMail session.
     private Session session;
-    
+    private List<String> classlist = new ArrayList<String>();
     /**
      * Creates new form front
      */
@@ -116,8 +126,9 @@ public class front extends javax.swing.JFrame {
        //JPanel emailsPanel = new JPanel();
     public front() {
         initComponents();
-        
-        
+   //     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\reload.png")));
+        this.setIconImage(new ImageIcon(getClass().getResource("icon.png")).getImage());
+   //     java.net.URL url = ClassLoader.getSystemResource("com/xyz/resources/camera.png");
               
         setTitle("Intelligent Email Box");
          // Handle window closing events.
@@ -157,6 +168,7 @@ public class front extends javax.swing.JFrame {
      // Setup messages table.
         tableModel = new MessagesTableModel();
         table = new JTable(tableModel);
+        table.setRowHeight(table.getRowHeight() + 13);
         table.getSelectionModel().addListSelectionListener(new
                 ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
@@ -168,14 +180,7 @@ public class front extends javax.swing.JFrame {
         
         // Setup E-mails panel.
         addPrimary();
-        emailsPanel.setBorder(
-                BorderFactory.createTitledBorder("Inbox("+totalemails+")"));
-        messageTextArea = new JTextArea();
-        messageTextArea.setEditable(false);
-        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-                new JScrollPane(table), new JScrollPane(messageTextArea));
-        emailsPanel.setLayout(new BorderLayout());
-        emailsPanel.add(splitPane, BorderLayout.CENTER);
+       
         
         // Setup buttons panel 2.
         buttonPanel2 = new JPanel();
@@ -212,6 +217,24 @@ public class front extends javax.swing.JFrame {
           getContentPane().add(buttonPanel2, BorderLayout.SOUTH);
       buttonPanel2.setVisible(true);  
       emailsPanel.setVisible(false);
+      
+      //classifier name reading from classes.txt and putting it into list
+      try{
+           BufferedReader reader = new BufferedReader(new FileReader("classes.txt"));
+            String line = null;
+            classlist.add("inbox".toUpperCase());
+            while ((line = reader.readLine()) != null) {
+                    classlist.add(line);
+                  //  System.out.println(line);
+            }
+            reader.close();
+      
+      }
+      catch(IOException e)
+      {
+          
+      }
+      
     }
          // Exit this program.
     private void actionExit() {
@@ -278,32 +301,36 @@ public class front extends javax.swing.JFrame {
         if (exit)
             System.exit(0);
     }
-    int tabCounter=0;
+    int tabCounter=classlist.size();
+    //isko purane tabs se start krna pdega
+    
+    
+    
      public void add(String str) {
+         othertable[tabCounter] = new JTable();
          str=str.toUpperCase();
-    final JPanel content = new JPanel();
+         otherPanel[tabCounter]= new JPanel();
+    //final JPanel content = new JPanel();
     JPanel tab = new JPanel();
     tab.setOpaque(false);
-++tabCounter;
+
     JLabel tabLabel = new JLabel(str);
 tabLabel.setPreferredSize(new Dimension(130, 20));
-    //JButton tabCloseButton = new JButton(closeXIcon);
-//    tabCloseButton.setPreferredSize(closeButtonSize);
-  /* tabCloseButton.addActionListener(new ActionListener() {
-
-      public void actionPerformed(ActionEvent e) {
-        int closeTabNumber = tabbedPane.indexOfComponent(content);
-        tabbedPane.removeTabAt(closeTabNumber);
-      }
-    });*/
-
     tab.add(tabLabel, BorderLayout.WEST);
  //   tab.add(tabCloseButton, BorderLayout.EAST);
-
-    tabbedPane.addTab(null, content);
+  othermessageTextArea[tabCounter] = new JTextArea();
+        othermessageTextArea[tabCounter].setEditable(false);
+        othersplitPane[tabCounter] = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+                new JScrollPane(othertable[tabCounter]), new JScrollPane(othermessageTextArea[tabCounter]));
+        otherPanel[tabCounter].setLayout(new BorderLayout());
+        otherPanel[tabCounter].add(othersplitPane[tabCounter], BorderLayout.CENTER);
+    tabbedPane.addTab(null, otherPanel[tabCounter]);
+    
     tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, tab);
+    
+        ++tabCounter;
   }
-     final JPanel emailsPanel = new JPanel();
+     
  public void addPrimary() {
     JPanel tab = new JPanel();
     tab.setOpaque(false);
@@ -324,7 +351,14 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
  //   tab.add(tabCloseButton, BorderLayout.EAST);
 
     tabbedPane.addTab(null, emailsPanel);
+    messageTextArea = new JTextArea();
+        messageTextArea.setEditable(false);
+        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+                new JScrollPane(table), new JScrollPane(messageTextArea));
+        emailsPanel.setLayout(new BorderLayout());
+        emailsPanel.add(splitPane, BorderLayout.CENTER);
     tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, tab);
+     
   }
 
      
@@ -474,7 +508,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\icon175x175.jpeg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\src\\major\\icon.png")); // NOI18N
 
         addTabButton.setText("Add Category");
         addTabButton.addActionListener(new java.awt.event.ActionListener() {
@@ -560,7 +594,6 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                                     .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(12, 12, 12)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -575,7 +608,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(addTabButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 6, Short.MAX_VALUE)
                         .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -594,6 +627,44 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         
         emailsPanel.setVisible(true);
               buttonPanel2.setVisible(true);
+                    
+    SwingWorker<Boolean, Void> refreshProcess = new SwingWorker<Boolean, Void>() {
+
+        @Override
+        protected Boolean doInBackground() throws Exception {
+            // paste the MySQL code stuff here
+           // execute1();
+            try{
+                System.out.println("yaha aa gya mn");
+                connect2();
+                
+            }
+            catch(Exception e)
+            {
+                System.out.println("thread mn panga ha----------------------------------");
+              //  return false;
+                
+            }
+            return true;
+        }
+
+        @Override
+        protected void done() {
+            // Process ended, mark some ended flag here
+            GlobalFlagforconnect2=1;
+            System.out.println("Refresh Done-----------");
+            try {
+           boolean g = get();
+         } catch (InterruptedException ex) {
+           ex.printStackTrace();
+         } catch (ExecutionException ex) {
+           ex.printStackTrace();
+         }
+            // or show result dialog, messageBox, etc      
+        }
+    };
+        refreshProcess.execute();
+        
            //   connect2();
           //     updateInbox.execute();
         //  getContentPane().setLayout(new BorderLayout());
@@ -646,7 +717,19 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
         }
         if(s!=null){
-        add(s);}
+        add(s);
+        classlist.add(s);
+        addRightClickMenuOnTable();
+        //yaha pe vo popupmenu ko update vala function fir se call hoga
+        try {
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("classes.txt", true)));
+            out.println(s);
+            out.close();
+            } catch (IOException e) {
+            //exception handling left as an exercise for the reader
+            }   
+            
+        }
     }//GEN-LAST:event_addTabButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -786,13 +869,55 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         }
        
         // Delete message from table.
+        final int store=totalemails-table.getSelectedRow();
+         System.out.println("This is the row number-------->"+(totalemails-table.getSelectedRow()));
         tableModel.deleteMessage(table.getSelectedRow());
+         try{
+             SwingWorker<Boolean, Void> backgroundProcess = new SwingWorker<Boolean, Void>() {
+
+        @Override
+        protected Boolean doInBackground() throws Exception {
+            // paste the MySQL code stuff here
+            try{
+            Class.forName("oracle.jdbc.driver.OracleDriver");  
+            Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh"); 
+            Statement stmt = con.createStatement();
+            stmt.executeQuery("Delete from emailstoremailclient where id="+store);
+            String str="UPDATE emailstoremailclient SET id=id-1 WHERE id>"+store;
+            stmt.executeUpdate(str);
+            con.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(""+e);
+        }
+            return true;
+        }
+
+        @Override
+        protected void done() {
+            // Process ended, mark some ended flag here
+         //   GlobalFlagforconnect2=1;
+            System.out.println("db delete Done-----------");
+            // or show result dialog, messageBox, etc      
+        }
+    };
+             backgroundProcess.execute();
+            }
+            catch(Exception e)
+            {
+                System.out.println(" Some problem in thread");
+            }
         
         // Update GUI.
         messageTextArea.setText("");
         deleting = false;
         selectedMessage = null;
         updateButtons();
+        totalemails--;
+        emailsPanel.setBorder(
+        BorderFactory.createTitledBorder("Inbox("+totalemails+") [Unread "+jf+"]"));
+        // yaha pe db update + delete that id
     }
    
       // Show the selected message in the content panel.
@@ -874,11 +999,42 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
     }
     public void addRightClickMenuOnTable()
     {
+        popupMenu= new JPopupMenu();
         //added right click menu on table rows
-          JMenuItem menuItemFurther = new JMenuItem("Move to tab");
+          JMenu menuItemFurther = new JMenu("Move to tab");
         JMenuItem menuItemRead = new JMenuItem("Mark as Read");
         JMenuItem menuItemArchive = new JMenuItem("Archive");
         JMenuItem menuItemDelete = new JMenuItem("Delete");
+        for(int iter=0;iter<classlist.size();iter++)
+        {
+            JMenuItem menuitem = new JMenuItem(classlist.get(iter));
+            menuItemFurther.add(menuitem);
+            if(iter!=classlist.size()-1){
+            menuItemFurther.addSeparator();}
+            final String temp = classlist.get(iter);
+             menuitem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+                final int store=totalemails-table.getSelectedRow();
+               String qry="UPDATE emailstoremailclient SET fname="+"'"+temp.toUpperCase()+"'"+" WHERE id="+store;
+                  try{
+        Class.forName("oracle.jdbc.driver.OracleDriver");  
+//create  the connection object  
+        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
+         Statement stmt=con.createStatement();  
+         stmt.executeQuery(qry);  
+         con.close();
+                  }
+                  catch(ClassNotFoundException | SQLException ex)
+                  {
+                      System.out.println(" there is some error is moving to other tabs "+ex);
+                  }
+              // JOptionPane.showMessageDialog(tabbedPane,"Right-click performed on table and choose this ->"+temp);
+            }
+        });
+        }
         popupMenu.add(menuItemFurther);
         popupMenu.addSeparator();
         popupMenu.add(menuItemRead);
@@ -888,22 +1044,22 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         popupMenu.add(menuItemDelete);
         table.setComponentPopupMenu(popupMenu);
         table.addMouseListener(new TableMouseListener(table));
+        //aise functions call honge
+         menuItemDelete.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionDelete();
+              //totalmessage--;
+                
+               // JOptionPane.showMessageDialog(tabbedPane,"Right-click performed on table and choose this");
+            }
+        });
+        
+         
+         
     }
     public void connect2() {
-        // Display connect dialog.
-        //load the driver class  
-        
-      //  System.out.println(dialog.getUsername());
-       
-    /* Display dialog stating that messages are
-       currently being downloaded from server. */
-        /*final DownloadingDialog downloadingDialog =
-                new DownloadingDialog(this);
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-         //       downloadingDialog.show();
-            }
-        });*/
         
         // Establish JavaMail session and connect to server.
         Store store = null;
@@ -911,29 +1067,23 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             // Initialize JavaMail session with SMTP server.
             Properties props = new Properties();
             props.setProperty("mail.store.protocol","imaps");
- //           props.put("mail.smtp.host", dialog.getSmtpServer());
             session = Session.getInstance(props, null);
-            
-            // Connect to e-mail server.
-          //  URLName urln = new URLName(connectionUrl.toString());
-          store = session.getStore("imaps");
+            store = session.getStore("imaps");
               //        JOptionPane.showMessageDialog(null,""+username+" "+password,"Mail sent",JOptionPane.PLAIN_MESSAGE);
             store.connect("imap.gmail.com", username, password);
             
         } catch (Exception e) {
-            // Close the downloading dialog.
-     //       downloadingDialog.dispose();
-            
             // Show error dialog.
             showError("Check your internet connection. Or invalid credentials or check your account settings. Not able to connect", true);
         }
-        int p=0;
+   //     int p=0;
+       
         String st;
          st=username.replace(".", "");
           st=st.replace(".","");
            st=st.replace("@","");
             st=st.replace("_","");
-           try{
+          /* try{
             BufferedReader reader = new BufferedReader(new FileReader("uid"+st+".txt"));
 String line = null;
 while ((line = reader.readLine()) != null) {
@@ -948,31 +1098,18 @@ while ((line = reader.readLine()) != null) {
                
            }
        //        reader.close();
-        
+        */
         // Download message headers from server.
         try {
             // Open main "INBOX" folder.
             folder = store.getFolder("INBOX");
             //Folder folder = store.getFolder("[Gmail]/Sent Mail");
             folder.open(Folder.READ_WRITE);
-           jf=folder.getUnreadMessageCount();
+            jf=folder.getUnreadMessageCount();
             totalemails=folder.getMessageCount();
             System.out.println(totalemails);
             // Get folder's list of messages.
-          if(p==0){
-              p=1;}
-          if(p==totalemails)
-          {
-              p++;
-          }
-          if(flag==0)
-          {
-              //messages = folder.getMessages(p,totalemails);
-              p=1;
-              flag=1;
-          }
-            messages = folder.getMessages(p,totalemails);
-         System.out.println(" jjhh "+p+" jhj  "+messages.length);
+            messages = folder.getMessages();
             emailsPanel.setBorder(
                 BorderFactory.createTitledBorder("Inbox("+totalemails+") [Unread "+jf+"]"));
           //  System.out.println("ye le---------"+messages.length);
@@ -987,6 +1124,7 @@ while ((line = reader.readLine()) != null) {
             
              //recent=folder.getUID();
         //     getMessageUID(session,folder,message[0]);
+            try{
              SwingWorker<Boolean, Void> backgroundProcess = new SwingWorker<Boolean, Void>() {
 
         @Override
@@ -999,34 +1137,30 @@ while ((line = reader.readLine()) != null) {
         @Override
         protected void done() {
             // Process ended, mark some ended flag here
-            GlobalFlagforconnect2=1;
+         //   GlobalFlagforconnect2=1;
             System.out.println("db Entry Done-----------");
             // or show result dialog, messageBox, etc      
         }
     };
              backgroundProcess.execute();
+            }
+            catch(Exception e)
+            {
+                System.out.println(" Some problem in thread");
+            }
            // execute1();
             // Put messages in table.
              
             tableModel.setMessages(messages);
         } catch (Exception e) {
-            // Close the downloading dialog.
-       //     downloadingDialog.dispose();
-            
-            // Show error dialog.
-            showError("Unable to download messages.", true);
+            System.out.println("Unable to download messages."+e);
         }
-         // downloadingDialog.dispose();
-        // Close the downloading dialog.
-      //  downloadingDialog.dispose();
-         
-      //  System.out.println("jfjf");
           str=username.replace(".", "");
           str=str.replace(".","");
            str=str.replace("@","");
             str=str.replace("_","");
             // str=str.replace("","");
-          file = new File("uid"+str+".txt");
+          /* file = new File("uid"+str+".txt");
               
               if (!file.exists()) {
             try {
@@ -1041,8 +1175,9 @@ while ((line = reader.readLine()) != null) {
             fw.close();
             } catch (IOException ex) {
                 Logger.getLogger(front.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } 
                             }
+                            */
     }
     // simply puts all mails into  the database
     void execute1()
@@ -1057,7 +1192,7 @@ while ((line = reader.readLine()) != null) {
        // stmt.executeQuery("insert into emailstoremailclient values('"+s+"','"+sub+"','"+d+"')");  
            
                
-            BufferedReader reader = new BufferedReader(new FileReader("uid"+str+".txt"));
+        /*    BufferedReader reader = new BufferedReader(new FileReader("uid"+str+".txt"));
 String line = null;
 while ((line = reader.readLine()) != null) {
     int i=Integer.parseInt(line);
@@ -1068,7 +1203,8 @@ while ((line = reader.readLine()) != null) {
             int start=count;
             System.out.println(start+" yaha haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             //yaha start to start+mess.len tha
-            for(int i=0;i<messages.length+0;i++)
+          */
+           for(int i=0;i<messages.length;i++)
             {count++;
                 Statement stmt=con.createStatement(); 
                 String str=null;
@@ -1093,7 +1229,7 @@ while ((line = reader.readLine()) != null) {
                 stmt.executeQuery("insert into emailstoremailclient values"
                         + "("+dbuid+",'"+str+"','"+sub+
                         "','"+folder.getMessage(i+1).getSentDate().toString()
-                        +"','inbox')");  
+                        +"','INBOX')");  
          /*       String cont= getMessageContent(folder.getMessage(i+1));
                 File file = new File("emails\\"+i+".txt");
                  FileWriter fw = new FileWriter(file.getAbsoluteFile());
@@ -1105,7 +1241,7 @@ while ((line = reader.readLine()) != null) {
             // rs.close(); 
         
         con.close();
-         int recent=count;
+      /*   int recent=count;
         FileWriter fw = null;
         
          fw = new FileWriter(file.getAbsoluteFile());
@@ -1113,7 +1249,7 @@ while ((line = reader.readLine()) != null) {
             String s=recent+"";
             bw.write(s);
             bw.close();
-            fw.close();
+            fw.close();*/
              }
                 catch(Exception e)
                 {
@@ -1166,3 +1302,5 @@ catch (Exception e) {
     private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 }
+
+//sarre user defined categories kisi file mn store ho....and hmesha vaha se read krke right click menu update ho
