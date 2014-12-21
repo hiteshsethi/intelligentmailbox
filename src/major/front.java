@@ -33,7 +33,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -81,11 +83,12 @@ import org.msgpack.MessagePack;
 public class front extends javax.swing.JFrame {
  // Message table's data model.
     File file;
+    int flag=1;
     final JPanel emailsPanel = new JPanel();
      private JPanel[] otherPanel = new JPanel[50];
     int GlobalFlagforconnect2=0;
     int LastUid=0;
-    int flag=0;
+   // int flag=0;
     private MessagesTableModel tableModel;
     private MessagesTableModel[] othertableModel = new MessagesTableModel[50];
  //   private MessagesTableModel tableModel2;
@@ -100,6 +103,7 @@ public class front extends javax.swing.JFrame {
     // This the text area for displaying messages.
     private JTextArea messageTextArea;
     private JTextArea[] othermessageTextArea = new JTextArea[50];
+     private ArrayList[] messageList = new ArrayList[50];
   /* This is the split panel that holds the messages
      table and the message view panel. */
     private JSplitPane splitPane;
@@ -119,13 +123,14 @@ public class front extends javax.swing.JFrame {
     /**
      * Creates new form front
      */
-    private CardLayout cardlayout = new CardLayout();  
+    //private CardLayout cardlayout = new CardLayout();  
     String username;
     String password;
     int totalemails=0;
        //JPanel emailsPanel = new JPanel();
     public front() {
         initComponents();
+        
    //     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\reload.png")));
         this.setIconImage(new ImageIcon(getClass().getResource("icon.png")).getImage());
    //     java.net.URL url = ClassLoader.getSystemResource("com/xyz/resources/camera.png");
@@ -179,8 +184,13 @@ public class front extends javax.swing.JFrame {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         // Setup E-mails panel.
-        addPrimary();
-       
+       addPrimary();
+       messageTextArea = new JTextArea();
+        messageTextArea.setEditable(false);
+        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+                new JScrollPane(table), new JScrollPane(messageTextArea));
+        emailsPanel.setLayout(new BorderLayout());
+        emailsPanel.add(splitPane, BorderLayout.CENTER);
         
         // Setup buttons panel 2.
         buttonPanel2 = new JPanel();
@@ -219,21 +229,7 @@ public class front extends javax.swing.JFrame {
       emailsPanel.setVisible(false);
       
       //classifier name reading from classes.txt and putting it into list
-      try{
-           BufferedReader reader = new BufferedReader(new FileReader("classes.txt"));
-            String line = null;
-            classlist.add("inbox".toUpperCase());
-            while ((line = reader.readLine()) != null) {
-                    classlist.add(line);
-                  //  System.out.println(line);
-            }
-            reader.close();
       
-      }
-      catch(IOException e)
-      {
-          
-      }
       
     }
          // Exit this program.
@@ -301,19 +297,27 @@ public class front extends javax.swing.JFrame {
         if (exit)
             System.exit(0);
     }
-    int tabCounter=classlist.size();
+    
+ //   int tabCounter=classlist.size()-1; //-1 coz inbox bhi added ha classlist mn
     //isko purane tabs se start krna pdega
+  
     
-    
-    
-     public void add(String str) {
-         othertable[tabCounter] = new JTable();
+     public void add(String str,int tabCounter) {
+       //  tabCounter=classlist.size()-1; 
+         othertableModel[tabCounter] = new MessagesTableModel();
+      
+         othertable[tabCounter] = new JTable(othertableModel[tabCounter]);
+      //   tabletocountermap.put(othertable[tabCounter], tabCounter);
+         othertable[tabCounter].setRowHeight(othertable[tabCounter].getRowHeight() + 13);
+        
+        // Allow only one row at a time to be selected.
+        othertable[tabCounter].setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
          str=str.toUpperCase();
          otherPanel[tabCounter]= new JPanel();
     //final JPanel content = new JPanel();
     JPanel tab = new JPanel();
     tab.setOpaque(false);
-
+    
     JLabel tabLabel = new JLabel(str);
 tabLabel.setPreferredSize(new Dimension(130, 20));
     tab.add(tabLabel, BorderLayout.WEST);
@@ -323,20 +327,57 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         othersplitPane[tabCounter] = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
                 new JScrollPane(othertable[tabCounter]), new JScrollPane(othermessageTextArea[tabCounter]));
         otherPanel[tabCounter].setLayout(new BorderLayout());
+   
+        
         otherPanel[tabCounter].add(othersplitPane[tabCounter], BorderLayout.CENTER);
     tabbedPane.addTab(null, otherPanel[tabCounter]);
-    
     tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, tab);
-    
-        ++tabCounter;
+    addMessageOtherTables(tabCounter,messageList[tabCounter]);
+    System.out.println(" -------------------------------------"+tabCounter);
+  //      ++tabCounter;
+    addingSelectionListners(tabCounter);
+      addRightClickMenuOnTable();
+   othersplitPane[tabCounter].setDividerLocation(.5);
   }
-     
+     void addingSelectionListners(int cou)
+     {
+         
+             final int p=cou;
+             othertable[p].getSelectionModel().addListSelectionListener(new
+                ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                othertableSelectionChanged(p);
+            }
+        });
+         
+     }
+  void addMessageOtherTables(int ind,ArrayList mes)
+  {
+    //  Message []m=messages;
+     /* 
+      try{
+            Class.forName("oracle.jdbc.driver.OracleDriver");  
+            Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh"); 
+            Statement stmt = con.createStatement();
+            stmt.executeQuery("Delete from emailstoremailclient where id=");
+            String str="UPDATE emailstoremailclient SET id=id-1 WHERE id>";
+            stmt.executeUpdate(str);
+            con.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(""+e);
+        }
+     */
+      // yaha pe mssages mn kuch ha nai na abhi
+      othertableModel[ind].setMessagesForClassifiers(mes);
+  }
  public void addPrimary() {
     JPanel tab = new JPanel();
     tab.setOpaque(false);
     JLabel tabLabel = new JLabel("  PRIMARY",new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\file8.png"),2);
     tabLabel.setPreferredSize(new Dimension(130, 20));
-    tabCounter++;
+   // tabCounter++;
     //JButton tabCloseButton = new JButton(closeXIcon);
 //    tabCloseButton.setPreferredSize(closeButtonSize);
   /* tabCloseButton.addActionListener(new ActionListener() {
@@ -351,12 +392,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
  //   tab.add(tabCloseButton, BorderLayout.EAST);
 
     tabbedPane.addTab(null, emailsPanel);
-    messageTextArea = new JTextArea();
-        messageTextArea.setEditable(false);
-        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-                new JScrollPane(table), new JScrollPane(messageTextArea));
-        emailsPanel.setLayout(new BorderLayout());
-        emailsPanel.add(splitPane, BorderLayout.CENTER);
+    
     tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, tab);
      
   }
@@ -443,7 +479,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         tabbedPane = new javax.swing.JTabbedPane();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        resetbutton = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
 
@@ -521,10 +557,10 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
 
         jButton7.setText("Add Label");
 
-        jButton8.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\reload.png")); // NOI18N
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        resetbutton.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\reload.png")); // NOI18N
+        resetbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                resetbuttonActionPerformed(evt);
             }
         });
 
@@ -565,7 +601,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                         .addGap(5, 5, 5)
                         .addComponent(jButton9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(resetbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -591,7 +627,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                                    .addComponent(resetbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                                     .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(12, 12, 12)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -717,9 +753,17 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
         }
         if(s!=null){
-        add(s);
-        classlist.add(s);
-        addRightClickMenuOnTable();
+            int i=classlist.size()-1;
+            if(i<0)
+            {
+                i=0;
+            }
+            classlist.add(s);
+          messageList[i] = new ArrayList();    
+        add(s,i);
+      //  System.out.println()
+         
+      
         //yaha pe vo popupmenu ko update vala function fir se call hoga
         try {
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("classes.txt", true)));
@@ -736,7 +780,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void resetbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetbuttonActionPerformed
         // TODO add your handling code here:
         
     SwingWorker<Boolean, Void> refreshProcess = new SwingWorker<Boolean, Void>() {
@@ -777,7 +821,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         refreshProcess.execute();
         
        // connect2();
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_resetbuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -843,7 +887,16 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             updateButtons();
         }
     }
-    
+     private void othertableSelectionChanged(int i) {
+    /* If not in the middle of deleting a message, set
+       the selected message and display it. */
+        if (!deleting) {
+            selectedMessage =
+                    othertableModel[i].getMessage(othertable[i].getSelectedRow());
+            othershowSelectedMessage(i);
+            updateButtons();
+        }
+    }
        // Reply to a message.
     private void actionReply() {
         sendMessage(MessageDialog.REPLY, selectedMessage);
@@ -869,9 +922,14 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         }
        
         // Delete message from table.
-        final int store=totalemails-table.getSelectedRow();
-         System.out.println("This is the row number-------->"+(totalemails-table.getSelectedRow()));
-        tableModel.deleteMessage(table.getSelectedRow());
+     //   final int store=totalemails-table.getSelectedRow();
+        Message temp=tableModel.getMessage(table.getSelectedRow());
+        final int st=temp.getMessageNumber();
+        // yaha pe diqat aaegi.......coz jbb different folders mn jaega to row number change hoga.
+       //  System.out.println("This is the row number-------->"+(totalemails-table.getSelectedRow()));
+       //  System.out.println("This is the row number-------->"+(st));
+         
+       tableModel.deleteMessage(table.getSelectedRow());
          try{
              SwingWorker<Boolean, Void> backgroundProcess = new SwingWorker<Boolean, Void>() {
 
@@ -882,8 +940,8 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             Class.forName("oracle.jdbc.driver.OracleDriver");  
             Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh"); 
             Statement stmt = con.createStatement();
-            stmt.executeQuery("Delete from emailstoremailclient where id="+store);
-            String str="UPDATE emailstoremailclient SET id=id-1 WHERE id>"+store;
+            stmt.executeQuery("Delete from emailstoremailclient where id="+st);
+            String str="UPDATE emailstoremailclient SET id=id-1 WHERE id>"+st;
             stmt.executeUpdate(str);
             con.close();
         }
@@ -928,6 +986,21 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             messageTextArea.setText(
                     getMessageContent(selectedMessage));
             messageTextArea.setCaretPosition(0);
+        } catch (Exception e) {
+            showError("Unabled to load message.", false);
+        } finally {
+            // Return to default cursor.
+            setCursor(Cursor.getDefaultCursor());
+        }
+    }
+     // Show the selected message in the content panel.
+    private void othershowSelectedMessage(int i) {
+        // Show hour glass cursor while message is loaded.
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            othermessageTextArea[i].setText(
+                    getMessageContent(selectedMessage));
+            othermessageTextArea[i].setCaretPosition(0);
         } catch (Exception e) {
             showError("Unabled to load message.", false);
         } finally {
@@ -1016,21 +1089,37 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
 
             @Override
             public void actionPerformed(ActionEvent e) {
-            
-                final int store=totalemails-table.getSelectedRow();
-               String qry="UPDATE emailstoremailclient SET fname="+"'"+temp.toUpperCase()+"'"+" WHERE id="+store;
+            /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! yaha pe store ko cal krne ka method change krna pdega
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             */
+                
+             //   final int store=totalemails-table.getSelectedRow();
+                 Message tem=tableModel.getMessage(table.getSelectedRow());
+        final int st=tem.getMessageNumber();
+       
+                //yaha pe getselectedrow nai work krega thang se.......sokuch ot krna pdega
+               String qry="UPDATE emailstoremailclient SET fname="+"'"+temp.toUpperCase()+"'"+" WHERE id="+st;
                   try{
         Class.forName("oracle.jdbc.driver.OracleDriver");  
 //create  the connection object  
         Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
          Statement stmt=con.createStatement();  
-         stmt.executeQuery(qry);  
+         stmt.executeQuery(qry);
+         System.out.println("ppppppppp======="+st);
+    //     tableModel.deleteMessage(table.getSelectedRow());
+           System.out.println("llllllllllllllllll======="+table.getSelectedRow());
          con.close();
                   }
-                  catch(ClassNotFoundException | SQLException ex)
+                  catch(Exception ex)
                   {
                       System.out.println(" there is some error is moving to other tabs "+ex);
                   }
+                 
               // JOptionPane.showMessageDialog(tabbedPane,"Right-click performed on table and choose this ->"+temp);
             }
         });
@@ -1152,6 +1241,11 @@ while ((line = reader.readLine()) != null) {
             // Put messages in table.
              
             tableModel.setMessages(messages);
+            if(flag==1){
+            addPreClassifier();   
+            flag=0;
+            }
+            
         } catch (Exception e) {
             System.out.println("Unable to download messages."+e);
         }
@@ -1180,6 +1274,90 @@ while ((line = reader.readLine()) != null) {
                             */
     }
     // simply puts all mails into  the database
+    void addPreClassifier()
+    {
+        
+            Map<String, Integer> myMap = new HashMap<String, Integer>();
+            try{
+           BufferedReader reader = new BufferedReader(new FileReader("classes.txt"));
+            String line = null;
+            int c=0;
+            while ((line = reader.readLine()) != null) {
+                line=line.toUpperCase();
+                    classlist.add(line);
+                    myMap.put(line,c);
+                       messageList[c++] = new ArrayList();
+                  //  add(line);
+                    // yaha be automaticalyy tab creation ho rhe ha
+                    
+                  //  System.out.println(line);
+            }
+            reader.close();
+      classlist.add("inbox".toUpperCase());
+      }
+      catch(IOException e)
+      {
+          
+      }    
+        
+           try{
+        Class.forName("oracle.jdbc.driver.OracleDriver");  
+//create  the connection object  
+        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
+         Statement stmt=con.createStatement();  
+        ResultSet rs=stmt.executeQuery("select id,fname from EMAILSTOREMAILCLIENT");  
+       
+       
+        while(rs.next())
+        {
+            int id=rs.getInt("id");
+            String fname=rs.getString("fname");
+         if(!fname.equals("INBOX")){
+            int classnum=myMap.get(fname);
+             System.out.println(id+" ---  "+fname+" ---  "+classnum);
+            messageList[classnum].add(messages[id-1]);
+         }
+        }
+        con.close();
+           }
+           catch(Exception e)
+           {
+               System.out.println("errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr  "+e);
+           }
+          
+      
+            
+            
+       try{
+           BufferedReader reader = new BufferedReader(new FileReader("classes.txt"));
+            String line = null;
+            int c=0;
+            while ((line = reader.readLine()) != null) {
+                 //   classlist.add(line);
+                    add(line,c++);
+                    // yaha be automaticalyy tab creation ho rhe ha
+                    
+                  //  System.out.println(line);
+            }
+            reader.close();
+     // classlist.add("inbox".toUpperCase());
+      }
+      catch(IOException e)
+      {
+          
+      } 
+            
+         //   for(int i)
+            
+            
+            
+            
+            
+            
+            
+            
+        
+    }
     void execute1()
     {int count=0;
         
@@ -1295,10 +1473,10 @@ catch (Exception e) {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton resetbutton;
     private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 }
