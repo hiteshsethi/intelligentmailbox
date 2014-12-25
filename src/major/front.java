@@ -375,7 +375,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
  public void addPrimary() {
     JPanel tab = new JPanel();
     tab.setOpaque(false);
-    JLabel tabLabel = new JLabel("  PRIMARY",new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\file8.png"),2);
+    JLabel tabLabel = new JLabel("  PRIMARY",new javax.swing.ImageIcon(getClass().getResource("/major/major images/file8.png")),2);
     tabLabel.setPreferredSize(new Dimension(130, 20));
    // tabCounter++;
     //JButton tabCloseButton = new JButton(closeXIcon);
@@ -492,7 +492,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         jButton1.setBackground(new java.awt.Color(209, 72, 54));
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\1415554495_Black_Email.png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554495_Black_Email.png"))); // NOI18N
         jButton1.setText("COMPOSE");
         jButton1.setIconTextGap(13);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -501,7 +501,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\1415554581_Black_DownRight-Arrow.png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554581_Black_DownRight-Arrow.png"))); // NOI18N
         jButton2.setText("Inbox");
         jButton2.setIconTextGap(10);
         jButton2.setInheritsPopupMenu(true);
@@ -511,7 +511,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\1415554665_Black_ThumbsUp.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554665_Black_ThumbsUp.png"))); // NOI18N
         jButton3.setText("Sent");
         jButton3.setFocusable(false);
         jButton3.setIconTextGap(10);
@@ -521,7 +521,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\1415554520_Black_Star.png")); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554520_Black_Star.png"))); // NOI18N
         jButton4.setText("Important");
         jButton4.setIconTextGap(10);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -537,14 +537,14 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         });
 
         jButton5.setBackground(new java.awt.Color(153, 153, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\1415554478_Black_Search.png")); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554478_Black_Search.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\src\\major\\icon.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/icon.png"))); // NOI18N
 
         addTabButton.setText("Add Category");
         addTabButton.addActionListener(new java.awt.event.ActionListener() {
@@ -557,7 +557,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
 
         jButton7.setText("Add Label");
 
-        resetbutton.setIcon(new javax.swing.ImageIcon("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\reload.png")); // NOI18N
+        resetbutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/reload.png"))); // NOI18N
         resetbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetbuttonActionPerformed(evt);

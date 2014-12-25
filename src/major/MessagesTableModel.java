@@ -8,6 +8,7 @@ package major;
  *
  * @author hitesh
  */
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -24,27 +25,23 @@ public class MessagesTableModel extends AbstractTableModel {
     private  final String[] columnNames = {"Sender",
     "Subject", "Date"};
     static int flag=0;
+    File file = new File("classes.txt");
+              
+       
     // The table's list of messages.
     private ArrayList messageList = new ArrayList();
     
     // Sets the table's list of messages.
     public void setMessages(Message[] messages) {
         // yaha pe database se value lete hue nai arraylist bnani ha
-        
+               if (file.exists()) {
+                  flag=1;
+              }
          try{
             Class.forName("oracle.jdbc.driver.OracleDriver");  
             Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh"); 
             Statement stmt = con.createStatement();
-            ResultSet rs1=stmt.executeQuery("Select count(*) from emailstoremailclient");
-            int ch=0;
-            while(rs1.next())
-            {
-                ch=rs1.getInt(1);
-            }
-            if(ch==messages.length)
-            {
-                flag=1;
-            }
+            
         for (int i = messages.length - 1; i >= 0; i--) {
             int p=i+1;String fname=null;
             ResultSet rs=stmt.executeQuery("Select fname from emailstoremailclient where id="+p);
@@ -57,8 +54,7 @@ public class MessagesTableModel extends AbstractTableModel {
           //  System.out.println("hjh hjhjh"+username+password);
         }
           //  System.out.println("hjh hjhjh "+ch);
-            if(ch>=p)
-            {
+            if(flag==1){
         if(fname.equals("INBOX"))
         {
             
