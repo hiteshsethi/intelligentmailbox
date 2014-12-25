@@ -252,9 +252,8 @@ public class front extends javax.swing.JFrame {
         // Display connect dialog.
         //load the driver class  
         try{
-        Class.forName("oracle.jdbc.driver.OracleDriver");  
-//create  the connection object  
-        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
+     
+            Connection con=DriverManager.getConnection(createDB.JDBC_URL);
          Statement stmt=con.createStatement();  
         ResultSet rs=stmt.executeQuery("select * from userdatamailclient");  
        
@@ -906,11 +905,11 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
     private void actionForward() {
         sendMessage(MessageDialog.FORWARD, selectedMessage);
     }
-    
+    static int deletecounter=0;
     // Delete the selected message.
     private void actionDelete() {
         deleting = true;
-        
+        deletecounter++;
         try {
             // Delete message from server.
             selectedMessage.setFlag(Flags.Flag.DELETED, true);
@@ -937,10 +936,10 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         protected Boolean doInBackground() throws Exception {
             // paste the MySQL code stuff here
             try{
-            Class.forName("oracle.jdbc.driver.OracleDriver");  
-            Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh"); 
+            
+            Connection con=DriverManager.getConnection(createDB.JDBC_URL); 
             Statement stmt = con.createStatement();
-            stmt.executeQuery("Delete from emailstoremailclient where id="+st);
+            stmt.execute("Delete from emailstoremailclient where id="+st);
             String str="UPDATE emailstoremailclient SET id=id-1 WHERE id>"+st;
             stmt.executeUpdate(str);
             con.close();
@@ -1037,9 +1036,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
     {
         try{
             GlobalFlagforconnect2=0;
-        Class.forName("oracle.jdbc.driver.OracleDriver");  
-//create  the connection object  
-        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
+            Connection con=DriverManager.getConnection(createDB.JDBC_URL);
          Statement stmt=con.createStatement();  
         ResultSet rs=stmt.executeQuery("select * from userdatamailclient");  
        
@@ -1066,7 +1063,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         }
         catch(Exception e)
         {
-            showError("Some problem in DB", true);
+            showError("Some problem in DB "+e, true);
         }
         addRightClickMenuOnTable();
     }
@@ -1105,11 +1102,10 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                 //yaha pe getselectedrow nai work krega thang se.......sokuch ot krna pdega
                String qry="UPDATE emailstoremailclient SET fname="+"'"+temp.toUpperCase()+"'"+" WHERE id="+st;
                   try{
-        Class.forName("oracle.jdbc.driver.OracleDriver");  
-//create  the connection object  
-        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
+        
+            Connection con=DriverManager.getConnection(createDB.JDBC_URL);  
          Statement stmt=con.createStatement();  
-         stmt.executeQuery(qry);
+         stmt.executeUpdate(qry);
          System.out.println("ppppppppp======="+st);
     //     tableModel.deleteMessage(table.getSelectedRow());
            System.out.println("llllllllllllllllll======="+table.getSelectedRow());
@@ -1301,9 +1297,8 @@ while ((line = reader.readLine()) != null) {
       }    
         
            try{
-        Class.forName("oracle.jdbc.driver.OracleDriver");  
-//create  the connection object  
-        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
+     
+            Connection con=DriverManager.getConnection(createDB.JDBC_URL);
          Statement stmt=con.createStatement();  
         ResultSet rs=stmt.executeQuery("select id,fname from EMAILSTOREMAILCLIENT");  
        
@@ -1362,10 +1357,8 @@ while ((line = reader.readLine()) != null) {
     {int count=0;
         
          try{
-                    Class.forName("oracle.jdbc.driver.OracleDriver");  
-//create  the connection object  
-        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
-          
+              
+            Connection con=DriverManager.getConnection(createDB.JDBC_URL);
        //  String org=passwordField.getPassword();
        // stmt.executeQuery("insert into emailstoremailclient values('"+s+"','"+sub+"','"+d+"')");  
            
@@ -1404,7 +1397,8 @@ while ((line = reader.readLine()) != null) {
                     sub=sub.replace("*","");
                     //sub=sub.replace("","");
                     int dbuid=folder.getMessage(i+1).getMessageNumber();
-                stmt.executeQuery("insert into emailstoremailclient values"
+                    
+                stmt.executeUpdate("insert into emailstoremailclient values"
                         + "("+dbuid+",'"+str+"','"+sub+
                         "','"+folder.getMessage(i+1).getSentDate().toString()
                         +"','INBOX')");  

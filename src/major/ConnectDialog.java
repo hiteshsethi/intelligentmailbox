@@ -153,20 +153,20 @@ public class ConnectDialog extends JDialog {
         }
         try
         {
-             Class.forName("oracle.jdbc.driver.OracleDriver");  
+            // Class.forName("oracle.jdbc.driver.OracleDriver");  
 //create  the connection object  
-        Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh");  
+        Connection con=DriverManager.getConnection(createDB.JDBC_URL);  
          Statement stmt=con.createStatement();  
        //  String org=passwordField.getPassword();
-        ResultSet rs=stmt.executeQuery("insert into userdatamailclient values('"+usernameTextField.getText().trim()+"','"+new String(passwordField.getPassword())+"')");  
-            rs.close(); 
+        stmt.executeUpdate("insert into userdatamailclient values('"+usernameTextField.getText().trim()+"','"+new String(passwordField.getPassword())+"')");  
+           // rs.close(); 
         stmt.close();
         con.close();
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(this,
-                    "DB error",
+                    "DB error "+e,
                     "DB Problem", JOptionPane.ERROR_MESSAGE);
         }
         

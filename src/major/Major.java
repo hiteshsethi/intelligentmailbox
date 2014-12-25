@@ -37,7 +37,13 @@ public class Major extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(front.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+           try{
+         new createDB().makeDB();
+           }
+           catch(Exception e)
+           {
+               System.out.println("problem while creating db "+e);
+           }
         front f=new front();
         f.show();
         f.setUserPass();

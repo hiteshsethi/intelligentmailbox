@@ -38,8 +38,8 @@ public class MessagesTableModel extends AbstractTableModel {
                   flag=1;
               }
          try{
-            Class.forName("oracle.jdbc.driver.OracleDriver");  
-            Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh"); 
+         
+            Connection con=DriverManager.getConnection(createDB.JDBC_URL);
             Statement stmt = con.createStatement();
             
         for (int i = messages.length - 1; i >= 0; i--) {
