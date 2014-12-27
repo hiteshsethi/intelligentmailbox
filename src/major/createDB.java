@@ -14,10 +14,10 @@ import java.sql.ResultSet;
  * @author hitesh
  */
 public class createDB {
-  //  public static final String DRIVER="org.apache.derby.jdbc.EmbeddedDriver";
-    public static final String DRIVER="org.apache.derby.jdbc.ClientDriver";
+   // public static final String DRIVER="org.apache.derby.jdbc.EmbeddedDriver";
+   public static final String DRIVER="org.apache.derby.jdbc.ClientDriver";
   //  public static final String JDBC_URL = "jdbc:derby:emaildb;create=true";
-   public static final String JDBC_URL = "jdbc:derby://localhost:1527/emailclientdb";
+  public static final String JDBC_URL = "jdbc:derby://localhost:1527/emailclientdb";
     public void makeDB() throws Exception
     {
          Class.forName(DRIVER);
@@ -29,6 +29,14 @@ public class createDB {
     ResultSet rs = dbm.getTables(null, null, "userdatamailclient".toUpperCase(), null);
     if (rs.next()) {
       System.out.println("Table exists"); 
+     /* 
+      ResultSet rs1 = con.createStatement().executeQuery("select * from USERDATAMAILCLIENT");
+      while(rs1.next())
+      {
+          System.out.println(rs1.getString(1) +" "+rs1.getString(2));
+      }
+      */
+      
     } else {
       System.out.println("Table does not exist"); 
     

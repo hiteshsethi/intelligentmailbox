@@ -4,7 +4,10 @@
  */
 package major;
 
+import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 
@@ -47,8 +50,12 @@ public class Major extends javax.swing.JFrame {
         front f=new front();
         f.show();
         f.setUserPass();
-        f.connect2();
-        // Display connect dialog.
-      // client.connect();
+        try {
+            f.connect2();
+            // client.connect();
+          // client.connect();
+        } catch (SQLException ex) {
+            Logger.getLogger(Major.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

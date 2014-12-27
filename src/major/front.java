@@ -47,6 +47,7 @@ import javax.mail.FetchProfile;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
 import javax.mail.Session;
@@ -468,7 +469,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        inboxbutton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
@@ -500,13 +501,13 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554581_Black_DownRight-Arrow.png"))); // NOI18N
-        jButton2.setText("Inbox");
-        jButton2.setIconTextGap(10);
-        jButton2.setInheritsPopupMenu(true);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        inboxbutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554581_Black_DownRight-Arrow.png"))); // NOI18N
+        inboxbutton.setText("Inbox");
+        inboxbutton.setIconTextGap(10);
+        inboxbutton.setInheritsPopupMenu(true);
+        inboxbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                inboxbuttonActionPerformed(evt);
             }
         });
 
@@ -576,7 +577,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inboxbutton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -633,7 +634,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inboxbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -656,57 +657,51 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         actionNew();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void inboxbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inboxbuttonActionPerformed
         // TODO add your handling code here:
         //connect2();
-        
-        emailsPanel.setVisible(true);
-              buttonPanel2.setVisible(true);
-                    
-    SwingWorker<Boolean, Void> refreshProcess = new SwingWorker<Boolean, Void>() {
+             
+   /* SwingWorker<Boolean, Void> refreshProcess = new SwingWorker<Boolean, Void>() {
 
         @Override
         protected Boolean doInBackground() throws Exception {
             // paste the MySQL code stuff here
            // execute1();
-            try{
+            
                 System.out.println("yaha aa gya mn");
+                try{
+                    tableModel.setEmpty(tableModel);  
+                 tableModel.deleteMessage(tableModel.getRowCount()-1);
+                 messages=null;
                 connect2();
-                
-            }
-            catch(Exception e)
-            {
-                System.out.println("thread mn panga ha----------------------------------");
-              //  return false;
-                
-            }
-            return true;
+                 deletecounter=0;
+                 
+                 return true;
+                }
+                catch(Exception e)
+                {
+                    System.out.println(" this was prob ---" +e);
+                    return false;
+                }
+           // return true;
         }
 
         @Override
         protected void done() {
-            // Process ended, mark some ended flag here
-            GlobalFlagforconnect2=1;
+          
             System.out.println("Refresh Done-----------");
-            try {
-           boolean g = get();
-         } catch (InterruptedException ex) {
-           ex.printStackTrace();
-         } catch (ExecutionException ex) {
-           ex.printStackTrace();
-         }
-            // or show result dialog, messageBox, etc      
         }
     };
+     
+    try{
         refreshProcess.execute();
+    }
+    catch(Exception e)
+    {
+        System.out.println("yo yo  "+e);
+    }*/
         
-           //   connect2();
-          //     updateInbox.execute();
-        //  getContentPane().setLayout(new BorderLayout());
-      //  getContentPane().add(buttonPanel, BorderLayout.NORTH);
-      //  getContentPane().add(emailsPanel, BorderLayout.CENTER);
-    //      getContentPane().add(buttonPanel2, BorderLayout.SOUTH);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_inboxbuttonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -788,38 +783,54 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         protected Boolean doInBackground() throws Exception {
             // paste the MySQL code stuff here
            // execute1();
-            try{
+           // deleting=true;
                 System.out.println("yaha aa gya mn");
-                connect2();
-                
+                try{
+                    tableModel.setEmpty(tableModel);
+               //      tableModel.setEmpty(tableModel);  
+                    if(tableModel.getRowCount()>0){
+                tableModel.deleteMessage(tableModel.getRowCount()-1);}
+            //     messages=null;
+             //  connect2();
+                 deletecounter=0;
+ messageTextArea.setText("");
+        //deleting = false;
+        selectedMessage = null;
+        updateButtons();       
+        table.getSelectionModel().addListSelectionListener(new
+                ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                tableSelectionChanged();
             }
-            catch(Exception e)
-            {
-                System.out.println("thread mn panga ha----------------------------------");
-              //  return false;
-                
-            }
-            return true;
+        });
+        connect2();
+                 return true;
+                }
+                catch(Exception e)
+                {
+                    System.out.println(" this was prob ---" +e);
+                    return false;
+                }
+           // return true;
         }
 
         @Override
         protected void done() {
-            // Process ended, mark some ended flag here
-            GlobalFlagforconnect2=1;
+          
             System.out.println("Refresh Done-----------");
-            try {
-           boolean g = get();
-         } catch (InterruptedException ex) {
-           ex.printStackTrace();
-         } catch (ExecutionException ex) {
-           ex.printStackTrace();
-         }
-            // or show result dialog, messageBox, etc      
+            
         }
     };
+     
+    try{
         refreshProcess.execute();
         
-       // connect2();
+    }
+    catch(Exception e)
+    {
+        System.out.println("yo yo  "+e);
+    }
+      
     }//GEN-LAST:event_resetbuttonActionPerformed
 
     /**
@@ -852,7 +863,11 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                 front f=new front();f.show();f.connect2();
+                 front f=new front();f.show();try {
+                    f.connect2();
+                } catch (SQLException ex) {
+                    Logger.getLogger(front.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
             }
         });
@@ -909,7 +924,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
     // Delete the selected message.
     private void actionDelete() {
         deleting = true;
-        deletecounter++;
+       
         try {
             // Delete message from server.
             selectedMessage.setFlag(Flags.Flag.DELETED, true);
@@ -923,7 +938,8 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         // Delete message from table.
      //   final int store=totalemails-table.getSelectedRow();
         Message temp=tableModel.getMessage(table.getSelectedRow());
-        final int st=temp.getMessageNumber();
+        
+        final int st=temp.getMessageNumber(); deletecounter++;
         // yaha pe diqat aaegi.......coz jbb different folders mn jaega to row number change hoga.
        //  System.out.println("This is the row number-------->"+(totalemails-table.getSelectedRow()));
        //  System.out.println("This is the row number-------->"+(st));
@@ -974,6 +990,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         totalemails--;
         emailsPanel.setBorder(
         BorderFactory.createTitledBorder("Inbox("+totalemails+") [Unread "+jf+"]"));
+        
         // yaha pe db update + delete that id
     }
    
@@ -986,7 +1003,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                     getMessageContent(selectedMessage));
             messageTextArea.setCaretPosition(0);
         } catch (Exception e) {
-            showError("Unabled to load message.", false);
+            System.out.println("Unabled to load message. "+e);
         } finally {
             // Return to default cursor.
             setCursor(Cursor.getDefaultCursor());
@@ -1001,7 +1018,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                     getMessageContent(selectedMessage));
             othermessageTextArea[i].setCaretPosition(0);
         } catch (Exception e) {
-            showError("Unabled to load message.", false);
+            System.out.println("Unabled to load message."+e);
         } finally {
             // Return to default cursor.
             setCursor(Cursor.getDefaultCursor());
@@ -1088,14 +1105,10 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             public void actionPerformed(ActionEvent e) {
             /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! yaha pe store ko cal krne ka method change krna pdega
              * 
-             * 
-             * 
-             * 
-             * 
-             * 
              */
                 
              //   final int store=totalemails-table.getSelectedRow();
+                deleting =true;
                  Message tem=tableModel.getMessage(table.getSelectedRow());
         final int st=tem.getMessageNumber();
        
@@ -1107,8 +1120,13 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
          Statement stmt=con.createStatement();  
          stmt.executeUpdate(qry);
          System.out.println("ppppppppp======="+st);
-    //     tableModel.deleteMessage(table.getSelectedRow());
+         
            System.out.println("llllllllllllllllll======="+table.getSelectedRow());
+           tableModel.deleteMessage(table.getSelectedRow());
+           messageTextArea.setText("");
+        deleting = false;
+        selectedMessage = null;
+        updateButtons();
          con.close();
                   }
                   catch(Exception ex)
@@ -1131,20 +1149,13 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         table.addMouseListener(new TableMouseListener(table));
         //aise functions call honge
          menuItemDelete.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 actionDelete();
-              //totalmessage--;
-                
-               // JOptionPane.showMessageDialog(tabbedPane,"Right-click performed on table and choose this");
-            }
+             }
         });
-        
-         
-         
     }
-    public void connect2() {
+    public void connect2() throws SQLException {
         
         // Establish JavaMail session and connect to server.
         Store store = null;
@@ -1242,13 +1253,10 @@ while ((line = reader.readLine()) != null) {
             flag=0;
             }
             
-        } catch (Exception e) {
+        } catch (MessagingException | SQLException e) {
             System.out.println("Unable to download messages."+e);
         }
-          str=username.replace(".", "");
-          str=str.replace(".","");
-           str=str.replace("@","");
-            str=str.replace("_","");
+        
             // str=str.replace("","");
           /* file = new File("uid"+str+".txt");
               
@@ -1295,14 +1303,10 @@ while ((line = reader.readLine()) != null) {
       {
           
       }    
-        
            try{
-     
             Connection con=DriverManager.getConnection(createDB.JDBC_URL);
          Statement stmt=con.createStatement();  
         ResultSet rs=stmt.executeQuery("select id,fname from EMAILSTOREMAILCLIENT");  
-       
-       
         while(rs.next())
         {
             int id=rs.getInt("id");
@@ -1319,10 +1323,7 @@ while ((line = reader.readLine()) != null) {
            {
                System.out.println("errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr  "+e);
            }
-          
-      
-            
-            
+   
        try{
            BufferedReader reader = new BufferedReader(new FileReader("classes.txt"));
             String line = null;
@@ -1335,79 +1336,50 @@ while ((line = reader.readLine()) != null) {
                   //  System.out.println(line);
             }
             reader.close();
-     // classlist.add("inbox".toUpperCase());
       }
       catch(IOException e)
       {
           
-      } 
-            
-         //   for(int i)
-            
-            
-            
-            
-            
-            
-            
-            
-        
+      }     
     }
     void execute1()
-    {int count=0;
-        
+    {
+      int count=0;
          try{
-              
             Connection con=DriverManager.getConnection(createDB.JDBC_URL);
-       //  String org=passwordField.getPassword();
-       // stmt.executeQuery("insert into emailstoremailclient values('"+s+"','"+sub+"','"+d+"')");  
-           
-               
-        /*    BufferedReader reader = new BufferedReader(new FileReader("uid"+str+".txt"));
-String line = null;
-while ((line = reader.readLine()) != null) {
-    int i=Integer.parseInt(line);
-   // System.out.println("this is "+i);
-    count+=i;
-}
-            reader.close();
-            int start=count;
-            System.out.println(start+" yaha haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            //yaha start to start+mess.len tha
-          */
-           for(int i=0;i<messages.length;i++)
-            {count++;
+            int lastid=0;
+            ResultSet rs1 = con.createStatement().executeQuery("select MAX(id) from emailstoremailclient");
+            if(rs1.next())
+            {
+              lastid = rs1.getInt(1);
+              System.out.println(lastid + " ha ahha ahaha ha ");
+            }
+           for(int i=lastid+1;i<=messages.length;i++)
+            {
+                count++;
                 Statement stmt=con.createStatement(); 
                 String str=null;
-                Address[] senders =folder.getMessage(i+1).getFrom();
-                    if (senders != null || senders.length > 0) {
-                             str=senders[0].toString();
-                    }
-                    String sub=folder.getMessage(i+1).getSubject();
+                Address[] senders =folder.getMessage(i).getFrom();
+                if (senders != null || senders.length > 0) 
+                {
+                    str=senders[0].toString();
+                }
+                    String sub=folder.getMessage(i).getSubject();
                     if(sub==null)
                         sub="No subject";
                     sub=sub.replace("'","");//coz problem aa re the.... "'" iski vajah se
                     sub=sub.replace("%","");
-                    str=str.replace("'", "");
+                    str=str.replace("'","");
                     sub=sub.replace("^","");
                     sub=sub.replace(",","");
-                  //  sub=sub.replace(""","");
-          //          sub=sub.replace("^","");
                     sub=sub.replace("&","");
                     sub=sub.replace("*","");
-                    //sub=sub.replace("","");
-                    int dbuid=folder.getMessage(i+1).getMessageNumber();
+                    int dbuid=folder.getMessage(i).getMessageNumber();
                     
                 stmt.executeUpdate("insert into emailstoremailclient values"
                         + "("+dbuid+",'"+str+"','"+sub+
-                        "','"+folder.getMessage(i+1).getSentDate().toString()
+                        "','"+folder.getMessage(i).getSentDate().toString()
                         +"','INBOX')");  
-         /*       String cont= getMessageContent(folder.getMessage(i+1));
-                File file = new File("emails\\"+i+".txt");
-                 FileWriter fw = new FileWriter(file.getAbsoluteFile());
-                    BufferedWriter bw = new BufferedWriter(fw);
-                    bw.write(cont);
-                    bw.close();*/
            stmt.close();
             }
             // rs.close(); 
@@ -1423,9 +1395,9 @@ while ((line = reader.readLine()) != null) {
             bw.close();
             fw.close();*/
              }
-                catch(Exception e)
+                catch(SQLException | MessagingException e)
                 {
-                    System.out.println(e);
+                    System.out.println("----------------------"+e);
                 }
       
     }
@@ -1459,9 +1431,9 @@ catch (Exception e) {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTabButton;
+    private javax.swing.JButton inboxbutton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

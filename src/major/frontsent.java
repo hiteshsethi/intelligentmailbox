@@ -25,9 +25,12 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Address;
 import javax.mail.FetchProfile;
 import javax.mail.Flags;
@@ -405,11 +408,15 @@ public class frontsent extends javax.swing.JFrame {
         dispose();
         front f=new front();
         f.show();
-        f.connect2();
-       //  getContentPane().setLayout(new BorderLayout());
-      //  getContentPane().add(buttonPanel, BorderLayout.NORTH);
-      //  getContentPane().add(emailsPanel, BorderLayout.CENTER);
-    //      getContentPane().add(buttonPanel2, BorderLayout.SOUTH);
+        try {
+            f.connect2();
+           //  getContentPane().setLayout(new BorderLayout());
+          //  getContentPane().add(buttonPanel, BorderLayout.NORTH);
+          //      getContentPane().add(buttonPanel2, BorderLayout.SOUTH);
+        //      getContentPane().add(buttonPanel2, BorderLayout.SOUTH);
+        } catch (SQLException ex) {
+            Logger.getLogger(frontsent.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
  private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -448,7 +455,11 @@ public class frontsent extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                 front f=new front();f.show();f.connect2();
+                 front f=new front();f.show();try {
+                    f.connect2();
+                } catch (SQLException ex) {
+                    Logger.getLogger(frontsent.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
             }
         });
