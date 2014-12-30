@@ -96,14 +96,30 @@ public class MessagesTableModel extends AbstractTableModel {
  
     
     public void setMessagesForClassifiers(ArrayList messages) {
+        if(messages!=null){
         // yaha pe database se value lete hue nai arraylist bnani ha
         messageList = messages;
         // Fire table data change notification to table.
         fireTableDataChanged();
     }
+    }
     
+    public void setFirstPlaceMessage(Message m)
+    {
+        if(m!=null)
+        {
+            messageList.add(0, m);
+                     fireTableDataChanged();
+        }
+    }
     
-    
+     public void setMessagesForSearch(ArrayList messages) {
+         if(messages!=null){
+        // yaha pe database se value lete hue nai arraylist bnani ha
+        messageList = messages;
+        // Fire table data change notification to table.
+        fireTableDataChanged();}
+    }
     
     // Get a message for the specified row.
     public Message getMessage(int row) {

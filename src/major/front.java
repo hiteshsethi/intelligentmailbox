@@ -6,6 +6,8 @@ package major;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -58,6 +60,7 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -72,8 +75,10 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.border.MatteBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import org.msgpack.MessagePack;
 
@@ -131,7 +136,7 @@ public class front extends javax.swing.JFrame {
        //JPanel emailsPanel = new JPanel();
     public front() {
         initComponents();
-        
+        searchButton.setEnabled(false);
    //     setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("C:\\Users\\hitesh\\Documents\\NetBeansProjects\\major\\major images\\reload.png")));
         this.setIconImage(new ImageIcon(getClass().getResource("icon.png")).getImage());
    //     java.net.URL url = ClassLoader.getSystemResource("com/xyz/resources/camera.png");
@@ -173,8 +178,42 @@ public class front extends javax.swing.JFrame {
         setJMenuBar(menuBar);
      // Setup messages table.
         tableModel = new MessagesTableModel();
-        table = new JTable(tableModel);
-        table.setRowHeight(table.getRowHeight() + 13);
+        table = new JTable(tableModel)
+        {
+           
+    public Component prepareRenderer(TableCellRenderer renderer, int Index_row, int Index_col) {
+        // get the current row
+        Component comp = super.prepareRenderer(renderer, Index_row, Index_col);
+        // even index, not selected
+        JComponent jc = (JComponent)comp;
+        Message mes=tableModel.getMessage(Index_row);
+                try {
+                    Flags flag=mes.getFlags();
+                     if(flag.contains(Flags.Flag.SEEN))
+                     {
+                          comp.setBackground(Color.lightGray);
+                          
+                     }
+                     else
+                     {
+                          comp.setBackground(Color.white);
+                     }
+                     jc.setBorder(new MatteBorder(1, 0, 1, 0, Color.darkGray) );
+                } catch (MessagingException ex) {
+                    //Logger.getLogger(front.class.getName()).log(Level.SEVERE, null, ex);
+                }
+       
+        
+       /* if (Index_row % 2 == 0 && !isCellSelected(Index_row, Index_col)) {
+           
+        } else {
+           
+        }*/
+        return comp;
+    }
+};
+       
+        table.setRowHeight(table.getRowHeight() + 16);
         table.getSelectionModel().addListSelectionListener(new
                 ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
@@ -305,10 +344,44 @@ public class front extends javax.swing.JFrame {
      public void add(String str,int tabCounter) {
        //  tabCounter=classlist.size()-1; 
          othertableModel[tabCounter] = new MessagesTableModel();
-      
-         othertable[tabCounter] = new JTable(othertableModel[tabCounter]);
+      final int andar=tabCounter;
+         othertable[tabCounter] = new JTable(othertableModel[tabCounter])
+                 {
+           
+    public Component prepareRenderer(TableCellRenderer renderer, int Index_row, int Index_col) {
+        // get the current row
+        Component comp = super.prepareRenderer(renderer, Index_row, Index_col);
+        // even index, not selected
+        JComponent jc = (JComponent)comp;
+        Message mes=othertableModel[andar].getMessage(Index_row);
+        if(mes!=null)
+                try {
+                    Flags flag=mes.getFlags();
+                     if(flag.contains(Flags.Flag.SEEN))
+                     {
+                          comp.setBackground(Color.lightGray);
+                          
+                     }
+                     else
+                     {
+                          comp.setBackground(Color.white);
+                     }
+                     jc.setBorder(new MatteBorder(1, 0, 1, 0, Color.darkGray) );
+                } catch (MessagingException ex) {
+                    Logger.getLogger(front.class.getName()).log(Level.SEVERE, null, ex);
+                }
+       
+        
+       /* if (Index_row % 2 == 0 && !isCellSelected(Index_row, Index_col)) {
+           
+        } else {
+           
+        }*/
+        return comp;
+    }
+};
       //   tabletocountermap.put(othertable[tabCounter], tabCounter);
-         othertable[tabCounter].setRowHeight(othertable[tabCounter].getRowHeight() + 13);
+         othertable[tabCounter].setRowHeight(othertable[tabCounter].getRowHeight() + 20);
         
         // Allow only one row at a time to be selected.
         othertable[tabCounter].setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -353,22 +426,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
      }
   void addMessageOtherTables(int ind,ArrayList mes)
   {
-    //  Message []m=messages;
-     /* 
-      try{
-            Class.forName("oracle.jdbc.driver.OracleDriver");  
-            Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@hitesh-PC:1521:xe","system","hitesh"); 
-            Statement stmt = con.createStatement();
-            stmt.executeQuery("Delete from emailstoremailclient where id=");
-            String str="UPDATE emailstoremailclient SET id=id-1 WHERE id>";
-            stmt.executeUpdate(str);
-            con.close();
-        }
-        catch(Exception e)
-        {
-            System.out.println(""+e);
-        }
-     */
+
       // yaha pe mssages mn kuch ha nai na abhi
       othertableModel[ind].setMessagesForClassifiers(mes);
   }
@@ -468,12 +526,12 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        composebutton = new javax.swing.JButton();
         inboxbutton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        searchField = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         addTabButton = new javax.swing.JButton();
         tabbedPane = new javax.swing.JTabbedPane();
@@ -489,15 +547,15 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(java.awt.Color.white);
 
-        jButton1.setBackground(new java.awt.Color(209, 72, 54));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554495_Black_Email.png"))); // NOI18N
-        jButton1.setText("COMPOSE");
-        jButton1.setIconTextGap(13);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        composebutton.setBackground(new java.awt.Color(209, 72, 54));
+        composebutton.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        composebutton.setForeground(new java.awt.Color(255, 255, 255));
+        composebutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554495_Black_Email.png"))); // NOI18N
+        composebutton.setText("COMPOSE");
+        composebutton.setIconTextGap(13);
+        composebutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                composebuttonActionPerformed(evt);
             }
         });
 
@@ -530,17 +588,17 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        searchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                searchFieldActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(153, 153, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554478_Black_Search.png"))); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setBackground(new java.awt.Color(153, 153, 255));
+        searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554478_Black_Search.png"))); // NOI18N
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
 
@@ -580,7 +638,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                             .addComponent(inboxbutton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(composebutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -592,9 +650,9 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tabbedPane)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 143, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -617,8 +675,8 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(searchField)
+                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
@@ -632,7 +690,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                         .addGap(12, 12, 12)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(composebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(inboxbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -652,10 +710,10 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void composebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_composebuttonActionPerformed
         // TODO add your handling code here:
         actionNew();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_composebuttonActionPerformed
 
     private void inboxbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inboxbuttonActionPerformed
         // TODO add your handling code here:
@@ -712,9 +770,45 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         f.connect2();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+           
+               /* for (int i=messages.length-1;i>=0;i--)
+                {
+                    try {
+                        System.out.println("Messages"+messages[i].getSubject());
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(front.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                */
+         SwingWorker<Boolean, Void> searchProcess = new SwingWorker<Boolean, Void>() {
+
+        @Override
+        protected Boolean doInBackground() throws Exception {
+            String str=searchField.getText();
+            searchField.setText("");
+             searchFrame n=new searchFrame(messages,username,password,str);
+             n.setSize(1160,650);
+             n.setVisible(true);
+            n.setLocation(185,90);
+             //n.setDefaultCloseOperation(n.DISPOSE_ON_CLOSE);
+            return true;
+        }
+
+        @Override
+        protected void done() {
+            // Process ended, mark some ended flag here
+         //   GlobalFlagforconnect2=1;
+            System.out.println("search box shown-----------");
+            // or show result dialog, messageBox, etc      
+        }
+    };
+             searchProcess.execute();
+                
+               
+           
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -752,7 +846,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             {
                 i=0;
             }
-            classlist.add(s);
+            classlist.add(s.toUpperCase());
           messageList[i] = new ArrayList();    
         add(s,i);
       //  System.out.println()
@@ -761,7 +855,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         //yaha pe vo popupmenu ko update vala function fir se call hoga
         try {
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("classes.txt", true)));
-            out.println(s);
+            out.println(s.toUpperCase());
             out.close();
             } catch (IOException e) {
             //exception handling left as an exercise for the reader
@@ -770,9 +864,9 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         }
     }//GEN-LAST:event_addTabButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_searchFieldActionPerformed
 
     private void resetbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetbuttonActionPerformed
         // TODO add your handling code here:
@@ -1122,7 +1216,37 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
          System.out.println("ppppppppp======="+st);
          
            System.out.println("llllllllllllllllll======="+table.getSelectedRow());
+           if(!temp.equals("INBOX")){
+               Message m=tableModel.getMessage(table.getSelectedRow());
            tableModel.deleteMessage(table.getSelectedRow());
+           myMap = new HashMap<String, Integer>();
+            
+            try{
+           BufferedReader reader = new BufferedReader(new FileReader("classes.txt"));
+            String line = null;
+            int c=0;
+            while ((line = reader.readLine()) != null) {
+                line=line.toUpperCase();
+                 //   classlist.add(line);
+                    myMap.put(line,c);
+                       messageList[c++] = new ArrayList();
+                  //  add(line);
+                    // yaha be automaticalyy tab creation ho rhe ha
+                    
+                  //  System.out.println(line);
+            } reader.close();
+            }
+            catch(Exception ep)
+            {
+                
+            }
+           
+             int classnum=myMap.get(temp);
+             System.out.println(temp+" ---   ---  "+classnum);
+        othertableModel[classnum].setFirstPlaceMessage(m);
+        othersplitPane[classnum].setDividerLocation(.5);
+            //othertableModel[classnum].setMessagesForClassifiers(messageList[classnum]);
+           }
            messageTextArea.setText("");
         deleting = false;
         selectedMessage = null;
@@ -1132,6 +1256,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                   catch(Exception ex)
                   {
                       System.out.println(" there is some error is moving to other tabs "+ex);
+                         Logger.getLogger(front.class.getName()).log(Level.SEVERE, null, ex);
                   }
                  
               // JOptionPane.showMessageDialog(tabbedPane,"Right-click performed on table and choose this ->"+temp);
@@ -1248,11 +1373,15 @@ while ((line = reader.readLine()) != null) {
             // Put messages in table.
              
             tableModel.setMessages(messages);
-            if(flag==1){
+            File file = new File("classes.txt");
+              
+              if (file.exists()) {
+            if(flag==1 ){
             addPreClassifier();   
             flag=0;
             }
-            
+              }
+              searchButton.setEnabled(true);
         } catch (MessagingException | SQLException e) {
             System.out.println("Unable to download messages."+e);
         }
@@ -1278,10 +1407,11 @@ while ((line = reader.readLine()) != null) {
                             */
     }
     // simply puts all mails into  the database
+    Map<String, Integer> myMap = new HashMap<String, Integer>();
     void addPreClassifier()
     {
-        
-            Map<String, Integer> myMap = new HashMap<String, Integer>();
+        myMap = new HashMap<String, Integer>();
+            
             try{
            BufferedReader reader = new BufferedReader(new FileReader("classes.txt"));
             String line = null;
@@ -1431,18 +1561,18 @@ catch (Exception e) {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTabButton;
+    private javax.swing.JButton composebutton;
     private javax.swing.JButton inboxbutton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton resetbutton;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField searchField;
     private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 }
