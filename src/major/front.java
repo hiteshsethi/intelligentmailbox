@@ -1524,7 +1524,7 @@ while ((line = reader.readLine()) != null) {
             int var=0;
             if(rs2.next())
             {
-                var=rs2.getInt(0);
+                var=rs2.getInt(1);
             }
             if(var==0){
             ResultSet rs1 = con.createStatement().executeQuery("select MAX(id) from emailstoremailclient");

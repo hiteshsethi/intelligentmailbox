@@ -91,9 +91,10 @@ public class mailClassifier {
             out.close();
             
         } catch (IOException ex) {
-            Logger.getLogger(mailClassifier.class.getName()).log(Level.SEVERE, null, ex);
+           // Logger.getLogger(mailClassifier.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("mailclassifier error :"+ex);
         }
-        if(numCalls>=clas*10)
+        //if(numCalls>=clas*10)
         {
             trainClassifier();
             //30 for 3 class's ke bad he work krna start kre
@@ -101,6 +102,7 @@ public class mailClassifier {
     }
     public static void trainClassifier()
     {
+        System.out.println("Training Done");
         TrainDone=1;
         try{
         BufferedReader breader = null;
@@ -141,7 +143,7 @@ public class mailClassifier {
     static int CountTestMessage=0;
     public static String testMessage(String content)
     {
-        
+        System.out.println("In test module");
         if(CountTestMessage==0)
         {
             trainClassifier();
@@ -184,12 +186,16 @@ public class mailClassifier {
                 System.out.println("clslabel  "+test.classAttribute().value((int) clsLabel));
                  ret=test.classAttribute().value((int) clsLabel);
             } catch (Exception ex) {
-                Logger.getLogger(mailClassifier.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
+              //  Logger.getLogger(mailClassifier.class.getName()).log(Level.SEVERE, null, ex);
             } 
+            
+            
             
         } catch (IOException ex) {
             Logger.getLogger(mailClassifier.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ret=ret.trim();
         return ret;
     }
 }

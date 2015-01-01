@@ -8,13 +8,17 @@ package major;
  *
  * @author hitesh
  */
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.*;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -75,13 +79,89 @@ public class MessagesTableModel extends AbstractTableModel {
             
             messageList.add(messages[i]);
             fireTableDataChanged();
-   //         System.out.println(" this message num is "+messages[i].getMessageNumber());
+            System.out.println(" this message num is "+messages[i].getMessageNumber());
         }
             }
             else
             {
+                String fnamebyclass=null;
+                File file=new File("classes.txt");
+               if(file.exists())// if(mailClassifier.TrainDone==1)
+                {
+                    try {                   
+                        fnamebyclass=mailClassifier.testMessage(front.html2text(messages[i].getSubject()+" "+front.getMessageContent(messages[i])));
+                    } catch (Exception ex) {
+                        Logger.getLogger(MessagesTableModel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                     Map<String, Integer> myMap = new HashMap<String, Integer>();
+            
+                    try{
+                        BufferedReader reader = new BufferedReader(new FileReader("classes.txt"));
+                        String line = null;
+                        int c=0;
+                        while ((line = reader.readLine()) != null) {
+                                line=line.toUpperCase();
+                                myMap.put(line,c);
+                                c++;
+                
+                            } reader.close();
+                        }
+                    catch(Exception ep)
+                    {
+                
+                    }
+           
+                    int classnum=myMap.get(fnamebyclass);
+                    try {
+                        messages[i].setFlag(Flags.Flag.SEEN, false);
+                         front.othertableModel[classnum].setFirstPlaceMessage(messages[i]);
+                        
+                    } catch (Exception ex) {
+                        System.out.println("----------------------"+ex);
+                       // Logger.getLogger(MessagesTableModel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                   
+                    try{
+                        Connection con1=DriverManager.getConnection(createDB.JDBC_URL);
+                        Statement stmt1=con1.createStatement(); 
+                        String str=null;
+                        Address[] senders =messages[i].getFrom();
+                        if (senders != null || senders.length > 0) 
+                        {
+                            str=senders[0].toString();
+                        }
+                         String sub=messages[i].getSubject();
+                    if(sub==null)
+                        sub="No subject";
+                    sub=sub.replace("'","");//coz problem aa re the.... "'" iski vajah se
+                    sub=sub.replace("%","");
+                    str=str.replace("'","");
+                    sub=sub.replace("^","");
+                    sub=sub.replace(",","");
+                    sub=sub.replace("&","");
+                    sub=sub.replace("*","");
+                    int dbuid=messages[i].getMessageNumber();
+                    
+                    stmt1.executeUpdate("insert into emailstoremailclient values"
+                        + "("+dbuid+",'"+str+"','"+sub+
+                        "','"+messages[i].getSentDate().toString()
+                        +"','"+fnamebyclass+"')");  
+                    stmt1.close();       
+                    con1.close();      
+             }
+                catch(SQLException | MessagingException e)
+                {
+                    System.out.println("----------------------"+e);
+                }
+      
+                   
+                }
+                else
+                {
+                
                  messageList.add(messages[i]);
                   fireTableDataChanged();
+                }
      //       System.out.println(" that message num is "+messages[i].getMessageNumber());
             }
         }
@@ -98,6 +178,7 @@ public class MessagesTableModel extends AbstractTableModel {
     public void setMessagesForClassifiers(ArrayList messages) {
         if(messages!=null){
         // yaha pe database se value lete hue nai arraylist bnani ha
+        Collections.reverse(messages);
         messageList = messages;
         // Fire table data change notification to table.
         fireTableDataChanged();
