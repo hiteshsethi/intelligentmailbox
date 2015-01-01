@@ -1,0 +1,5 @@
+@relation dataemail
+@attribute text string
+@attribute @@class@@ {PROMO,PROGRAMMING,SOCIAL,INBOX}
+@data
+' We wish you a very Happy New Year and hope you enjoy and celebrate the occasion with your family and friends. We too are your well wishers and will remain so forever . May God bless you . 1. Reach me out any time when you need help and* wish to help* ,at kk.rohatgi@jiit.ac.in &n sp; Your Dean -- If you no longer wish to receive mail from this sender, Please click here',?

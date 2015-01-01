@@ -1,0 +1,30 @@
+@relation 'dataemail-weka.filters.unsupervised.attribute.StringToWordVector-R1-W1000-prune-rate-1.0-N0-stemmerweka.core.stemmers.NullStemmer-M1-O-tokenizerweka.core.tokenizers.WordTokenizer -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\"'
+
+@attribute @@class@@ {PROMO,PROGRAMMING,SOCIAL,INBOX}
+@attribute //tastykhana numeric
+@attribute ============================================== numeric
+@attribute Learn numeric
+@attribute TastyKhana numeric
+@attribute Unsubscribe numeric
+@attribute com numeric
+@attribute com/unsubscribe numeric
+@attribute content numeric
+@attribute faster numeric
+@attribute from numeric
+@attribute hitesh numeric
+@attribute how numeric
+@attribute http numeric
+@attribute latest@gmail numeric
+@attribute list numeric
+@attribute list-manage2 numeric
+@attribute order numeric
+@attribute shanu numeric
+@attribute text numeric
+@attribute this numeric
+@attribute to numeric
+@attribute u=a71b50cbe697c645e02f2de80&id=87058022a7&e=ee98fca5cb&c=3d0b654046 numeric
+@attribute us1 numeric
+@attribute with numeric
+
+@data
+{0 ?,1 1,2 1,3 1,4 1,5 1,6 1,7 1,8 1,9 1,10 1,11 1,12 1,13 1,14 1,15 1,16 1,17 1,18 1,19 1,20 1,21 1,22 1,23 1,24 1}

@@ -1,0 +1,5 @@
+@relation dataemail
+@attribute text string
+@attribute @@class@@ {PROMO,PROGRAMMING,SOCIAL,INBOX}
+@data
+'hitesh, heres what you missed from Google Students on Google+ A post that you might have missed',INBOX

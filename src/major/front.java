@@ -80,6 +80,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import org.jsoup.Jsoup;
 import org.msgpack.MessagePack;
 
 /**
@@ -95,8 +96,8 @@ public class front extends javax.swing.JFrame {
     int GlobalFlagforconnect2=0;
     int LastUid=0;
    // int flag=0;
-    private MessagesTableModel tableModel;
-    private MessagesTableModel[] othertableModel = new MessagesTableModel[50];
+    static public MessagesTableModel tableModel;
+    static public MessagesTableModel[] othertableModel = new MessagesTableModel[50];
  //   private MessagesTableModel tableModel2;
     JPanel buttonPanel2;
     int jf;
@@ -841,7 +842,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
         }
         if(s!=null){
-            int i=classlist.size()-1;
+            int i=classlist.size();
             if(i<0)
             {
                 i=0;
@@ -1190,8 +1191,8 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         {
             JMenuItem menuitem = new JMenuItem(classlist.get(iter));
             menuItemFurther.add(menuitem);
-            if(iter!=classlist.size()-1){
-            menuItemFurther.addSeparator();}
+        //    if(iter!=classlist.size()-1){
+            menuItemFurther.addSeparator(); //}
             final String temp = classlist.get(iter);
              menuitem.addActionListener(new ActionListener() {
 
@@ -1203,13 +1204,18 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                 
              //   final int store=totalemails-table.getSelectedRow();
                 deleting =true;
-                 Message tem=tableModel.getMessage(table.getSelectedRow());
-        final int st=tem.getMessageNumber();
+                 Message mes=tableModel.getMessage(table.getSelectedRow());
+        final int st=mes.getMessageNumber();
        
                 //yaha pe getselectedrow nai work krega thang se.......sokuch ot krna pdega
                String qry="UPDATE emailstoremailclient SET fname="+"'"+temp.toUpperCase()+"'"+" WHERE id="+st;
+                     try {
+                         mailClassifier.trainData(html2text(mes.getSubject()+" "+getMessageContent(mes)), temp.toUpperCase());
+                     } catch (Exception ex) {
+                         System.out.println("Some problem is passing to mailClassfier.trainData :"+ex);
+                     }
                   try{
-        
+           
             Connection con=DriverManager.getConnection(createDB.JDBC_URL);  
          Statement stmt=con.createStatement();  
          stmt.executeUpdate(qry);
@@ -1229,7 +1235,8 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                 line=line.toUpperCase();
                  //   classlist.add(line);
                     myMap.put(line,c);
-                       messageList[c++] = new ArrayList();
+                       messageList[c] = new ArrayList();
+                       c++;
                   //  add(line);
                     // yaha be automaticalyy tab creation ho rhe ha
                     
@@ -1242,6 +1249,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
            
              int classnum=myMap.get(temp);
+             //classnum
              System.out.println(temp+" ---   ---  "+classnum);
         othertableModel[classnum].setFirstPlaceMessage(m);
         othersplitPane[classnum].setDividerLocation(.5);
@@ -1263,6 +1271,39 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
         });
         }
+        
+        JMenuItem menuitem = new JMenuItem("INBOX");
+            menuItemFurther.add(menuitem);
+           
+           // final String temp = classlist.get(iter);
+             menuitem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! yaha pe store ko cal krne ka method change krna pdega
+             * 
+             */
+                
+             //   final int store=totalemails-table.getSelectedRow();
+                deleting =true;
+                 Message mes=tableModel.getMessage(table.getSelectedRow());
+                 final int st=mes.getMessageNumber();
+       
+       
+                     try {
+                         mailClassifier.trainData(html2text(mes.getSubject()+" "+getMessageContent(mes)), "INBOX");
+                     } catch (Exception ex) {
+                         System.out.println("Some problem is passing to mailClassfier.trainData :"+ex);
+                     }
+               
+            }
+        });
+        
+        
+        
+        
+        
+        
         popupMenu.add(menuItemFurther);
         popupMenu.addSeparator();
         popupMenu.add(menuItemRead);
@@ -1420,14 +1461,15 @@ while ((line = reader.readLine()) != null) {
                 line=line.toUpperCase();
                     classlist.add(line);
                     myMap.put(line,c);
-                       messageList[c++] = new ArrayList();
+                       messageList[c] = new ArrayList();
+                       c++;
                   //  add(line);
                     // yaha be automaticalyy tab creation ho rhe ha
                     
                   //  System.out.println(line);
             }
             reader.close();
-      classlist.add("inbox".toUpperCase());
+    //  classlist.add("inbox".toUpperCase());
       }
       catch(IOException e)
       {
@@ -1478,6 +1520,13 @@ while ((line = reader.readLine()) != null) {
          try{
             Connection con=DriverManager.getConnection(createDB.JDBC_URL);
             int lastid=0;
+            ResultSet rs2=con.createStatement().executeQuery("select count(id) from emailstoremailclient");
+            int var=0;
+            if(rs2.next())
+            {
+                var=rs2.getInt(0);
+            }
+            if(var==0){
             ResultSet rs1 = con.createStatement().executeQuery("select MAX(id) from emailstoremailclient");
             if(rs1.next())
             {
@@ -1513,7 +1562,7 @@ while ((line = reader.readLine()) != null) {
            stmt.close();
             }
             // rs.close(); 
-        
+            }
         con.close();
       /*   int recent=count;
         FileWriter fw = null;
@@ -1524,6 +1573,7 @@ while ((line = reader.readLine()) != null) {
             bw.write(s);
             bw.close();
             fw.close();*/
+            
              }
                 catch(SQLException | MessagingException e)
                 {
@@ -1575,6 +1625,11 @@ catch (Exception e) {
     private javax.swing.JTextField searchField;
     private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
-}
 
+  public static String html2text(String html) {
+    return Jsoup.parse(html).text();
+}  
+    
+    
+}
 //sarre user defined categories kisi file mn store ho....and hmesha vaha se read krke right click menu update ho
