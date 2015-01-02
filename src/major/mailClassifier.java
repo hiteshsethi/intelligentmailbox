@@ -35,11 +35,12 @@ public class mailClassifier {
     static FilteredClassifier fc;
     static int numCalls=0;
     static int TrainDone=0;
+    static  int clas=0;
     public static void trainData(String messagecontent,String fname)
     {numCalls++;
-       
+        messagecontent=messagecontent.replace("'","");
         File file = new File("train.arff");
-        int clas=0;
+       
          if (file.exists())
         {
             first=1;
@@ -72,6 +73,7 @@ public class mailClassifier {
                 out.println("@data");
                 first=1;
             }
+            else{
             BufferedReader reader1 = new BufferedReader(new FileReader("classes.txt"));
                 String line = null;
                 String classL="";
@@ -86,6 +88,8 @@ public class mailClassifier {
             List<String> lines = FileUtils.readLines(file);
             lines.set(2, "@attribute @@class@@ {"+classL+"}");
             FileUtils.writeLines(file, lines);
+            }
+           
             out.println("'"+messagecontent+"',"+fname);
             //writer.close();
             out.close();
@@ -94,8 +98,9 @@ public class mailClassifier {
            // Logger.getLogger(mailClassifier.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("mailclassifier error :"+ex);
         }
-        //if(numCalls>=clas*10)
+        if(numCalls>=(clas*10))
         {
+            System.out.println("numCalls "+numCalls+"  --"+clas*10);
             trainClassifier();
             //30 for 3 class's ke bad he work krna start kre
         }
@@ -135,14 +140,15 @@ public class mailClassifier {
     }
     public static void main(String args[])
     {
-     //   trainData("test","test");
-        trainClassifier();
-        testMessage("hitesh, heres what you missed from Google Students on Google+ A post that you might have missed");
-      //  testMessage("Dominos: Buy 1 Pizza & Get 1 Free This Weeks Top New Coupons From CouponDunia Dominos Popular Coupons 1. Buy 1 Pizza & Get 1 Free You received this email because you signed up for coupon alerts from CouponDunia. Not interested anymore? Unsubscribe from Dominos coupon alerts.");
+        trainData("test","test");
+      //  trainClassifier();
+       // testMessage("hitesh, heres what you missed from Google Students on Google+ A post that you might have missed");
+      //  testMessage("Dominos: Buy 1 Pizza & Get 1 Free  Weeks Top New Coupons From CouponDunia Dominos Popular Coupons 1. Buy 1 Pizza & Get 1 Free You received this email because you signed up for coupon alerts from CouponDunia. Not interested anymore? Unsubscribe from Dominos coupon alerts.");
     }
     static int CountTestMessage=0;
     public static String testMessage(String content)
     {
+        content=content.replace("'","");
         System.out.println("In test module");
         if(CountTestMessage==0)
         {

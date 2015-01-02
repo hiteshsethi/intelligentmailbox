@@ -1295,6 +1295,11 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                      } catch (Exception ex) {
                          System.out.println("Some problem is passing to mailClassfier.trainData :"+ex);
                      }
+                     
+                   messageTextArea.setText("");
+        deleting = false;
+        selectedMessage = null;
+        updateButtons();
                
             }
         });
@@ -1382,7 +1387,13 @@ while ((line = reader.readLine()) != null) {
          //   UIDFolder f;
         //    profile.add(UIDFolder.FetchProfileItem.UID);
             folder.fetch(messages, profile);
-           
+              File file = new File("classes.txt");
+           if (file.exists()) {
+            if(flag==1 ){
+            addPreClassifier();   
+             flag=0;
+            }     
+              }
             
              //recent=folder.getUID();
         //     getMessageUID(session,folder,message[0]);
@@ -1392,6 +1403,8 @@ while ((line = reader.readLine()) != null) {
         @Override
         protected Boolean doInBackground() throws Exception {
             // paste the MySQL code stuff here
+            
+              
             execute1();
             return true;
         }
@@ -1414,14 +1427,8 @@ while ((line = reader.readLine()) != null) {
             // Put messages in table.
              
             tableModel.setMessages(messages);
-            File file = new File("classes.txt");
+          
               
-              if (file.exists()) {
-            if(flag==1 ){
-            addPreClassifier();   
-            flag=0;
-            }
-              }
               searchButton.setEnabled(true);
         } catch (MessagingException | SQLException e) {
             System.out.println("Unable to download messages."+e);
@@ -1527,6 +1534,7 @@ while ((line = reader.readLine()) != null) {
                 var=rs2.getInt(1);
             }
             if(var==0){
+                flag=0;
             ResultSet rs1 = con.createStatement().executeQuery("select MAX(id) from emailstoremailclient");
             if(rs1.next())
             {

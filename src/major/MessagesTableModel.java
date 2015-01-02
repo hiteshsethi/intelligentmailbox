@@ -91,7 +91,8 @@ public class MessagesTableModel extends AbstractTableModel {
                     try {                   
                         fnamebyclass=mailClassifier.testMessage(front.html2text(messages[i].getSubject()+" "+front.getMessageContent(messages[i])));
                     } catch (Exception ex) {
-                        Logger.getLogger(MessagesTableModel.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(MessagesTableModel.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("Problem in calling testMessage() :"+ex);
                     }
                      Map<String, Integer> myMap = new HashMap<String, Integer>();
             
@@ -110,9 +111,22 @@ public class MessagesTableModel extends AbstractTableModel {
                     {
                 
                     }
-           
-                    int classnum=myMap.get(fnamebyclass);
+                    
+                    int classnum;
+                    if(fnamebyclass.equals("INBOX"))
+                    {
+                        try {
+                            messages[i].setFlag(Flags.Flag.SEEN, false);
+                        } catch (MessagingException ex) {
+                            //Logger.getLogger(MessagesTableModel.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("Problem in marking flag seen"+ex);
+                        }
+                        messageList.add(messages[i]);
+                    fireTableDataChanged();
+                    }
+                    else{
                     try {
+                        classnum=myMap.get(fnamebyclass);
                         messages[i].setFlag(Flags.Flag.SEEN, false);
                          front.othertableModel[classnum].setFirstPlaceMessage(messages[i]);
                         
@@ -120,7 +134,7 @@ public class MessagesTableModel extends AbstractTableModel {
                         System.out.println("----------------------"+ex);
                        // Logger.getLogger(MessagesTableModel.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                   
+                    }
                     try{
                         Connection con1=DriverManager.getConnection(createDB.JDBC_URL);
                         Statement stmt1=con1.createStatement(); 
@@ -152,6 +166,7 @@ public class MessagesTableModel extends AbstractTableModel {
                 catch(SQLException | MessagingException e)
                 {
                     System.out.println("----------------------"+e);
+                //    Logger.getLogger(mailClassifier.class.getName()).log(Level.SEVERE, null, e);
                 }
       
                    

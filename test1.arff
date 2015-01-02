@@ -1,5 +1,5 @@
 @relation dataemail
 @attribute text string
-@attribute @@class@@ {PROMO,SOCIAL,PROGRAMMING,INBOX}
+@attribute @@class@@ {JOB,PROMO,INBOX}
 @data
-'checking lets see where you will go.',INBOX
+'Fashionara: Extra 15% Off on Rs. 2015 + 3 New Coupons New Year Sale: Extra 15% off on minimum purchase of Rs. 2015. Offer valid till 6th January.Get upto 60% + 25% off on women handbags on a minimum purchase of Rs. 999.Get upto 80% + 25% off on women accessories. No minimum purchase required.Get flat 40% + 25% off on snazzy heels. -- Hitesh Sethi Undergraduate(4th year)-B.tech JIIT,Noida Contact : +91-8586021769',INBOX

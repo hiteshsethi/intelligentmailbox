@@ -176,23 +176,28 @@ public class searchFrame extends javax.swing.JFrame {
           getContentPane().add(buttonPanel2, BorderLayout.SOUTH);
       buttonPanel2.setVisible(true);  
       splitPane.setDividerLocation(.5);
-        addToModel(m);
+        addToModel(m,str);
     }
 
-     void addToModel(Message[] messages)
+     void addToModel(Message[] messages,String search)
     {
         splitPane.setDividerLocation(.5);
         ArrayList m=new ArrayList();
         //here will go the logic for search and variable to searched is "str"
           for (int i = messages.length - 1; i >= 0; i--) {
-           /* try {
-                System.out.println("this was the messsage "+messages[i].getSubject());
-            } catch (MessagingException ex) {
-                
-                Logger.getLogger(searchFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
-           //   messages[i].
-              m.add(messages[i]);
+            
+                 try {
+                     System.out.println("this was the messsage "+messages[i].getSubject());
+                 } catch (MessagingException ex) {
+                     
+                     Logger.getLogger(searchFrame.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                 try{ if((messages[i].getSubject()).toLowerCase().indexOf(search.toLowerCase())>=0){
+                   m.add(messages[i]);}
+            } catch (Exception ex) {
+                System.out.println("Search problem :"+ex);
+                //Logger.getLogger(searchFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
           }
         try {
             tableModel.setMessagesForSearch(m);
