@@ -10,11 +10,8 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,10 +28,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -52,13 +47,8 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author hitesh
  */
-public class searchFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form searchFrame
-     */
-        // Message table's data model.
-    private MessagesTableModel tableModel;
+public class sentFrame extends javax.swing.JFrame {
+private MessagesTableModel tableModel;
     
     // Table listing messages.
     private JTable table;
@@ -80,16 +70,15 @@ public class searchFrame extends javax.swing.JFrame {
     private boolean deleting;
     
     String username,password;
-    
-    public searchFrame(Message[] m,String u,String p,String str) {
+    /**
+     * Creates new form sentFrame
+     */
+    public sentFrame(Message[] m,String u,String p) {
         initComponents();
-        username=u;
-        password=p;
-        searchLabel.setText("Search Page Results For : '"+str+"'");
-      // setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Intelligent Email Box");
          // Handle window closing events.
-        
+        username=u;
+        password=p;
       //  setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH); //for full size
          tableModel = new MessagesTableModel();
         table = new JTable(tableModel)
@@ -140,9 +129,9 @@ public class searchFrame extends javax.swing.JFrame {
         splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
                 new JScrollPane(table), new JScrollPane(messageTextArea));
           splitPane.setDividerLocation(.5);
-        searchPanel.setLayout(new BorderLayout());
+        sentPanel.setLayout(new BorderLayout());
         
-        searchPanel.add(splitPane, BorderLayout.CENTER);
+        sentPanel.add(splitPane, BorderLayout.CENTER);
         
         // Setup buttons panel 2.
         buttonPanel2 = new JPanel();
@@ -170,7 +159,7 @@ public class searchFrame extends javax.swing.JFrame {
         });
         deleteButton.setEnabled(false);
         buttonPanel2.add(deleteButton);
-        searchPanel.setSize(1140, 520);
+        sentPanel.setSize(1140, 520);
     //    emailsPanel.setExtendedState(javax.swing.JPanel.MAXIMIZED_BOTH);
      //   pack();
       // emailsPanel.add(buttonPanel2)
@@ -178,125 +167,32 @@ public class searchFrame extends javax.swing.JFrame {
           getContentPane().add(buttonPanel2, BorderLayout.SOUTH);
       buttonPanel2.setVisible(true);  
       splitPane.setDividerLocation(.5);
-        addToModel(m,str);
+        addToModel(m);
+        
     }
 
-     void addToModel(Message[] messages,String search)
+     void addToModel(Message[] messages)
     {
         splitPane.setDividerLocation(.5);
         ArrayList m=new ArrayList();
         //here will go the logic for search and variable to searched is "str"
           for (int i = messages.length - 1; i >= 0; i--) {
             
-                 try {
-                     System.out.println("this was the messsage "+messages[i].getSubject());
-                 } catch (MessagingException ex) {
-                     
-                     Logger.getLogger(searchFrame.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-                 try{ if((messages[i].getSubject()).toLowerCase().indexOf(search.toLowerCase())>=0){
-                   m.add(messages[i]);}
+                try{
+                   m.add(messages[i]);
             } catch (Exception ex) {
-                System.out.println("Search problem :"+ex);
+                System.out.println("Sent problem :"+ex);
                 //Logger.getLogger(searchFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
           }
         try {
             tableModel.setMessagesForSearch(m);
         } catch (Exception ex) {
-            System.out.println("This was the error generated in search box : "+ex);
+            System.out.println("This was the error generated in sent box : "+ex);
             //Logger.getLogger(searchFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        searchLabel = new javax.swing.JLabel();
-        searchPanel = new javax.swing.JPanel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(1160, 650));
-        setMinimumSize(new java.awt.Dimension(1160, 650));
-        setPreferredSize(new java.awt.Dimension(1160, 650));
-
-        searchLabel.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
-        searchLabel.setText("Search Page Results For : ");
-
-        javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
-        searchPanel.setLayout(searchPanelLayout);
-        searchPanelLayout.setHorizontalGroup(
-            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        searchPanelLayout.setVerticalGroup(
-            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 233, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(searchPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(searchLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(searchFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(searchFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(searchFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(searchFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-             //   new searchFrame().setVisible(true);
-            }
-        });
-    }
     
      private void actionReply() {
         sendMessage(MessageDialog.REPLY, selectedMessage);
@@ -502,8 +398,103 @@ public class searchFrame extends javax.swing.JFrame {
         // yaha pe db update + delete that id
     }
    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        sentPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        javax.swing.GroupLayout sentPanelLayout = new javax.swing.GroupLayout(sentPanel);
+        sentPanel.setLayout(sentPanelLayout);
+        sentPanelLayout.setHorizontalGroup(
+            sentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        sentPanelLayout.setVerticalGroup(
+            sentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 270, Short.MAX_VALUE)
+        );
+
+        jLabel1.setText("Sent Mails :");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(sentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(sentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(sentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(sentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+            //    new sentFrame().setVisible(true);
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel searchLabel;
-    private javax.swing.JPanel searchPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel sentPanel;
     // End of variables declaration//GEN-END:variables
 }

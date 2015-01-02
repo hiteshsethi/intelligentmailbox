@@ -114,7 +114,7 @@ public class front extends javax.swing.JFrame {
   /* This is the split panel that holds the messages
      table and the message view panel. */
     private JSplitPane splitPane;
-    private JSplitPane[] othersplitPane = new JSplitPane[50];
+    static public JSplitPane[] othersplitPane = new JSplitPane[50];
     // These are the buttons for managing the selected message.
     private JButton replyButton, forwardButton, deleteButton;
     
@@ -529,7 +529,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
 
         composebutton = new javax.swing.JButton();
         inboxbutton = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        sentButton = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         searchField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
@@ -570,13 +570,13 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554665_Black_ThumbsUp.png"))); // NOI18N
-        jButton3.setText("Sent");
-        jButton3.setFocusable(false);
-        jButton3.setIconTextGap(10);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        sentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/major/major images/1415554665_Black_ThumbsUp.png"))); // NOI18N
+        sentButton.setText("Sent");
+        sentButton.setFocusable(false);
+        sentButton.setIconTextGap(10);
+        sentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                sentButtonActionPerformed(evt);
             }
         });
 
@@ -637,7 +637,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                         .addComponent(jLabel1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(inboxbutton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sentButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
                         .addComponent(composebutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -695,7 +695,7 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
                         .addGap(18, 18, 18)
                         .addComponent(inboxbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -762,14 +762,76 @@ tabLabel.setPreferredSize(new Dimension(130, 20));
         
     }//GEN-LAST:event_inboxbuttonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void sentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sentButtonActionPerformed
         // TODO add your handling code here:
-        
-        dispose();
-        frontsent f=new frontsent();
-        f.show();
-        f.connect2();
-    }//GEN-LAST:event_jButton3ActionPerformed
+     
+        Store store1 = null;
+        try {
+            // Initialize JavaMail session with SMTP server.
+            Properties props = new Properties();
+            props.setProperty("mail.store.protocol","imaps");
+            session = Session.getInstance(props, null);
+            store1 = session.getStore("imaps");
+              //        JOptionPane.showMessageDialog(null,""+username+" "+password,"Mail sent",JOptionPane.PLAIN_MESSAGE);
+            store1.connect("imap.gmail.com", username, password);
+            
+        } catch (Exception e) {
+            // Show error dialog.
+            showError("Check your internet connection. Or invalid credentials or check your account settings. Not able to connect", true);
+        }
+        try{
+       // Folder folder1 = store1.getFolder("INBOX");
+            Folder folder1 = store1.getFolder("[Gmail]/Sent Mail");
+            folder1.open(Folder.READ_WRITE);
+            //jf=folder1.getUnreadMessageCount();
+            //totalemails=folder.getMessageCount();
+            //System.out.println(totalemails);
+            // Get folder's list of messages.
+            final Message[] mess = folder1.getMessages();
+         
+          //  System.out.println("ye le---------"+messages.length);
+            // Retrieve message headers for each message in folder.
+            FetchProfile profile1 = new FetchProfile();
+            profile1.add(FetchProfile.Item.ENVELOPE);
+            profile1.add(FetchProfile.Item.FLAGS);
+         //   UIDFolder f;
+        //    profile.add(UIDFolder.FetchProfileItem.UID);
+            folder1.fetch(mess, profile1);
+          
+       
+            SwingWorker<Boolean, Void> searchProcess = new SwingWorker<Boolean, Void>() {
+
+        @Override
+        protected Boolean doInBackground() throws Exception {
+        //    String str=searchField.getText();
+            //searchField.setText("");
+            
+            
+            
+             sentFrame n=new sentFrame(mess,username,password);
+             n.setSize(1160,650);
+             n.setVisible(true);
+            n.setLocation(185,90);
+             //n.setDefaultCloseOperation(n.DISPOSE_ON_CLOSE);
+            return true;
+        }
+
+        @Override
+        protected void done() {
+            // Process ended, mark some ended flag here
+         //   GlobalFlagforconnect2=1;
+            System.out.println("sent box shown-----------");
+            // or show result dialog, messageBox, etc      
+        }
+    };
+             searchProcess.execute();
+            }
+        catch(Exception e)
+        {
+            
+        }     
+           
+    }//GEN-LAST:event_sentButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
@@ -1622,7 +1684,6 @@ catch (Exception e) {
     private javax.swing.JButton composebutton;
     private javax.swing.JButton inboxbutton;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -1631,6 +1692,7 @@ catch (Exception e) {
     private javax.swing.JButton resetbutton;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchField;
+    private javax.swing.JButton sentButton;
     private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 

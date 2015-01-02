@@ -129,7 +129,7 @@ public class MessagesTableModel extends AbstractTableModel {
                         classnum=myMap.get(fnamebyclass);
                         messages[i].setFlag(Flags.Flag.SEEN, false);
                          front.othertableModel[classnum].setFirstPlaceMessage(messages[i]);
-                        
+                        front.othersplitPane[classnum].setDividerLocation(.5);
                     } catch (Exception ex) {
                         System.out.println("----------------------"+ex);
                        // Logger.getLogger(MessagesTableModel.class.getName()).log(Level.SEVERE, null, ex);
